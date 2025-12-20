@@ -39,6 +39,17 @@ const PERSONAL_INFO = {
   github: "https://github.com/GaneshArwan",
 };
 
+// Background Image Placeholders
+const BACKGROUNDS = {
+  hero: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop", 
+  about: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop", 
+  skills: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop", 
+  experience: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop", 
+  projects: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop", 
+  certifications: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2071&auto=format&fit=crop", 
+  contact: "https://images.unsplash.com/photo-1516387938699-a93567ec168e?q=80&w=2071&auto=format&fit=crop" 
+};
+
 // Helper for devicon urls
 const getIconUrl = (name) => `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${name}/${name}-original.svg`;
 
@@ -63,7 +74,21 @@ const EXPERIENCE = [
     company: "Kawan Lama Group",
     type: "Contract",
     date: "Jan 2025 - Present",
-    description: "Continuing development on Master Data Management projects and initiatives.",
+    description: (
+      <div className="space-y-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+        <p className="font-semibold text-teal-600 dark:text-teal-400">Key Achievements:</p>
+        <ul className="list-disc pl-5 space-y-2">
+            <li><strong>Improved SLA & Quality:</strong> Reduced rework and accelerated processing by 30% through pre-validation and standardized workflows.</li>
+            <li><strong>Digital Integration:</strong> Migrated promotion, finance, site, pricing, and vendor master data requests from manual channels (email) into a centralized system (Catalyst), enhancing trackability.</li>
+            <li><strong>Workspace Centralization:</strong> Consolidated 7 scattered spreadsheets into a single workspace, simplifying task management for MDAs.</li>
+            <li><strong>Process Automation:</strong> Developed semi-automation tools for SAP article image processing, significantly speeding up bulk submissions.</li>
+            <li><strong>Reporting & Analytics:</strong> Created quarterly performance reports for business units (AHI, BERLIN, HCI) and real-time dashboards (Baseline, Daily/Weekly) to identify bottlenecks and operational efficiency.</li>
+            <li><strong>Workload Balance:</strong> Implemented "Baseline," "Status MDM," and "Priority Request" logic for fair task distribution, reducing manual intervention.</li>
+            <li><strong>Data Quality Improvement:</strong> Conducted vendor bank account data cleansing and standardized site master naming conventions to prevent future system errors.</li>
+            <li><strong>Documentation:</strong> Produced standardized guidelines for Site, GL Account, Cost Center, Profit Center, and Vendor/Customer master data changes.</li>
+        </ul>
+      </div>
+    ),
     certificate: null
   },
   {
@@ -72,7 +97,36 @@ const EXPERIENCE = [
     company: "Kawan Lama Group",
     type: "Internship",
     date: "Jan 2024 - Jan 2025",
-    description: "Transformed department workflows from email-based to structured systems using Google Forms & Sheets. Implemented Google Apps Script to automate form creation, approvals, and notifications. Assisted in automating data mapping and created visualizations using Looker.",
+    description: (
+      <div className="space-y-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+        <p>I contributed to automation, data management, and operational efficiency projects, enhancing my skills in scripting and data governance.</p>
+        
+        <div>
+          <strong className="block text-teal-600 dark:text-teal-400 mb-1">Workflow Optimization</strong>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>Transformed email-based workflows to a structured system using Google Forms and Sheets.</li>
+            <li>Developed custom forms for efficient task collection and management.</li>
+            <li>Implemented Google Apps Script for automated form creation, approvals, and notifications.</li>
+          </ul>
+        </div>
+
+        <div>
+          <strong className="block text-teal-600 dark:text-teal-400 mb-1">Data Management & Governance</strong>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>Utilized Google Sheets and Looker for data visualization.</li>
+            <li>Assisted in automating data mapping processes.</li>
+          </ul>
+        </div>
+
+        <div>
+          <strong className="block text-teal-600 dark:text-teal-400 mb-1">Operational Support</strong>
+          <ul className="list-disc pl-5 space-y-1">
+            <li>Monitored promotional and merchandise processes.</li>
+            <li>Assisted in inventory tracking and management.</li>
+          </ul>
+        </div>
+      </div>
+    ),
     highlight: "Awarded Certificate of Excellence Intern",
     certificateImage: "https://media.licdn.com/dms/image/v2/D562DAQEjY09fOpIPnw/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1743495474953?e=1765983600&v=beta&t=Ser7pAKeBx63KxVfpElDcdLQuAsBg-ktpCR1Yt2Rb9U"
   }
@@ -201,15 +255,16 @@ const PROJECTS = [
 // --- Helper Components ---
 
 const SectionHeader = ({ title, subtitle }) => (
-  <div className="mb-12 w-full text-left">
-    <h2 className="text-3xl md:text-4xl font-bold text-slate-800 dark:text-slate-100 mb-4">{title}</h2>
+  <div className="mb-12 w-full text-left relative z-20">
+    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4 drop-shadow-md">{title}</h2>
     <div className="w-20 h-1 bg-teal-500 rounded-full mb-4"></div>
-    {subtitle && <p className="text-slate-600 dark:text-slate-400">{subtitle}</p>}
+    {subtitle && <p className="text-slate-700 dark:text-slate-300 font-medium drop-shadow-sm">{subtitle}</p>}
   </div>
 );
 
 // Reusable Sticky Horizontal Scroll Section
-const StickyScrollSection = ({ id, title, subtitle, items, renderCard }) => {
+const StickyScrollSection = ({ id, title, subtitle, items, renderCard, bgImage, blurPx }) => {
+
   const sectionRef = useRef(null);
   const containerRef = useRef(null);
   const [translateX, setTranslateX] = useState(0);
@@ -223,6 +278,7 @@ const StickyScrollSection = ({ id, title, subtitle, items, renderCard }) => {
       const windowScroll = window.scrollY;
       const windowHeight = window.innerHeight;
 
+      // Make scroll trigger earlier so it feels more responsive
       const startScroll = sectionTop;
       const endScroll = sectionTop + sectionHeight - windowHeight;
       
@@ -246,8 +302,24 @@ const StickyScrollSection = ({ id, title, subtitle, items, renderCard }) => {
   }, [items]);
 
   return (
-    <section id={id} ref={sectionRef} className="relative h-[300vh] bg-slate-50 dark:bg-slate-950 transition-colors duration-300 scroll-mt-20">
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center px-6 max-w-7xl mx-auto">
+    <section id={id} ref={sectionRef} className="relative h-[300vh] transition-colors duration-300 scroll-mt-24">
+       {/* Background with Overlay */}
+       <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+            style={{ backgroundImage: `url(${bgImage})` }}
+          />
+          <div
+            className="absolute inset-0 bg-slate-50/85 dark:bg-slate-950/85 transition-[backdrop-filter] duration-300"
+            style={{
+              backdropFilter: `blur(${blurPx}px)`,
+              WebkitBackdropFilter: `blur(${blurPx}px)`
+            }}
+          ></div>
+
+       </div>
+
+      <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center px-6 max-w-7xl mx-auto z-10">
         <div className="w-full">
           <SectionHeader title={title} subtitle={subtitle} />
         </div>
@@ -405,16 +477,25 @@ const CustomCursor = () => {
 
 const Navbar = ({ isDarkMode, toggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-5'}`}>
+      <nav
+        className="
+          fixed
+          left-1/2 -translate-x-1/2
+          top-6
+          z-50
+          w-[calc(100%-2rem)]
+          max-w-6xl
+          rounded-2xl
+          bg-white/80 dark:bg-slate-900/80
+          backdrop-blur-md
+          border border-slate-200/50 dark:border-slate-700/50
+          shadow-lg
+          transition-all duration-300
+        "
+      >
+
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <a href="#" className="text-2xl font-bold text-teal-500 tracking-tighter hover:scale-105 transition-transform">W.</a>
         
@@ -474,8 +555,8 @@ const SideRibbonNavigation = () => {
   ];
 
   return (
-    <div className="fixed right-0 top-24 h-[calc(100vh-6rem)] w-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-l border-slate-200 dark:border-slate-800 z-40 hidden lg:flex flex-col justify-center items-center py-10 shadow-lg rounded-tl-2xl rounded-bl-2xl">
-      <div className="flex flex-col gap-12 h-full justify-center">
+    <div className="fixed right-0 top-32 h-[calc(100vh-8rem)] w-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-l border-slate-200 dark:border-slate-800 z-40 hidden lg:flex flex-col justify-center items-center py-10 shadow-lg rounded-tl-2xl rounded-bl-2xl">
+      <div className="flex flex-col gap-6 h-full justify-center"> {/* Adjusted gap from 8 to 6 */}
       {sections.map((section) => (
         <a 
           key={section.id} 
@@ -495,7 +576,8 @@ const SideRibbonNavigation = () => {
   );
 };
 
-const Hero = () => {
+// **FIX**: Accepted blurPx as prop
+const Hero = ({ blurPx }) => {
   const scrollToContact = (e) => {
     e.preventDefault();
     const contactSection = document.getElementById('contact');
@@ -505,11 +587,23 @@ const Hero = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 pt-20 relative overflow-hidden transition-colors duration-300">
-      <div className="absolute top-20 right-0 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl -z-10 animate-pulse"></div>
-      <div className="absolute bottom-20 left-0 w-72 h-72 bg-blue-600/10 rounded-full blur-3xl -z-10"></div>
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden transition-colors duration-300 bg-slate-50 dark:bg-slate-950">
+      {/* Background with Overlay */}
+      <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+            style={{ backgroundImage: `url(${BACKGROUNDS.hero})` }}
+          />
+          <div
+            className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300"
+            style={{
+              backdropFilter: `blur(${blurPx}px)`,
+              WebkitBackdropFilter: `blur(${blurPx}px)`
+            }}
+          ></div>
+      </div>
 
-      <div className="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center">
+      <div className="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
         <div className="space-y-6">
           <p className="text-teal-500 font-mono flex items-center gap-2">
             <span className="w-8 h-px bg-teal-500"></span> Hello, I'm
@@ -539,19 +633,36 @@ const Hero = () => {
         </div>
 
         <div className="relative hidden md:flex justify-center">
-           {/* Layout spacer */}
+           {/* Placeholder for future Image component */}
+           {/* <img src="/path/to/image.png" alt="Profile" className="w-full h-auto object-cover rounded-2xl shadow-2xl" /> */}
         </div>
       </div>
     </section>
   );
 };
 
-const About = () => {
+// **FIX**: Accepted blurPx as prop
+const About = ({ blurPx }) => {
   return (
-    <section id="about" className="py-20 pt-40 bg-slate-50 dark:bg-slate-900 transition-colors duration-300 scroll-mt-28">
-      <div className="max-w-4xl mx-auto px-6">
+    <section id="about" className="py-20 pt-40 relative transition-colors duration-300 scroll-mt-28 bg-slate-50 dark:bg-slate-950">
+       {/* Background with Overlay */}
+       <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+            style={{ backgroundImage: `url(${BACKGROUNDS.about})` }}
+          />
+          <div
+            className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300"
+            style={{
+              backdropFilter: `blur(${blurPx}px)`,
+              WebkitBackdropFilter: `blur(${blurPx}px)`
+            }}
+          ></div>
+       </div>
+
+      <div className="max-w-4xl mx-auto px-6 relative z-10">
         <SectionHeader title="About Me" />
-        <div className="bg-white dark:bg-slate-800/50 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm hover:border-teal-500/30 transition-all">
+        <div className="bg-white/80 dark:bg-slate-900/80 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm hover:border-teal-500/30 transition-all backdrop-blur-md">
           <div className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed whitespace-pre-line">
             {PERSONAL_INFO.about}
           </div>
@@ -568,10 +679,26 @@ const About = () => {
   );
 };
 
-const Projects = () => {
+// **FIX**: Accepted blurPx as prop
+const Projects = ({ blurPx }) => {
   return (
-    <section id="projects" className="py-20 pt-32 bg-slate-50 dark:bg-slate-900 transition-colors duration-300 scroll-mt-32">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="projects" className="py-20 pt-32 relative transition-colors duration-300 scroll-mt-32 bg-slate-50 dark:bg-slate-950">
+       {/* Background with Overlay */}
+       <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+            style={{ backgroundImage: `url(${BACKGROUNDS.projects})` }}
+          />
+          <div
+            className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300"
+            style={{
+              backdropFilter: `blur(${blurPx}px)`,
+              WebkitBackdropFilter: `blur(${blurPx}px)`
+            }}
+          ></div>
+       </div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <SectionHeader title="Featured Projects" subtitle="A selection of my work in Data Analysis and Automation." />
         <div className="space-y-16 mb-12">
           {PROJECTS.map((project) => (
@@ -596,11 +723,23 @@ const Projects = () => {
               </div>
 
               {/* Hover Overlay (Full Info) */}
-              <div className="absolute inset-0 bg-slate-900/95 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 flex flex-col justify-center items-center p-12 text-center">
-                <h3 className="text-3xl font-bold text-teal-400 mb-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">{project.title}</h3>
+              <div
+                className="absolute inset-0 bg-slate-900/95 transition-[backdrop-filter] duration-300
+                          opacity-0 group-hover:opacity-100
+                          flex flex-col justify-center items-center p-12 text-center"
+                style={{
+                  backdropFilter: `blur(${blurPx}px)`,
+                  WebkitBackdropFilter: `blur(${blurPx}px)`
+                }}
+              >
+                <h3 className="text-3xl font-bold text-teal-400 mb-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  {project.title}
+                </h3>
+
                 <p className="text-slate-300 text-lg mb-8 max-w-2xl translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
                   {project.description}
                 </p>
+
                 <div className="flex flex-wrap gap-3 justify-center mb-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-700 delay-100">
                   {project.tech.map((t, i) => (
                     <span key={i} className="text-sm font-medium bg-teal-500/10 text-teal-300 px-4 py-1.5 rounded-full border border-teal-500/20">
@@ -608,7 +747,8 @@ const Projects = () => {
                     </span>
                   ))}
                 </div>
-                <div className="inline-flex items-center gap-2 text-white bg-teal-600 px-6 py-3 rounded-full font-bold hover:bg-teal-500 transition-colors translate-y-4 group-hover:translate-y-0 duration-1000 delay-150 shadow-lg">
+
+                <div className="inline-flex items-center gap-2 text-white bg-teal-600 px-6 py-3 rounded-full font-bold hover:bg-teal-500 transition-colors shadow-lg">
                   View Details <ArrowRight size={20} />
                 </div>
               </div>
@@ -620,7 +760,8 @@ const Projects = () => {
   );
 };
 
-const Experience = () => {
+// **FIX**: Accepted blurPx as prop
+const Experience = ({ blurPx }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
   const [selectedTitle, setSelectedTitle] = useState('');
@@ -632,8 +773,23 @@ const Experience = () => {
   };
 
   return (
-    <section id="experience" className="py-20 bg-slate-50 dark:bg-slate-900 transition-colors duration-300 scroll-mt-20">
-      <div className="max-w-5xl mx-auto px-6">
+    <section id="experience" className="py-20 relative transition-colors duration-300 scroll-mt-20 bg-slate-50 dark:bg-slate-950">
+       {/* Background with Overlay */}
+       <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+            style={{ backgroundImage: `url(${BACKGROUNDS.experience})` }}
+          />
+          <div
+            className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300"
+            style={{
+              backdropFilter: `blur(${blurPx}px)`,
+              WebkitBackdropFilter: `blur(${blurPx}px)`
+            }}
+          ></div>
+        </div>
+
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         <SectionHeader title="Experience" />
         <div className="space-y-12">
           {EXPERIENCE.map((exp) => (
@@ -646,15 +802,16 @@ const Experience = () => {
                 <div className="absolute left-0 md:left-1/2 w-4 h-4 bg-teal-500 rounded-full border-4 border-slate-50 dark:border-slate-900 -translate-x-[5px] md:-translate-x-1/2 mt-1.5 md:mt-0"></div>
                 <div className="w-full md:w-[45%]">
                   <div className="md:hidden text-teal-500 font-mono text-sm mb-1">{exp.date}</div>
-                  <div className="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-shadow group">
+                  <div className="bg-white/80 dark:bg-slate-900/80 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-shadow group backdrop-blur-sm">
                     <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">{exp.role}</h3>
                     <div className="flex items-center gap-2 mb-3">
                       <span className="text-slate-700 dark:text-slate-300 font-medium">{exp.company}</span>
                       <span className="text-xs bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 px-2 py-0.5 rounded">{exp.type}</span>
                     </div>
-                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-3">
+                    {/* Render JSX content correctly */}
+                    <div className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-3">
                       {exp.description}
-                    </p>
+                    </div>
                     {exp.highlight && (
                       <button 
                         onClick={() => openCertificate(exp.certificateImage, exp.highlight)}
@@ -684,7 +841,8 @@ const Experience = () => {
   );
 };
 
-const Contact = () => {
+// **FIX**: Accepted blurPx as prop
+const Contact = ({ blurPx }) => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -703,8 +861,23 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-slate-50 dark:bg-slate-900 transition-colors duration-300">
-      <div className="max-w-4xl mx-auto px-6">
+    <section id="contact" className="py-20 relative transition-colors duration-300 bg-slate-50 dark:bg-slate-900">
+       {/* Background with Overlay */}
+       <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+            style={{ backgroundImage: `url(${BACKGROUNDS.contact})` }}
+          />
+          <div
+            className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300"
+            style={{
+              backdropFilter: `blur(${blurPx}px)`,
+              WebkitBackdropFilter: `blur(${blurPx}px)`
+            }}
+          ></div>
+       </div>
+
+      <div className="max-w-4xl mx-auto px-6 relative z-10">
         <SectionHeader title="Get In Touch" />
         
         <div className="grid md:grid-cols-2 gap-12">
@@ -736,7 +909,7 @@ const Contact = () => {
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4 bg-white dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+          <form onSubmit={handleSubmit} className="space-y-4 bg-white/80 dark:bg-slate-800/80 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm backdrop-blur-sm">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Name</label>
               <input 
@@ -791,7 +964,7 @@ const Contact = () => {
 };
 
 const Footer = () => (
-  <footer className="bg-slate-50 dark:bg-slate-900 py-8 border-t border-slate-200 dark:border-slate-900 transition-colors duration-300 lg:pr-24">
+  <footer className="bg-slate-50 dark:bg-slate-900 py-8 border-t border-slate-200 dark:border-slate-900 transition-colors duration-300 lg:pr-24 relative z-10">
     <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm">
       <p>&copy; {new Date().getFullYear()} {PERSONAL_INFO.name} All rights reserved.</p>
       <div className="flex gap-4 mt-4 md:mt-0">
@@ -806,8 +979,25 @@ export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
   const [selectedTitle, setSelectedTitle] = useState('');
-  const [isDarkMode, setIsDarkMode] = useState(true);
+  
+  // Initialize theme from localStorage or system preference
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    try {
+      if (typeof window !== 'undefined') {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+          return savedTheme === 'dark';
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches;
+      }
+    } catch (e) {
+      console.warn('LocalStorage access denied or error:', e);
+    }
+    return true; // Default to dark if error
+  });
+
   const [isLoading, setIsLoading] = useState(true);
+  const [blurPx, setBlurPx] = useState(0);
 
   const openCertificate = (image, title) => {
     setSelectedImage(image);
@@ -819,13 +1009,39 @@ export default function App() {
     setIsDarkMode(!isDarkMode);
   };
 
+  // Improved useEffect for theme management
   useEffect(() => {
+    const root = window.document.documentElement;
+    // Log for debugging
+    console.log(`Theme changing to: ${isDarkMode ? 'dark' : 'light'}`);
     if (isDarkMode) {
-      document.documentElement.classList.add('dark');
+      root.classList.add('dark');
+      try { localStorage.setItem('theme', 'dark'); } catch(e) {}
     } else {
-      document.documentElement.classList.remove('dark');
+      root.classList.remove('dark');
+      try { localStorage.setItem('theme', 'light'); } catch(e) {}
     }
   }, [isDarkMode]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const y = window.scrollY;
+
+      if (y < 120) {
+        setBlurPx(0);
+      } else if (y < 360) {
+        setBlurPx(1);
+      } else {
+        setBlurPx(2);
+      }
+    };
+
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll(); // initialize on load
+
+      return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
 
   if (isLoading) {
     return <FuturisticLoader onComplete={() => setIsLoading(false)} />;
@@ -836,65 +1052,74 @@ export default function App() {
       <CustomCursor />
       <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
       <SideRibbonNavigation />
-      <Hero />
-      <About />
-      <Projects />
-      
-      {/* Sticky Horizontal Scroll for Skills */}
-      <StickyScrollSection 
-        id="skills"
-        title="Technical Skills"
-        subtitle="Tools and technologies I use to drive insights."
-        items={SKILLS}
-        renderCard={(skill, index) => (
-          <div key={index} className="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-teal-500/50 transition-all w-72 shrink-0 flex flex-col items-center text-center justify-center gap-4 group shadow-sm hover:shadow-md">
-            <div className="w-16 h-16 flex items-center justify-center rounded-2xl bg-slate-100 dark:bg-white/5 p-2 transition-transform group-hover:scale-110">
-              <img src={skill.image} alt={skill.name} className="w-full h-full object-contain" />
+      <div className="pt-32">
+        {/* **FIX**: Passed blurPx prop to children */}
+        <Hero blurPx={blurPx} />
+        <About blurPx={blurPx} />
+        <Projects blurPx={blurPx} />
+        
+        {/* Sticky Horizontal Scroll for Skills */}
+        <StickyScrollSection 
+          id="skills"
+          title="Technical Skills"
+          subtitle="Tools and technologies I use to drive insights."
+          items={SKILLS}
+          bgImage={BACKGROUNDS.skills}
+          blurPx={blurPx}
+          renderCard={(skill, index) => (
+            <div key={index} className="bg-white/90 dark:bg-slate-900/90 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-teal-500/50 transition-all w-72 shrink-0 flex flex-col items-center text-center justify-center gap-4 group shadow-sm hover:shadow-md backdrop-blur-sm">
+              <div className="w-16 h-16 flex items-center justify-center rounded-2xl bg-slate-100 dark:bg-white/5 p-2 transition-transform group-hover:scale-110">
+                <img src={skill.image} alt={skill.name} className="w-full h-full object-contain" />
+              </div>
+              <div>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-slate-200">{skill.name}</h3>
+                <p className="text-sm text-slate-500 mt-1">{skill.category}</p>
+              </div>
             </div>
-            <div>
-              <h3 className="text-xl font-bold text-slate-900 dark:text-slate-200">{skill.name}</h3>
-              <p className="text-sm text-slate-500 mt-1">{skill.category}</p>
+          )}
+        />
+
+        {/* **FIX**: Passed blurPx prop to children */}
+        <Experience blurPx={blurPx} />
+
+        {/* Sticky Horizontal Scroll for Certifications */}
+        <StickyScrollSection 
+          id="certifications"
+          title="Certifications & Awards"
+          subtitle="Recognitions of my expertise and dedication."
+          items={CERTIFICATIONS}
+          bgImage={BACKGROUNDS.certifications}
+          blurPx={blurPx}
+          renderCard={(cert, index) => (
+            <div 
+              key={index} 
+              onClick={() => openCertificate(cert.image, cert.title)}
+              className="bg-white/90 dark:bg-slate-900/90 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between hover:border-teal-500/50 transition-all w-96 shrink-0 h-64 cursor-pointer group shadow-sm hover:shadow-md backdrop-blur-sm"
+            >
+              <div>
+                <Award className="text-teal-500 mb-6 group-hover:scale-110 transition-transform" size={40} />
+                <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2 leading-tight group-hover:text-teal-500 transition-colors">{cert.title}</h3>
+                <p className="text-slate-500 dark:text-slate-400">{cert.issuer}</p>
+              </div>
+              <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-sm">
+                <span className="text-slate-500">{cert.date}</span>
+                <span className="font-mono text-slate-600">{cert.credentialId}</span>
+              </div>
             </div>
-          </div>
-        )}
-      />
+          )}
+        />
 
-      <Experience />
+        <CertificateModal 
+          isOpen={modalOpen} 
+          onClose={() => setModalOpen(false)} 
+          imageSrc={selectedImage} 
+          title={selectedTitle} 
+        />
 
-      {/* Sticky Horizontal Scroll for Certifications */}
-      <StickyScrollSection 
-        id="certifications"
-        title="Certifications & Awards"
-        subtitle="Recognitions of my expertise and dedication."
-        items={CERTIFICATIONS}
-        renderCard={(cert, index) => (
-          <div 
-            key={index} 
-            onClick={() => openCertificate(cert.image, cert.title)}
-            className="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between hover:border-teal-500/50 transition-all w-96 shrink-0 h-64 cursor-pointer group shadow-sm hover:shadow-md"
-          >
-            <div>
-              <Award className="text-teal-500 mb-6 group-hover:scale-110 transition-transform" size={40} />
-              <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2 leading-tight group-hover:text-teal-500 transition-colors">{cert.title}</h3>
-              <p className="text-slate-500 dark:text-slate-400">{cert.issuer}</p>
-            </div>
-            <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-sm">
-              <span className="text-slate-500">{cert.date}</span>
-              <span className="font-mono text-slate-600">{cert.credentialId}</span>
-            </div>
-          </div>
-        )}
-      />
-
-      <CertificateModal 
-        isOpen={modalOpen} 
-        onClose={() => setModalOpen(false)} 
-        imageSrc={selectedImage} 
-        title={selectedTitle} 
-      />
-
-      <Contact />
-      <Footer />
+        {/* **FIX**: Passed blurPx prop to children */}
+        <Contact blurPx={blurPx} />
+        <Footer />
+      </div>
     </div>
   );
 }
