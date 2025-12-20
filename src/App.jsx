@@ -773,7 +773,7 @@ const Experience = ({ blurPx }) => {
   };
 
   return (
-    <section id="experience" className="py-20 relative transition-colors duration-300 scroll-mt-20 bg-slate-50 dark:bg-slate-950">
+    <section id="experience" className="py-20 relative transition-colors duration-300 scroll-mt-20 bg-slate-50 dark:bg-slate-900">
        {/* Background with Overlay */}
        <div className="absolute inset-0 z-0">
           <div 
@@ -1006,7 +1006,21 @@ export default function App() {
   };
 
   const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
+    const next = !isDarkMode;
+    setIsDarkMode(next);
+
+    try {
+      const root = window.document.documentElement;
+      if (next) {
+        root.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      } else {
+        root.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      }
+    } catch (e) {
+      // ignore storage access errors
+    }
   };
 
   // Improved useEffect for theme management
