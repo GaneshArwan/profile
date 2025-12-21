@@ -1,31 +1,57 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  Github, 
-  Linkedin, 
   Mail, 
   Menu, 
   X, 
-  Code, 
   Award,
-  Briefcase,
   GraduationCap,
-  ExternalLink,
-  ChevronDown,
-  ChevronUp,
-  Send,
-  X as CloseIcon,
   Sun,
   Moon,
-  Database,
-  BarChart,
-  Brain,
-  Lightbulb,
-  Cpu,
   Activity,
-  Zap,
   ArrowRight,
-  Loader2
+  Cpu,
+  X as CloseIcon,
+  Send
 } from 'lucide-react';
+
+// --- Custom Icons ---
+
+const GithubIcon = ({ size = 24, className = "" }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/>
+    <path d="M9 18c-4.51 2-5-2-7-2"/>
+  </svg>
+);
+
+const LinkedinIcon = ({ size = 24, className = "" }) => (
+  <svg 
+    xmlns="http://www.w3.org/2000/svg" 
+    width={size} 
+    height={size} 
+    viewBox="0 0 24 24" 
+    fill="none" 
+    stroke="currentColor" 
+    strokeWidth="2" 
+    strokeLinecap="round" 
+    strokeLinejoin="round" 
+    className={className}
+  >
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+    <rect width="4" height="12" x="2" y="9"/>
+    <circle cx="4" cy="4" r="2"/>
+  </svg>
+);
 
 // --- Data Constants ---
 
@@ -39,7 +65,6 @@ const PERSONAL_INFO = {
   github: "https://github.com/GaneshArwan",
 };
 
-// Background Image Placeholders
 const BACKGROUNDS = {
   hero: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop", 
   about: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop", 
@@ -50,7 +75,6 @@ const BACKGROUNDS = {
   contact: "https://images.unsplash.com/photo-1516387938699-a93567ec168e?q=80&w=2071&auto=format&fit=crop" 
 };
 
-// Helper for devicon urls
 const getIconUrl = (name) => `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${name}/${name}-original.svg`;
 
 const SKILLS = [
@@ -75,17 +99,24 @@ const EXPERIENCE = [
     type: "Contract",
     date: "Jan 2025 - Present",
     description: (
-      <div className="space-y-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-        <p className="font-semibold text-teal-600 dark:text-teal-400">Key Achievements:</p>
-        <ul className="list-disc pl-5 space-y-2">
-            <li><strong>Improved SLA & Quality:</strong> Reduced rework and accelerated processing by 30% through pre-validation and standardized workflows.</li>
-            <li><strong>Digital Integration:</strong> Migrated promotion, finance, site, pricing, and vendor master data requests from manual channels (email) into a centralized system (Catalyst), enhancing trackability.</li>
-            <li><strong>Workspace Centralization:</strong> Consolidated 7 scattered spreadsheets into a single workspace, simplifying task management for MDAs.</li>
-            <li><strong>Process Automation:</strong> Developed semi-automation tools for SAP article image processing, significantly speeding up bulk submissions.</li>
-            <li><strong>Reporting & Analytics:</strong> Created quarterly performance reports for business units (AHI, BERLIN, HCI) and real-time dashboards (Baseline, Daily/Weekly) to identify bottlenecks and operational efficiency.</li>
-            <li><strong>Workload Balance:</strong> Implemented "Baseline," "Status MDM," and "Priority Request" logic for fair task distribution, reducing manual intervention.</li>
-            <li><strong>Data Quality Improvement:</strong> Conducted vendor bank account data cleansing and standardized site master naming conventions to prevent future system errors.</li>
-            <li><strong>Documentation:</strong> Produced standardized guidelines for Site, GL Account, Cost Center, Profit Center, and Vendor/Customer master data changes.</li>
+      // UPDATE: New Description with Bold Titles
+      <div className="space-y-4 text-sm leading-relaxed text-slate-700 dark:text-slate-300 font-medium">
+        <ul className="list-disc pl-5 space-y-3">
+            <li>
+                <strong className="text-teal-600 dark:text-teal-400">Improved master data SLA by 30%:</strong> through workflow standardization and pre-validation mechanisms, reducing back-and-forth and rework.
+            </li>
+            <li>
+                <strong className="text-teal-600 dark:text-teal-400">Increased master data completeness and accuracy to &gt;99%:</strong> across key domains (Site, Vendor, Customer, Article, Finance).
+            </li>
+            <li>
+                <strong className="text-teal-600 dark:text-teal-400">Digital Integration:</strong> Migrated 10+ manual master data processes into a centralized digital workflow, establishing the foundation for end-to-end request tracking that replaced untraceable email-based submissions with a transparent, auditable system.
+            </li>
+            <li>
+                <strong className="text-teal-600 dark:text-teal-400">Reduced operational bottlenecks by ~35% and automated ~70% of repetitive tasks:</strong> rule-based master data activities through workflow-driven automation and standardized logic, increasing daily request handling capacity by ~3x with the same headcount.
+            </li>
+            <li>
+                <strong className="text-teal-600 dark:text-teal-400">Enabled faster and more reliable business decisions:</strong> by ensuring consistent, well-governed master data, supported by a centralized request tracking system, Looker dashboards to monitor MDM performance and data trends, and data profiling outputs for Business Units, providing visibility into their own master data domains (Article, Site, Vendor, and Customer).
+            </li>
         </ul>
       </div>
     ),
@@ -98,28 +129,25 @@ const EXPERIENCE = [
     type: "Internship",
     date: "Jan 2024 - Jan 2025",
     description: (
-      <div className="space-y-4 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+      <div className="space-y-4 text-sm leading-relaxed text-slate-700 dark:text-slate-300 font-medium">
         <p>I contributed to automation, data management, and operational efficiency projects, enhancing my skills in scripting and data governance.</p>
-        
         <div>
-          <strong className="block text-teal-600 dark:text-teal-400 mb-1">Workflow Optimization</strong>
+          <strong className="block text-teal-600 dark:text-teal-400 mb-1 text-base">Workflow Optimization</strong>
           <ul className="list-disc pl-5 space-y-1">
             <li>Transformed email-based workflows to a structured system using Google Forms and Sheets.</li>
             <li>Developed custom forms for efficient task collection and management.</li>
             <li>Implemented Google Apps Script for automated form creation, approvals, and notifications.</li>
           </ul>
         </div>
-
         <div>
-          <strong className="block text-teal-600 dark:text-teal-400 mb-1">Data Management & Governance</strong>
+          <strong className="block text-teal-600 dark:text-teal-400 mb-1 text-base">Data Management & Governance</strong>
           <ul className="list-disc pl-5 space-y-1">
             <li>Utilized Google Sheets and Looker for data visualization.</li>
             <li>Assisted in automating data mapping processes.</li>
           </ul>
         </div>
-
         <div>
-          <strong className="block text-teal-600 dark:text-teal-400 mb-1">Operational Support</strong>
+          <strong className="block text-teal-600 dark:text-teal-400 mb-1 text-base">Operational Support</strong>
           <ul className="list-disc pl-5 space-y-1">
             <li>Monitored promotional and merchandise processes.</li>
             <li>Assisted in inventory tracking and management.</li>
@@ -132,81 +160,152 @@ const EXPERIENCE = [
   }
 ];
 
-const EDUCATION = [
-  {
-    id: 1,
-    school: "Universitas Tarumanagara",
-    degree: "Bachelor's degree, Computer Science",
-    date: "Jul 2021 - Feb 2025",
-    description: "Focus on Data Science and Software Engineering."
-  }
-];
-
 const CERTIFICATIONS = [
+
   {
+
     id: 1,
+
     title: "Belajar Analisis Data dengan Python",
+
     issuer: "Dicoding Indonesia",
+
     date: "Issued Oct 2023",
+
     credentialId: "GRX52E7ERX0M",
-    image: "https://dicoding-web-img.sgp1.cdn.digitaloceanspaces.com/original/academy/dos:5d06d09c6239dfb7722776c16723223120231026102607.png"
+
+    image: "https://media.licdn.com/dms/image/v2/C560BAQHOIi63tC8k8w/company-logo_100_100/company-logo_100_100/0/1660182933847/dicoding_logo?e=1767830400&v=beta&t=w0cAb4xz5sFk-PsdIa2MQCYjqrp_9feO2fG8_c3jC6c",
+
+    link: "https://www.dicoding.com/certificates/GRX52E7ERX0M"
+
   },
+
   {
+
     id: 2,
+
     title: "Belajar Dasar Visualisasi Data",
+
     issuer: "Dicoding Indonesia",
+
     date: "Issued Dec 2023",
+
     credentialId: "QLZ941NY7P5D",
-    image: "https://dicoding-web-img.sgp1.cdn.digitaloceanspaces.com/original/academy/dos:96323c3286379207009772390772205520231221162356.png"
+
+    image: "https://media.licdn.com/dms/image/v2/C560BAQHOIi63tC8k8w/company-logo_100_100/company-logo_100_100/0/1660182933847/dicoding_logo?e=1767830400&v=beta&t=w0cAb4xz5sFk-PsdIa2MQCYjqrp_9feO2fG8_c3jC6c",
+
+    link: "https://www.dicoding.com/certificates/QLZ941NY7P5D"
+
   },
+
   {
+
     id: 3,
+
     title: "Certificate of Excellence",
+
     issuer: "Kawan Lama Group",
+
     date: "Internship Award",
+
     credentialId: "MDM Automation",
-    image: "https://media.licdn.com/dms/image/v2/D562DAQEjY09fOpIPnw/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1743495474953?e=1765983600&v=beta&t=Ser7pAKeBx63KxVfpElDcdLQuAsBg-ktpCR1Yt2Rb9U"
+
+    image: "https://www.kawanlamagroup.com/favicon.png", // UPDATED IMAGE
+
+    link: "https://www.linkedin.com/in/william-oo00/details/certifications/"
+
   },
+
   {
+
     id: 4,
+
     title: "Memulai Pemrograman dengan Python",
+
     issuer: "Dicoding Indonesia",
+
     date: "Issued Sep 2023",
+
     credentialId: "Programming Logic",
-    image: "https://dicoding-web-img.sgp1.cdn.digitaloceanspaces.com/original/academy/dos:2053155705353156002008320920230922152332.png"
+
+    image: "https://media.licdn.com/dms/image/v2/C560BAQHOIi63tC8k8w/company-logo_100_100/company-logo_100_100/0/1660182933847/dicoding_logo?e=1767830400&v=beta&t=w0cAb4xz5sFk-PsdIa2MQCYjqrp_9feO2fG8_c3jC6c",
+
+    link: "https://dicoding.com/certificates/98XWVRM4LPM3"
+
   },
+
   {
+
     id: 5,
+
     title: "Machine Learning Pemula",
+
     issuer: "Dicoding Indonesia",
+
     date: "Issued 2023",
+
     credentialId: "ML Foundations",
-    image: "https://dicoding-web-img.sgp1.cdn.digitaloceanspaces.com/original/academy/dos:7095039328509300539320231122102553.png"
+
+    image: "https://media.licdn.com/dms/image/v2/C560BAQHOIi63tC8k8w/company-logo_100_100/company-logo_100_100/0/1660182933847/dicoding_logo?e=1767830400&v=beta&t=w0cAb4xz5sFk-PsdIa2MQCYjqrp_9feO2fG8_c3jC6c",
+
+    link: "https://dicoding.com/certificates/98XWV4O7LPM3"
+
   },
+
   {
+
     id: 6,
-    title: "Cloud Practitioner Essentials",
-    issuer: "AWS / Dicoding",
-    date: "Issued 2023",
-    credentialId: "Cloud Basics",
-    image: "https://dicoding-web-img.sgp1.cdn.digitaloceanspaces.com/original/academy/dos:53920970530932822002220230823145622.png"
+
+    title: "Microsoft Excel",
+
+    issuer: "MySkill",
+
+    date: "Issued Aug 2023",
+
+    credentialId: "", // EMPTY STRING AS REQUESTED
+
+    image: "https://myskill.id/favicon/favicon-32x32.png", // UPDATED IMAGE
+
+    link: "https://storage.googleapis.com/myskill-v2-certificates/learning-path-kpIIH7ZvWgW3muNNmC1V/1L3U2pxG95SYDqJeWU826bAsGLn2-iJSQ2XkoAtkIt8JfWW9v.pdf"
+
   },
+
   {
+
     id: 7,
+
     title: "SQL for Data Science",
-    issuer: "DataCamp / Other",
+
+    issuer: "Dicoding Indonesia",
+
     date: "Issued 2023",
+
     credentialId: "Database Management",
-    image: "https://images.credly.com/size/340x340/images/6c64c76b-91d9-43c2-9a53-4881ee053739/SQL_Fundamentals.png"
+
+    image: "https://media.licdn.com/dms/image/v2/C560BAQHOIi63tC8k8w/company-logo_100_100/company-logo_100_100/0/1660182933847/dicoding_logo?e=1767830400&v=beta&t=w0cAb4xz5sFk-PsdIa2MQCYjqrp_9feO2fG8_c3jC6c",
+
+    link: "https://dicoding.com/certificates/81P23MG9YXOY"
+
   },
+
   {
+
     id: 8,
-    title: "Google Data Analytics",
-    issuer: "Coursera",
-    date: "Issued 2024",
-    credentialId: "Data Analysis",
-    image: "https://images.credly.com/size/340x340/images/32267332-9a84-4696-b040-36b361730702/GCC_badge_python_1000x1000.png"
+
+    title: "Google Analytics Certification",
+
+    issuer: "Google Digital Academy",
+
+    date: "Issued Oct 2023",
+
+    credentialId: "177278382",
+
+    image: "https://media.licdn.com/dms/image/v2/C4E0BAQH3BCCd-0PGng/company-logo_100_100/company-logo_100_100/0/1630624368505?e=1767830400&v=beta&t=ndQOZD1t2LBlwWBePjVpk7xRDoxigbM5sKUuZJyRce4",
+
+    link: "https://skillshop.exceedlms.com/student/award/a31oSo7NkTXipXtJfDb5eR3E"
+
   }
+
 ];
 
 const PROJECTS = [
@@ -255,16 +354,27 @@ const PROJECTS = [
 // --- Helper Components ---
 
 const SectionHeader = ({ title, subtitle }) => (
-  <div className="mb-12 w-full text-left relative z-20">
-    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-slate-100 mb-4 drop-shadow-md">{title}</h2>
-    <div className="w-20 h-1 bg-teal-500 rounded-full mb-4"></div>
-    {subtitle && <p className="text-slate-700 dark:text-slate-300 font-medium drop-shadow-sm">{subtitle}</p>}
+  <div className="mb-12 w-full text-left relative z-20 animate-in slide-in-from-bottom-8 duration-700 fade-in">
+    <h2 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-6 drop-shadow-md tracking-tight">
+      {title}
+    </h2>
+    <div className="w-24 h-1.5 bg-teal-500 rounded-full mb-6 opacity-80"></div>
+    {subtitle && (
+      <p className="text-lg md:text-xl text-slate-700 dark:text-slate-300 font-medium drop-shadow-sm max-w-2xl">
+        {subtitle}
+      </p>
+    )}
   </div>
 );
 
-// Reusable Sticky Horizontal Scroll Section
-const StickyScrollSection = ({ id, title, subtitle, items, renderCard, bgImage, blurPx }) => {
+const BackgroundOverlay = () => (
+  <>
+    <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-slate-50 dark:from-slate-950 to-transparent z-[1] pointer-events-none" />
+    <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-slate-50 dark:from-slate-950 to-transparent z-[1] pointer-events-none" />
+  </>
+);
 
+const StickyScrollSection = ({ id, title, subtitle, items, renderCard, bgImage, blurPx }) => {
   const sectionRef = useRef(null);
   const containerRef = useRef(null);
   const [translateX, setTranslateX] = useState(0);
@@ -278,7 +388,6 @@ const StickyScrollSection = ({ id, title, subtitle, items, renderCard, bgImage, 
       const windowScroll = window.scrollY;
       const windowHeight = window.innerHeight;
 
-      // Make scroll trigger earlier so it feels more responsive
       const startScroll = sectionTop;
       const endScroll = sectionTop + sectionHeight - windowHeight;
       
@@ -288,7 +397,7 @@ const StickyScrollSection = ({ id, title, subtitle, items, renderCard, bgImage, 
         
         const contentWidth = containerRef.current.scrollWidth;
         const viewportWidth = window.innerWidth;
-        const maxTranslate = contentWidth - viewportWidth + 100;
+        const maxTranslate = contentWidth - viewportWidth + 500;
 
         let progress = scrollDistance / maxScrollDistance;
         progress = Math.max(0, Math.min(progress, 1));
@@ -302,8 +411,7 @@ const StickyScrollSection = ({ id, title, subtitle, items, renderCard, bgImage, 
   }, [items]);
 
   return (
-    <section id={id} ref={sectionRef} className="relative h-[300vh] transition-colors duration-300 scroll-mt-24">
-       {/* Background with Overlay */}
+    <section id={id} ref={sectionRef} className="relative h-[400vh] transition-colors duration-300 scroll-mt-24">
        <div className="absolute inset-0 z-0">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
@@ -316,18 +424,18 @@ const StickyScrollSection = ({ id, title, subtitle, items, renderCard, bgImage, 
               WebkitBackdropFilter: `blur(${blurPx}px)`
             }}
           ></div>
-
+          <BackgroundOverlay />
        </div>
 
-      <div className="sticky top-0 h-screen overflow-hidden flex flex-col justify-center px-6 max-w-7xl mx-auto z-10">
-        <div className="w-full">
+      <div className="sticky top-0 h-screen overflow-hidden flex flex-col pt-32 md:pt-40 px-6 max-w-7xl mx-auto z-10">
+        <div className="w-full shrink-0">
           <SectionHeader title={title} subtitle={subtitle} />
         </div>
         
         <div className="flex-1 flex items-center">
           <div 
             ref={containerRef}
-            className="flex gap-8 w-max will-change-transform"
+            className="flex gap-8 w-max will-change-transform pb-20" 
             style={{ transform: `translateX(-${translateX}px)` }}
           >
             {items.map((item, index) => renderCard(item, index))}
@@ -477,30 +585,60 @@ const CustomCursor = () => {
 
 const Navbar = ({ isDarkMode, toggleTheme }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['about', 'projects', 'skills', 'experience', 'certifications', 'contact'];
+      if (window.scrollY < 300) {
+        setActiveSection("");
+        return;
+      }
+      for (const id of sections) {
+        const element = document.getElementById(id);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if ((rect.top >= 0 && rect.top <= window.innerHeight / 2) || (rect.top < 0 && rect.bottom > window.innerHeight / 2)) {
+             const title = id.charAt(0).toUpperCase() + id.slice(1);
+             setActiveSection(title === 'Certifications' ? 'Awards' : title);
+             break;
+          }
+        }
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-      <nav
-        className="
-          fixed
-          left-1/2 -translate-x-1/2
-          top-6
-          z-50
-          w-[calc(100%-2rem)]
-          max-w-6xl
-          rounded-2xl
-          bg-white/80 dark:bg-slate-900/80
-          backdrop-blur-md
-          border border-slate-200/50 dark:border-slate-700/50
-          shadow-lg
-          transition-all duration-300
-        "
-      >
-
-      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <a href="#" className="text-2xl font-bold text-teal-500 tracking-tighter hover:scale-105 transition-transform">W.</a>
+    <nav
+      className="
+        fixed
+        left-1/2 -translate-x-1/2
+        top-32
+        z-50
+        w-[90%] md:w-auto md:min-w-[200px]
+        rounded-full
+        bg-white/80 dark:bg-slate-900/80
+        backdrop-blur-md
+        border border-slate-200/50 dark:border-slate-700/50
+        shadow-lg
+        transition-all duration-300
+        px-6
+      "
+    >
+      <div className="flex justify-between items-center gap-4 py-3">
+        <a href="#" className={`text-2xl font-bold text-teal-500 tracking-tighter hover:scale-105 transition-transform ${activeSection ? 'hidden md:block' : 'block'}`}>W.</a>
         
-        {/* Desktop: Theme Toggle Only (Nav is on side ribbon) */}
-        <div className="hidden lg:flex items-center">
+        <div className="absolute left-1/2 -translate-x-1/2 text-center">
+            {activeSection && (
+                <span className="text-lg font-bold text-slate-800 dark:text-slate-100 animate-in fade-in slide-in-from-top-2 whitespace-nowrap">
+                    {activeSection}
+                </span>
+            )}
+        </div>
+
+        <div className="hidden lg:flex items-center ml-auto">
           <button 
             onClick={toggleTheme}
             className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shadow-sm ring-1 ring-slate-200 dark:ring-slate-700"
@@ -509,24 +647,25 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
           </button>
         </div>
 
-        {/* Mobile: Hamburger + Theme Toggle */}
-        <div className="lg:hidden flex items-center gap-4">
-          <button 
-            onClick={toggleTheme}
-            className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shadow-sm"
-          >
-            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-          </button>
+        <div className="lg:hidden flex items-center gap-4 ml-auto">
           <button onClick={() => setIsOpen(!isOpen)} className="text-slate-600 dark:text-slate-300 hover:text-teal-500">
             {isOpen ? <X size={28} /> : <Menu size={28} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
       {isOpen && (
-        <div className="lg:hidden bg-white/95 dark:bg-slate-900/95 absolute w-full border-b border-slate-200 dark:border-slate-800 backdrop-blur-xl animate-in slide-in-from-top-5 h-screen">
+        <div className="lg:hidden bg-white/95 dark:bg-slate-900/95 absolute top-full left-0 w-full mt-4 rounded-2xl border border-slate-200 dark:border-slate-800 backdrop-blur-xl animate-in slide-in-from-top-2 overflow-hidden shadow-xl">
           <div className="px-6 py-6 flex flex-col space-y-4">
+            <div className="flex justify-between items-center pb-4 border-b border-slate-200 dark:border-slate-800">
+               <span className="text-sm font-bold text-slate-500">Theme</span>
+               <button 
+                onClick={toggleTheme}
+                className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
+               >
+                {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+               </button>
+            </div>
             {["About", "Projects", "Skills", "Experience", "Awards", "Contact"].map((link) => (
               <a 
                 key={link} 
@@ -555,19 +694,17 @@ const SideRibbonNavigation = () => {
   ];
 
   return (
-    <div className="fixed right-0 top-32 h-[calc(100vh-8rem)] w-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-l border-slate-200 dark:border-slate-800 z-40 hidden lg:flex flex-col justify-center items-center py-10 shadow-lg rounded-tl-2xl rounded-bl-2xl">
-      <div className="flex flex-col gap-6 h-full justify-center"> {/* Adjusted gap from 8 to 6 */}
+    <div className="fixed right-0 top-32 h-[calc(100vh-16rem)] w-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-l border-y border-slate-200 dark:border-slate-800 z-40 hidden lg:flex flex-col justify-center items-center py-10 shadow-lg rounded-tl-3xl rounded-bl-3xl">
+      <div className="flex flex-col gap-10 h-full justify-center"> 
       {sections.map((section) => (
         <a 
           key={section.id} 
           href={`#${section.id}`}
           className="group relative flex items-center justify-center w-full"
         >
-          {/* Vertical Text */}
-          <span className="vertical-text text-[11px] font-bold uppercase tracking-[0.25em] text-slate-400 group-hover:text-teal-500 transition-colors duration-300 whitespace-nowrap cursor-pointer hover:scale-110" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed', transform: 'rotate(180deg)' }}>
+          <span className="vertical-text text-xs font-bold uppercase tracking-[0.25em] text-slate-400 group-hover:text-teal-500 transition-colors duration-300 whitespace-nowrap cursor-pointer hover:scale-110" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed', transform: 'rotate(180deg)' }}>
             {section.label}
           </span>
-          {/* Hover Indicator Dot */}
           <div className="absolute right-0 w-1 h-0 bg-teal-500 group-hover:h-full transition-all duration-300 rounded-l-full"></div>
         </a>
       ))}
@@ -576,7 +713,6 @@ const SideRibbonNavigation = () => {
   );
 };
 
-// **FIX**: Accepted blurPx as prop
 const Hero = ({ blurPx }) => {
   const scrollToContact = (e) => {
     e.preventDefault();
@@ -588,7 +724,6 @@ const Hero = ({ blurPx }) => {
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden transition-colors duration-300 bg-slate-50 dark:bg-slate-950">
-      {/* Background with Overlay */}
       <div className="absolute inset-0 z-0">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
@@ -601,51 +736,45 @@ const Hero = ({ blurPx }) => {
               WebkitBackdropFilter: `blur(${blurPx}px)`
             }}
           ></div>
+          <BackgroundOverlay />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center relative z-10">
-        <div className="space-y-6">
-          <p className="text-teal-500 font-mono flex items-center gap-2">
-            <span className="w-8 h-px bg-teal-500"></span> Hello, I'm
+      <div className="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center relative z-10 pt-20 md:pt-0">
+        <div className="space-y-8">
+          <p className="text-teal-500 font-mono text-lg md:text-xl flex items-center gap-2">
+            <span className="w-10 h-px bg-teal-500"></span> Hello, I'm
           </p>
-          <h1 className="text-5xl md:text-7xl font-bold text-slate-900 dark:text-slate-100 leading-tight">
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-slate-900 dark:text-slate-100 leading-tight">
             {PERSONAL_INFO.name}
           </h1>
-          <h2 className="text-2xl md:text-3xl text-slate-600 dark:text-slate-400 font-light">
+          <h2 className="text-2xl md:text-4xl text-slate-600 dark:text-slate-400 font-light">
             <span className="text-teal-500 font-semibold">Data</span> Enthusiast and <span className="text-teal-500 font-semibold">AI/ML</span> Enthusiast
           </h2>
-          <p className="text-xl text-slate-500 dark:text-slate-400 mb-6 flex items-center gap-2">
-            <Activity size={20} className="text-teal-500" />
+          <p className="text-xl md:text-2xl text-slate-500 dark:text-slate-400 mb-6 flex items-center gap-2">
+            <Activity size={24} className="text-teal-500" />
             Data Analyst In Kawan Lama
           </p>
           
-          <div className="flex flex-wrap gap-4 pt-4">
-            <a href="#contact" onClick={scrollToContact} className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-8 rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-teal-500/20 hover:-translate-y-1">
-              <Mail size={18} /> Contact Me
+          <div className="flex flex-wrap gap-3 pt-4">
+            <a href="#contact" onClick={scrollToContact} className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 text-lg rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-teal-500/20 hover:-translate-y-1">
+              <Mail size={20} /> Contact Me
             </a>
-            <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noreferrer" className="border border-slate-300 dark:border-slate-600 hover:border-teal-500 text-slate-600 dark:text-slate-300 hover:text-teal-500 dark:hover:text-teal-400 py-3 px-8 rounded-full transition-all flex items-center gap-2 hover:-translate-y-1">
-              <Linkedin size={18} /> LinkedIn
+            <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noreferrer" className="border border-slate-300 dark:border-slate-600 hover:border-teal-500 text-slate-600 dark:text-slate-300 hover:text-teal-500 dark:hover:text-teal-400 py-3 px-6 text-lg rounded-full transition-all flex items-center gap-2 hover:-translate-y-1">
+              <LinkedinIcon size={20} /> LinkedIn
             </a>
-            <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="border border-slate-300 dark:border-slate-600 hover:border-teal-500 text-slate-600 dark:text-slate-300 hover:text-teal-500 dark:hover:text-teal-400 py-3 px-8 rounded-full transition-all flex items-center gap-2 hover:-translate-y-1">
-              <Github size={18} /> GitHub
+            <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="border border-slate-300 dark:border-slate-600 hover:border-teal-500 text-slate-600 dark:text-slate-300 hover:text-teal-500 dark:hover:text-teal-400 py-3 px-6 text-lg rounded-full transition-all flex items-center gap-2 hover:-translate-y-1">
+              <GithubIcon size={20} /> GitHub
             </a>
           </div>
-        </div>
-
-        <div className="relative hidden md:flex justify-center">
-           {/* Placeholder for future Image component */}
-           {/* <img src="/path/to/image.png" alt="Profile" className="w-full h-auto object-cover rounded-2xl shadow-2xl" /> */}
         </div>
       </div>
     </section>
   );
 };
 
-// **FIX**: Accepted blurPx as prop
 const About = ({ blurPx }) => {
   return (
     <section id="about" className="py-20 pt-40 relative transition-colors duration-300 scroll-mt-28 bg-slate-50 dark:bg-slate-950">
-       {/* Background with Overlay */}
        <div className="absolute inset-0 z-0">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
@@ -658,20 +787,14 @@ const About = ({ blurPx }) => {
               WebkitBackdropFilter: `blur(${blurPx}px)`
             }}
           ></div>
+          <BackgroundOverlay />
        </div>
 
-      <div className="max-w-4xl mx-auto px-6 relative z-10">
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         <SectionHeader title="About Me" />
-        <div className="bg-white/80 dark:bg-slate-900/80 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm hover:border-teal-500/30 transition-all backdrop-blur-md">
-          <div className="text-slate-600 dark:text-slate-300 text-lg leading-relaxed whitespace-pre-line">
+        <div className="bg-white/80 dark:bg-slate-900/80 p-8 md:p-12 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm hover:border-teal-500/30 transition-all backdrop-blur-md">
+          <div className="text-slate-600 dark:text-slate-300 text-lg md:text-xl leading-loose whitespace-pre-line">
             {PERSONAL_INFO.about}
-          </div>
-          
-          <div className="mt-8 border-t border-slate-200 dark:border-slate-700 pt-6">
-            <div className="flex items-center gap-3 text-slate-500 dark:text-slate-400">
-              <GraduationCap className="text-teal-500" />
-              <span>Universitas Tarumanagara (2021-2025)</span>
-            </div>
           </div>
         </div>
       </div>
@@ -679,11 +802,9 @@ const About = ({ blurPx }) => {
   );
 };
 
-// **FIX**: Accepted blurPx as prop
 const Projects = ({ blurPx }) => {
   return (
     <section id="projects" className="py-20 pt-32 relative transition-colors duration-300 scroll-mt-32 bg-slate-50 dark:bg-slate-950">
-       {/* Background with Overlay */}
        <div className="absolute inset-0 z-0">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
@@ -696,6 +817,7 @@ const Projects = ({ blurPx }) => {
               WebkitBackdropFilter: `blur(${blurPx}px)`
             }}
           ></div>
+          <BackgroundOverlay />
        </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -707,49 +829,46 @@ const Projects = ({ blurPx }) => {
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="block group relative rounded-2xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 cursor-pointer transition-all hover:-translate-y-2 hover:shadow-2xl h-[500px]"
+              className="block group relative rounded-3xl overflow-hidden shadow-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 cursor-pointer transition-all hover:-translate-y-2 hover:shadow-2xl h-[500px] md:h-[600px]"
             >
-              {/* Full Background Image */}
               <img 
                 src={project.image} 
                 alt={project.title} 
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
               />
               
-              {/* Default Overlay (Bottom Title) */}
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent flex flex-col justify-end p-8 transition-opacity duration-300 group-hover:opacity-0">
-                <h3 className="text-3xl font-bold text-white mb-2 shadow-black drop-shadow-md">{project.title}</h3>
-                <div className="w-16 h-1.5 bg-teal-500 rounded-full"></div>
+                <h3 className="text-3xl md:text-5xl font-bold text-white mb-2 shadow-black drop-shadow-md">{project.title}</h3>
+                <div className="w-20 h-2 bg-teal-500 rounded-full"></div>
               </div>
 
-              {/* Hover Overlay (Full Info) */}
               <div
                 className="absolute inset-0 bg-slate-900/95 transition-[backdrop-filter] duration-300
                           opacity-0 group-hover:opacity-100
-                          flex flex-col justify-center items-center p-12 text-center"
+                          flex flex-col justify-center items-center p-8 md:p-16 text-center"
                 style={{
                   backdropFilter: `blur(${blurPx}px)`,
                   WebkitBackdropFilter: `blur(${blurPx}px)`
                 }}
               >
-                <h3 className="text-3xl font-bold text-teal-400 mb-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-3xl md:text-5xl font-bold text-teal-400 mb-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                   {project.title}
                 </h3>
 
-                <p className="text-slate-300 text-lg mb-8 max-w-2xl translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+                <p className="text-slate-300 text-lg md:text-xl mb-10 max-w-3xl translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75 leading-relaxed">
                   {project.description}
                 </p>
 
-                <div className="flex flex-wrap gap-3 justify-center mb-8 translate-y-4 group-hover:translate-y-0 transition-transform duration-700 delay-100">
+                <div className="flex flex-wrap gap-3 justify-center mb-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-700 delay-100">
                   {project.tech.map((t, i) => (
-                    <span key={i} className="text-sm font-medium bg-teal-500/10 text-teal-300 px-4 py-1.5 rounded-full border border-teal-500/20">
+                    <span key={i} className="text-sm md:text-base font-medium bg-teal-500/10 text-teal-300 px-5 py-2 rounded-full border border-teal-500/20">
                       {t}
                     </span>
                   ))}
                 </div>
 
-                <div className="inline-flex items-center gap-2 text-white bg-teal-600 px-6 py-3 rounded-full font-bold hover:bg-teal-500 transition-colors shadow-lg">
-                  View Details <ArrowRight size={20} />
+                <div className="inline-flex items-center gap-2 text-white bg-teal-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-teal-500 transition-colors shadow-lg">
+                  View Details <ArrowRight size={22} />
                 </div>
               </div>
             </a>
@@ -760,7 +879,6 @@ const Projects = ({ blurPx }) => {
   );
 };
 
-// **FIX**: Accepted blurPx as prop
 const Experience = ({ blurPx }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
@@ -774,7 +892,6 @@ const Experience = ({ blurPx }) => {
 
   return (
     <section id="experience" className="py-20 relative transition-colors duration-300 scroll-mt-20 bg-slate-50 dark:bg-slate-900">
-       {/* Background with Overlay */}
        <div className="absolute inset-0 z-0">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
@@ -787,6 +904,7 @@ const Experience = ({ blurPx }) => {
               WebkitBackdropFilter: `blur(${blurPx}px)`
             }}
           ></div>
+          <BackgroundOverlay />
         </div>
 
       <div className="max-w-5xl mx-auto px-6 relative z-10">
@@ -808,14 +926,11 @@ const Experience = ({ blurPx }) => {
                       <span className="text-slate-700 dark:text-slate-300 font-medium">{exp.company}</span>
                       <span className="text-xs bg-slate-100 dark:bg-slate-700 text-slate-500 dark:text-slate-400 px-2 py-0.5 rounded">{exp.type}</span>
                     </div>
-                    {/* Render JSX content correctly */}
-                    <div className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-3">
-                      {exp.description}
-                    </div>
+                    {exp.description}
                     {exp.highlight && (
                       <button 
                         onClick={() => openCertificate(exp.certificateImage, exp.highlight)}
-                        className="flex items-start gap-2 bg-teal-500/10 p-3 rounded-lg border border-teal-500/20 hover:bg-teal-500/20 transition-colors w-full text-left group cursor-pointer"
+                        className="flex items-start gap-2 bg-teal-500/10 p-3 rounded-lg border border-teal-500/20 hover:bg-teal-500/20 transition-colors w-full text-left group cursor-pointer mt-3"
                       >
                         <Award size={16} className="text-teal-500 mt-0.5 shrink-0" />
                         <div>
@@ -841,13 +956,8 @@ const Experience = ({ blurPx }) => {
   );
 };
 
-// **FIX**: Accepted blurPx as prop
 const Contact = ({ blurPx }) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -862,7 +972,6 @@ const Contact = ({ blurPx }) => {
 
   return (
     <section id="contact" className="py-20 relative transition-colors duration-300 bg-slate-50 dark:bg-slate-900">
-       {/* Background with Overlay */}
        <div className="absolute inset-0 z-0">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
@@ -875,6 +984,7 @@ const Contact = ({ blurPx }) => {
               WebkitBackdropFilter: `blur(${blurPx}px)`
             }}
           ></div>
+          <BackgroundOverlay />
        </div>
 
       <div className="max-w-4xl mx-auto px-6 relative z-10">
@@ -896,13 +1006,13 @@ const Contact = ({ blurPx }) => {
               </a>
               <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-teal-500 transition-colors group">
                 <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-teal-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-teal-500 transition-all group-hover:scale-110">
-                  <Linkedin size={20} />
+                  <LinkedinIcon size={20} />
                 </div>
                 <span>LinkedIn Profile</span>
               </a>
               <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-teal-500 transition-colors group">
                 <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-teal-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-teal-500 transition-all group-hover:scale-110">
-                  <Github size={20} />
+                  <GithubIcon size={20} />
                 </div>
                 <span>GitHub Profile</span>
               </a>
@@ -911,7 +1021,7 @@ const Contact = ({ blurPx }) => {
 
           <form onSubmit={handleSubmit} className="space-y-4 bg-white/80 dark:bg-slate-800/80 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm backdrop-blur-sm">
             <div>
-              <label htmlFor="name" className="block text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Name</label>
+              <label htmlFor="name" className="block text-lg font-medium text-slate-500 dark:text-slate-400 mb-1">Name</label>
               <input 
                 type="text" 
                 name="name" 
@@ -924,7 +1034,7 @@ const Contact = ({ blurPx }) => {
               />
             </div>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Email</label>
+              <label htmlFor="email" className="block text-lg font-medium text-slate-500 dark:text-slate-400 mb-1">Email</label>
               <input 
                 type="email" 
                 name="email" 
@@ -937,7 +1047,7 @@ const Contact = ({ blurPx }) => {
               />
             </div>
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-slate-500 dark:text-slate-400 mb-1">Message</label>
+              <label htmlFor="message" className="block text-lg font-medium text-slate-500 dark:text-slate-400 mb-1">Message</label>
               <textarea 
                 name="message" 
                 id="message" 
@@ -968,8 +1078,8 @@ const Footer = () => (
     <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm">
       <p>&copy; {new Date().getFullYear()} {PERSONAL_INFO.name} All rights reserved.</p>
       <div className="flex gap-4 mt-4 md:mt-0">
-        <a href={PERSONAL_INFO.linkedin} className="hover:text-teal-500"><Linkedin size={18} /></a>
-        <a href={PERSONAL_INFO.github} className="hover:text-teal-500"><Github size={18} /></a>
+        <a href={PERSONAL_INFO.linkedin} className="hover:text-teal-500"><LinkedinIcon size={18} /></a>
+        <a href={PERSONAL_INFO.github} className="hover:text-teal-500"><GithubIcon size={18} /></a>
       </div>
     </div>
   </footer>
@@ -980,7 +1090,6 @@ export default function App() {
   const [selectedImage, setSelectedImage] = useState('');
   const [selectedTitle, setSelectedTitle] = useState('');
   
-  // Initialize theme from localStorage or system preference
   const [isDarkMode, setIsDarkMode] = useState(() => {
     try {
       if (typeof window !== 'undefined') {
@@ -993,7 +1102,7 @@ export default function App() {
     } catch (e) {
       console.warn('LocalStorage access denied or error:', e);
     }
-    return true; // Default to dark if error
+    return true; 
   });
 
   const [isLoading, setIsLoading] = useState(true);
@@ -1008,7 +1117,6 @@ export default function App() {
   const toggleTheme = () => {
     const next = !isDarkMode;
     setIsDarkMode(next);
-
     try {
       const root = window.document.documentElement;
       if (next) {
@@ -1018,16 +1126,11 @@ export default function App() {
         root.classList.remove('dark');
         localStorage.setItem('theme', 'light');
       }
-    } catch (e) {
-      // ignore storage access errors
-    }
+    } catch (e) {}
   };
 
-  // Improved useEffect for theme management
   useEffect(() => {
     const root = window.document.documentElement;
-    // Log for debugging
-    console.log(`Theme changing to: ${isDarkMode ? 'dark' : 'light'}`);
     if (isDarkMode) {
       root.classList.add('dark');
       try { localStorage.setItem('theme', 'dark'); } catch(e) {}
@@ -1040,22 +1143,18 @@ export default function App() {
   useEffect(() => {
     const handleScroll = () => {
       const y = window.scrollY;
-
       if (y < 120) {
         setBlurPx(0);
       } else if (y < 360) {
         setBlurPx(1);
       } else {
-        setBlurPx(2);
+        setBlurPx(1);
       }
     };
-
       window.addEventListener('scroll', handleScroll, { passive: true });
-      handleScroll(); // initialize on load
-
+      handleScroll(); 
       return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
 
   if (isLoading) {
     return <FuturisticLoader onComplete={() => setIsLoading(false)} />;
@@ -1066,16 +1165,16 @@ export default function App() {
       <CustomCursor />
       <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
       <SideRibbonNavigation />
-      <div className="pt-32">
-        {/* **FIX**: Passed blurPx prop to children */}
+      
+      <div>
         <Hero blurPx={blurPx} />
         <About blurPx={blurPx} />
         <Projects blurPx={blurPx} />
         
-        {/* Sticky Horizontal Scroll for Skills */}
+        {/* FIX: Title "Skills", Card style reverted to vertical w-72 */}
         <StickyScrollSection 
           id="skills"
-          title="Technical Skills"
+          title="Skills"
           subtitle="Tools and technologies I use to drive insights."
           items={SKILLS}
           bgImage={BACKGROUNDS.skills}
@@ -1093,10 +1192,8 @@ export default function App() {
           )}
         />
 
-        {/* **FIX**: Passed blurPx prop to children */}
         <Experience blurPx={blurPx} />
 
-        {/* Sticky Horizontal Scroll for Certifications */}
         <StickyScrollSection 
           id="certifications"
           title="Certifications & Awards"
@@ -1105,21 +1202,37 @@ export default function App() {
           bgImage={BACKGROUNDS.certifications}
           blurPx={blurPx}
           renderCard={(cert, index) => (
-            <div 
+            <a 
+
               key={index} 
-              onClick={() => openCertificate(cert.image, cert.title)}
-              className="bg-white/90 dark:bg-slate-900/90 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between hover:border-teal-500/50 transition-all w-96 shrink-0 h-64 cursor-pointer group shadow-sm hover:shadow-md backdrop-blur-sm"
+
+              href={cert.link || "#"}
+
+              target="_blank"
+
+              rel="noopener noreferrer"
+
+              className="bg-white/90 dark:bg-slate-900/90 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between hover:border-teal-500/50 transition-all w-96 shrink-0 h-64 cursor-pointer group shadow-sm hover:shadow-md backdrop-blur-sm block"
             >
               <div>
-                <Award className="text-teal-500 mb-6 group-hover:scale-110 transition-transform" size={40} />
+                {/* Check if image is a logo (small) or certificate (large) */}
+                <div className="mb-6 h-16 w-16 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center overflow-hidden border border-slate-100 dark:border-slate-700">
+                    <img src={cert.image} alt={cert.issuer} className="w-full h-full object-cover" />
+                </div>
                 <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2 leading-tight group-hover:text-teal-500 transition-colors">{cert.title}</h3>
                 <p className="text-slate-500 dark:text-slate-400">{cert.issuer}</p>
               </div>
               <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-sm">
                 <span className="text-slate-500">{cert.date}</span>
-                <span className="font-mono text-slate-600">{cert.credentialId}</span>
+                {cert.credentialId && (
+
+                  <span className="font-mono text-slate-600 truncate max-w-[120px]">{cert.credentialId}</span>
+
+                )}
+
               </div>
-            </div>
+
+            </a>
           )}
         />
 
@@ -1130,7 +1243,6 @@ export default function App() {
           title={selectedTitle} 
         />
 
-        {/* **FIX**: Passed blurPx prop to children */}
         <Contact blurPx={blurPx} />
         <Footer />
       </div>
