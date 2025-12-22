@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
+  Home,
   Mail, 
   Menu, 
   X, 
@@ -65,7 +66,7 @@ const PERSONAL_INFO = {
   github: "https://github.com/GaneshArwan",
 };
 
-const BACKGROUNDS = {
+const REMOTE_BACKGROUNDS = {
   hero: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop", 
   about: "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop", 
   skills: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop", 
@@ -73,6 +74,17 @@ const BACKGROUNDS = {
   projects: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop", 
   certifications: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=2071&auto=format&fit=crop", 
   contact: "https://images.unsplash.com/photo-1516387938699-a93567ec168e?q=80&w=2071&auto=format&fit=crop" 
+};
+
+// 2. ADD THIS NEW CONSTANT for local paths
+const LOCAL_BACKGROUNDS = {
+  hero: "/assets/hero.jpg",
+  about: "/assets/about.jpg",
+  skills: "/assets/skills.jpg",
+  experience: "/assets/experience.jpg",
+  projects: "/assets/projects.jpg",
+  certifications: "/assets/certifications.jpg",
+  contact: "/assets/contact.jpg"
 };
 
 const getIconUrl = (name) => `https://cdn.jsdelivr.net/gh/devicons/devicon/icons/${name}/${name}-original.svg`;
@@ -103,19 +115,19 @@ const EXPERIENCE = [
       <div className="space-y-4 text-sm leading-relaxed text-slate-700 dark:text-slate-300 font-medium">
         <ul className="list-disc pl-5 space-y-3">
             <li>
-                <strong className="text-teal-600 dark:text-teal-400">Improved master data SLA by 30%:</strong> through workflow standardization and pre-validation mechanisms, reducing back-and-forth and rework.
+                <strong className="text-emerald-600 dark:text-emerald-400">Improved master data SLA by 30%:</strong> through workflow standardization and pre-validation mechanisms, reducing back-and-forth and rework.
             </li>
             <li>
-                <strong className="text-teal-600 dark:text-teal-400">Increased master data completeness and accuracy to &gt;99%:</strong> across key domains (Site, Vendor, Customer, Article, Finance).
+                <strong className="text-emerald-600 dark:text-emerald-400">Increased master data completeness and accuracy to &gt;99%:</strong> across key domains (Site, Vendor, Customer, Article, Finance).
             </li>
             <li>
-                <strong className="text-teal-600 dark:text-teal-400">Digital Integration:</strong> Migrated 10+ manual master data processes into a centralized digital workflow, establishing the foundation for end-to-end request tracking that replaced untraceable email-based submissions with a transparent, auditable system.
+                <strong className="text-emerald-600 dark:text-emerald-400">Digital Integration:</strong> Migrated 10+ manual master data processes into a centralized digital workflow, establishing the foundation for end-to-end request tracking that replaced untraceable email-based submissions with a transparent, auditable system.
             </li>
             <li>
-                <strong className="text-teal-600 dark:text-teal-400">Reduced operational bottlenecks by ~35% and automated ~70% of repetitive tasks:</strong> rule-based master data activities through workflow-driven automation and standardized logic, increasing daily request handling capacity by ~3x with the same headcount.
+                <strong className="text-emerald-600 dark:text-emerald-400">Reduced operational bottlenecks by ~35% and automated ~70% of repetitive tasks:</strong> rule-based master data activities through workflow-driven automation and standardized logic, increasing daily request handling capacity by ~3x with the same headcount.
             </li>
             <li>
-                <strong className="text-teal-600 dark:text-teal-400">Enabled faster and more reliable business decisions:</strong> by ensuring consistent, well-governed master data, supported by a centralized request tracking system, Looker dashboards to monitor MDM performance and data trends, and data profiling outputs for Business Units, providing visibility into their own master data domains (Article, Site, Vendor, and Customer).
+                <strong className="text-emerald-600 dark:text-emerald-400">Enabled faster and more reliable business decisions:</strong> by ensuring consistent, well-governed master data, supported by a centralized request tracking system, Looker dashboards to monitor MDM performance and data trends, and data profiling outputs for Business Units, providing visibility into their own master data domains (Article, Site, Vendor, and Customer).
             </li>
         </ul>
       </div>
@@ -132,7 +144,7 @@ const EXPERIENCE = [
       <div className="space-y-4 text-sm leading-relaxed text-slate-700 dark:text-slate-300 font-medium">
         <p>I contributed to automation, data management, and operational efficiency projects, enhancing my skills in scripting and data governance.</p>
         <div>
-          <strong className="block text-teal-600 dark:text-teal-400 mb-1 text-base">Workflow Optimization</strong>
+          <strong className="block text-emerald-600 dark:text-emerald-400 mb-1 text-base">Workflow Optimization</strong>
           <ul className="list-disc pl-5 space-y-1">
             <li>Transformed email-based workflows to a structured system using Google Forms and Sheets.</li>
             <li>Developed custom forms for efficient task collection and management.</li>
@@ -140,14 +152,14 @@ const EXPERIENCE = [
           </ul>
         </div>
         <div>
-          <strong className="block text-teal-600 dark:text-teal-400 mb-1 text-base">Data Management & Governance</strong>
+          <strong className="block text-emerald-600 dark:text-emerald-400 mb-1 text-base">Data Management & Governance</strong>
           <ul className="list-disc pl-5 space-y-1">
             <li>Utilized Google Sheets and Looker for data visualization.</li>
             <li>Assisted in automating data mapping processes.</li>
           </ul>
         </div>
         <div>
-          <strong className="block text-teal-600 dark:text-teal-400 mb-1 text-base">Operational Support</strong>
+          <strong className="block text-emerald-600 dark:text-emerald-400 mb-1 text-base">Operational Support</strong>
           <ul className="list-disc pl-5 space-y-1">
             <li>Monitored promotional and merchandise processes.</li>
             <li>Assisted in inventory tracking and management.</li>
@@ -353,12 +365,26 @@ const PROJECTS = [
 
 // --- Helper Components ---
 
+const useBackgroundImage = (localPath, fallbackUrl) => {
+  const [bgImage, setBgImage] = useState(fallbackUrl);
+
+  useEffect(() => {
+    if (!localPath) return;
+    const img = new Image();
+    img.src = localPath;
+    img.onload = () => setBgImage(localPath);
+    // If it fails (404), it naturally stays as fallbackUrl
+  }, [localPath, fallbackUrl]);
+
+  return bgImage;
+};
+
 const SectionHeader = ({ title, subtitle }) => (
   <div className="mb-12 w-full text-left relative z-20 animate-in slide-in-from-bottom-8 duration-700 fade-in">
     <h2 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-slate-100 mb-6 drop-shadow-md tracking-tight">
       {title}
     </h2>
-    <div className="w-24 h-1.5 bg-teal-500 rounded-full mb-6 opacity-80"></div>
+    <div className="w-24 h-1.5 bg-emerald-500 rounded-full mb-6 opacity-80"></div>
     {subtitle && (
       <p className="text-lg md:text-xl text-slate-700 dark:text-slate-300 font-medium drop-shadow-sm max-w-2xl">
         {subtitle}
@@ -412,7 +438,7 @@ const StickyScrollSection = ({ id, title, subtitle, items, renderCard, bgImage, 
 
   return (
     <section id={id} ref={sectionRef} className="relative h-[400vh] transition-colors duration-300 scroll-mt-24">
-       <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
             style={{ backgroundImage: `url(${bgImage})` }}
@@ -425,7 +451,7 @@ const StickyScrollSection = ({ id, title, subtitle, items, renderCard, bgImage, 
             }}
           ></div>
           <BackgroundOverlay />
-       </div>
+      </div>
 
       <div className="sticky top-0 h-screen overflow-hidden flex flex-col pt-32 md:pt-40 px-6 max-w-7xl mx-auto z-10">
         <div className="w-full shrink-0">
@@ -494,7 +520,7 @@ const FuturisticLoader = ({ onComplete }) => {
   }, [onComplete]);
 
   return (
-    <div className="fixed inset-0 z-[100] bg-slate-950 flex items-center justify-center text-teal-500 font-mono overflow-hidden">
+    <div className="fixed inset-0 z-[100] bg-slate-950 flex items-center justify-center text-emerald-500 font-mono overflow-hidden">
       {/* HUD Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(20,184,166,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(20,184,166,0.03)_1px,transparent_1px)] bg-[size:30px_30px] opacity-50"></div>
       
@@ -505,36 +531,36 @@ const FuturisticLoader = ({ onComplete }) => {
       <div className="relative flex flex-col items-center justify-center w-full h-full max-w-lg">
         
         {/* Outer Ring */}
-        <div className="absolute w-80 h-80 rounded-full border border-teal-500/10 animate-[spin_10s_linear_infinite]"></div>
-        <div className="absolute w-72 h-72 rounded-full border border-dashed border-teal-500/20 animate-[spin_15s_linear_infinite_reverse]"></div>
+        <div className="absolute w-80 h-80 rounded-full border border-emerald-500/10 animate-[spin_10s_linear_infinite]"></div>
+        <div className="absolute w-72 h-72 rounded-full border border-dashed border-emerald-500/20 animate-[spin_15s_linear_infinite_reverse]"></div>
         
         {/* Center Progress */}
         <div className="flex flex-col items-center z-10 p-12">
           <div className="relative mb-6">
-            <div className="absolute inset-0 bg-teal-500 blur-xl opacity-20 rounded-full"></div>
-            <Cpu size={64} className="relative text-teal-400 animate-pulse" />
+            <div className="absolute inset-0 bg-emerald-500 blur-xl opacity-20 rounded-full"></div>
+            <Cpu size={64} className="relative text-emerald-400 animate-pulse" />
           </div>
           
-          <div className="text-6xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-teal-300 to-teal-700">
+          <div className="text-6xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-emerald-300 to-emerald-700">
             {count}%
           </div>
           
           <div className="mt-4 flex flex-col items-center gap-2">
             <div className="h-1 w-48 bg-slate-800 rounded-full overflow-hidden border border-slate-700">
               <div 
-                className="h-full bg-teal-500 shadow-[0_0_10px_rgba(20,184,166,0.5)] transition-all duration-75 ease-out" 
+                className="h-full bg-emerald-500 shadow-[0_0_10px_rgba(20,184,166,0.5)] transition-all duration-75 ease-out" 
                 style={{ width: `${count}%` }}
               />
             </div>
-            <span className="text-xs tracking-[0.2em] text-teal-400/70 uppercase animate-pulse">{status}</span>
+            <span className="text-xs tracking-[0.2em] text-emerald-400/70 uppercase animate-pulse">{status}</span>
           </div>
         </div>
 
         {/* Decorative HUD Elements */}
-        <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-teal-500/20 to-transparent"></div>
-        <div className="absolute left-1/2 top-0 h-full w-px bg-gradient-to-b from-transparent via-teal-500/20 to-transparent"></div>
+        <div className="absolute top-1/2 left-0 w-full h-px bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent"></div>
+        <div className="absolute left-1/2 top-0 h-full w-px bg-gradient-to-b from-transparent via-emerald-500/20 to-transparent"></div>
         
-        <div className="absolute bottom-10 left-10 text-[10px] text-teal-500/40 font-mono hidden md:block">
+        <div className="absolute bottom-10 left-10 text-[10px] text-emerald-500/40 font-mono hidden md:block">
           <div>SYS_ID: 0x4F82</div>
           <div>SECURE_CONN: TRUE</div>
         </div>
@@ -564,15 +590,15 @@ const CustomCursor = () => {
   return (
     <>
       <div 
-        className={`fixed top-0 left-0 pointer-events-none z-[9999] rounded-full border border-teal-500 transition-all duration-150 ease-out hidden md:flex items-center justify-center mix-blend-difference
-          ${isHovering ? 'w-12 h-12 bg-teal-500/20' : 'w-8 h-8'}
+        className={`fixed top-0 left-0 pointer-events-none z-[9999] rounded-full border border-emerald-500 transition-all duration-150 ease-out hidden md:flex items-center justify-center mix-blend-difference
+          ${isHovering ? 'w-12 h-12 bg-emerald-500/20' : 'w-8 h-8'}
         `}
         style={{ 
           transform: `translate(${position.x}px, ${position.y}px) translate(-50%, -50%)`
         }}
       />
       <div 
-        className="fixed top-0 left-0 w-1.5 h-1.5 bg-teal-500 rounded-full pointer-events-none z-[9999] hidden md:block mix-blend-difference"
+        className="fixed top-0 left-0 w-1.5 h-1.5 bg-emerald-500 rounded-full pointer-events-none z-[9999] hidden md:block mix-blend-difference"
         style={{ 
           transform: `translate(${position.x}px, ${position.y}px) translate(-50%, -50%)`
         }}
@@ -599,9 +625,9 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
         if (element) {
           const rect = element.getBoundingClientRect();
           if ((rect.top >= 0 && rect.top <= window.innerHeight / 2) || (rect.top < 0 && rect.bottom > window.innerHeight / 2)) {
-             const title = id.charAt(0).toUpperCase() + id.slice(1);
-             setActiveSection(title === 'Certifications' ? 'Awards' : title);
-             break;
+            const title = id.charAt(0).toUpperCase() + id.slice(1);
+            setActiveSection(title === 'Certifications' ? 'Awards' : title);
+            break;
           }
         }
       }
@@ -615,21 +641,26 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
       className="
         fixed
         left-1/2 -translate-x-1/2
-        top-32
+        top-12 lg:top-28
         z-50
-        w-[90%] md:w-auto md:min-w-[200px]
+        w-[40%] md:w-auto md:min-w-[250px]
+        min-w-[320px]
         rounded-full
-        bg-white/80 dark:bg-slate-900/80
-        backdrop-blur-md
-        border border-slate-200/50 dark:border-slate-700/50
-        shadow-lg
+        bg-white/30 dark:bg-slate-900/30  /* CHANGED: Glossy /30 */
+        backdrop-blur-xl                  /* CHANGED: Stronger Blur */
+        border border-white/20 dark:border-slate-700/50 /* CHANGED: Glass Border */
+        shadow-2xl
         transition-all duration-300
         px-6
       "
     >
       <div className="flex justify-between items-center gap-4 py-3">
-        <a href="#" className={`text-2xl font-bold text-teal-500 tracking-tighter hover:scale-105 transition-transform ${activeSection ? 'hidden md:block' : 'block'}`}>W.</a>
+        {/* Left: Home Icon */}
+        <a href="#" className="text-emerald-500 hover:scale-110 transition-transform"> {/* CHANGED: Emerald */}
+          <Home size={24} />
+        </a>
         
+        {/* Center: Active Section Title */}
         <div className="absolute left-1/2 -translate-x-1/2 text-center">
             {activeSection && (
                 <span className="text-lg font-bold text-slate-800 dark:text-slate-100 animate-in fade-in slide-in-from-top-2 whitespace-nowrap">
@@ -638,39 +669,45 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
             )}
         </div>
 
-        <div className="hidden lg:flex items-center ml-auto">
+        {/* Right: Actions */}
+        <div className="flex items-center gap-4 ml-auto">
+          {/* Desktop Theme Button: Visible ONLY on Large AND Tall screens (>= 830px) */}
           <button 
             onClick={toggleTheme}
-            className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors shadow-sm ring-1 ring-slate-200 dark:ring-slate-700"
+            className="hidden lg:[@media(min-height:830px)]:flex p-2 rounded-full bg-slate-100/50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 hover:bg-emerald-100 dark:hover:bg-slate-700 transition-colors shadow-sm ring-1 ring-white/20"
           >
             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
           </button>
-        </div>
 
-        <div className="lg:hidden flex items-center gap-4 ml-auto">
-          <button onClick={() => setIsOpen(!isOpen)} className="text-slate-600 dark:text-slate-300 hover:text-teal-500">
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
+          {/* Hamburger: Visible on Mobile OR Short screens (< 830px) */}
+          <div className="lg:[@media(min-height:830px)]:hidden flex items-center">
+            <button onClick={() => setIsOpen(!isOpen)} className="text-slate-600 dark:text-slate-300 hover:text-emerald-500">
+              {isOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
         </div>
       </div>
 
+      {/* Mobile Menu Dropdown */}
       {isOpen && (
-        <div className="lg:hidden bg-white/95 dark:bg-slate-900/95 absolute top-full left-0 w-full mt-4 rounded-2xl border border-slate-200 dark:border-slate-800 backdrop-blur-xl animate-in slide-in-from-top-2 overflow-hidden shadow-xl">
+        <div className="lg:[@media(min-height:830px)]:hidden bg-white/90 dark:bg-slate-900/90 absolute top-full left-0 w-full mt-4 rounded-2xl border border-white/20 backdrop-blur-xl animate-in slide-in-from-top-2 overflow-hidden shadow-xl">
           <div className="px-6 py-6 flex flex-col space-y-4">
+            {/* Theme Toggle (Mobile) */}
             <div className="flex justify-between items-center pb-4 border-b border-slate-200 dark:border-slate-800">
-               <span className="text-sm font-bold text-slate-500">Theme</span>
-               <button 
+              <span className="text-sm font-bold text-slate-500">Theme</span>
+              <button 
                 onClick={toggleTheme}
                 className="p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300"
-               >
+              >
                 {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
-               </button>
+              </button>
             </div>
+
             {["About", "Projects", "Skills", "Experience", "Awards", "Contact"].map((link) => (
               <a 
                 key={link} 
                 href={`#${link.toLowerCase()}`} 
-                className="text-lg font-medium text-slate-600 dark:text-slate-300 hover:text-teal-500 hover:pl-2 transition-all"
+                className="text-lg font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-500 hover:pl-2 transition-all"
                 onClick={() => setIsOpen(false)}
               >
                 {link}
@@ -694,18 +731,21 @@ const SideRibbonNavigation = () => {
   ];
 
   return (
-    <div className="fixed right-0 top-32 h-[calc(100vh-16rem)] w-16 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-l border-y border-slate-200 dark:border-slate-800 z-40 hidden lg:flex flex-col justify-center items-center py-10 shadow-lg rounded-tl-3xl rounded-bl-3xl">
-      <div className="flex flex-col gap-10 h-full justify-center"> 
+    <div 
+      className="fixed right-0 top-32 h-[calc(100vh-16rem)] w-16 bg-white/30 dark:bg-slate-900/30 backdrop-blur-xl border-l border-y border-white/20 dark:border-slate-800 z-40 hidden lg:[@media(min-height:830px)]:flex flex-col items-center py-6 shadow-2xl rounded-tl-3xl rounded-bl-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden"
+      style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+    >
+      <div className="flex flex-col justify-center gap-6 w-full items-center min-h-full">
       {sections.map((section) => (
         <a 
           key={section.id} 
           href={`#${section.id}`}
-          className="group relative flex items-center justify-center w-full"
+          className="group relative flex items-center justify-center w-full shrink-0"
         >
-          <span className="vertical-text text-xs font-bold uppercase tracking-[0.25em] text-slate-400 group-hover:text-teal-500 transition-colors duration-300 whitespace-nowrap cursor-pointer hover:scale-110" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed', transform: 'rotate(180deg)' }}>
+          <span className="vertical-text text-xs font-bold uppercase tracking-[0.25em] text-slate-400 group-hover:text-emerald-500 transition-colors duration-300 whitespace-nowrap cursor-pointer hover:scale-110" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed', transform: 'rotate(180deg)' }}>
             {section.label}
           </span>
-          <div className="absolute right-0 w-1 h-0 bg-teal-500 group-hover:h-full transition-all duration-300 rounded-l-full"></div>
+          <div className="absolute right-0 w-1 h-0 bg-emerald-500 group-hover:h-full transition-all duration-300 rounded-l-full"></div>
         </a>
       ))}
       </div>
@@ -722,12 +762,14 @@ const Hero = ({ blurPx }) => {
     }
   };
 
+  const bgImage = useBackgroundImage(LOCAL_BACKGROUNDS.hero, REMOTE_BACKGROUNDS.hero);
+
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden transition-colors duration-300 bg-slate-50 dark:bg-slate-950">
       <div className="absolute inset-0 z-0">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
-            style={{ backgroundImage: `url(${BACKGROUNDS.hero})` }}
+            style={{ backgroundImage: `url(${bgImage})` }}
           />
           <div
             className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300"
@@ -741,28 +783,28 @@ const Hero = ({ blurPx }) => {
 
       <div className="max-w-7xl mx-auto px-6 w-full grid md:grid-cols-2 gap-12 items-center relative z-10 pt-20 md:pt-0">
         <div className="space-y-8">
-          <p className="text-teal-500 font-mono text-lg md:text-xl flex items-center gap-2">
-            <span className="w-10 h-px bg-teal-500"></span> Hello, I'm
+          <p className="text-emerald-500 font-mono text-lg md:text-xl flex items-center gap-2">
+            <span className="w-10 h-px bg-emerald-500"></span> Hello, I'm
           </p>
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-slate-900 dark:text-slate-100 leading-tight">
             {PERSONAL_INFO.name}
           </h1>
           <h2 className="text-2xl md:text-4xl text-slate-600 dark:text-slate-400 font-light">
-            <span className="text-teal-500 font-semibold">Data</span> Enthusiast and <span className="text-teal-500 font-semibold">AI/ML</span> Enthusiast
+            <span className="text-emerald-500 font-semibold">Data</span> Enthusiast and <span className="text-emerald-500 font-semibold">AI/ML</span> Enthusiast
           </h2>
           <p className="text-xl md:text-2xl text-slate-500 dark:text-slate-400 mb-6 flex items-center gap-2">
-            <Activity size={24} className="text-teal-500" />
+            <Activity size={24} className="text-emerald-500" />
             Data Analyst In Kawan Lama
           </p>
           
           <div className="flex flex-wrap gap-3 pt-4">
-            <a href="#contact" onClick={scrollToContact} className="bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 px-6 text-lg rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-teal-500/20 hover:-translate-y-1">
+            <a href="#contact" onClick={scrollToContact} className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 text-lg rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-emerald-500/20 hover:-translate-y-1">
               <Mail size={20} /> Contact Me
             </a>
-            <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noreferrer" className="border border-slate-300 dark:border-slate-600 hover:border-teal-500 text-slate-600 dark:text-slate-300 hover:text-teal-500 dark:hover:text-teal-400 py-3 px-6 text-lg rounded-full transition-all flex items-center gap-2 hover:-translate-y-1">
+            <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noreferrer" className="border border-slate-300 dark:border-slate-600 hover:border-emerald-500 text-slate-600 dark:text-slate-300 hover:text-emerald-500 dark:hover:text-emerald-400 py-3 px-6 text-lg rounded-full transition-all flex items-center gap-2 hover:-translate-y-1">
               <LinkedinIcon size={20} /> LinkedIn
             </a>
-            <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="border border-slate-300 dark:border-slate-600 hover:border-teal-500 text-slate-600 dark:text-slate-300 hover:text-teal-500 dark:hover:text-teal-400 py-3 px-6 text-lg rounded-full transition-all flex items-center gap-2 hover:-translate-y-1">
+            <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="border border-slate-300 dark:border-slate-600 hover:border-emerald-500 text-slate-600 dark:text-slate-300 hover:text-emerald-500 dark:hover:text-emerald-400 py-3 px-6 text-lg rounded-full transition-all flex items-center gap-2 hover:-translate-y-1">
               <GithubIcon size={20} /> GitHub
             </a>
           </div>
@@ -773,12 +815,13 @@ const Hero = ({ blurPx }) => {
 };
 
 const About = ({ blurPx }) => {
+  const bgImage = useBackgroundImage(LOCAL_BACKGROUNDS.about, REMOTE_BACKGROUNDS.about);
   return (
     <section id="about" className="py-20 pt-40 relative transition-colors duration-300 scroll-mt-28 bg-slate-50 dark:bg-slate-950">
-       <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
-            style={{ backgroundImage: `url(${BACKGROUNDS.about})` }}
+            style={{ backgroundImage: `url(${bgImage})` }}
           />
           <div
             className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300"
@@ -788,11 +831,11 @@ const About = ({ blurPx }) => {
             }}
           ></div>
           <BackgroundOverlay />
-       </div>
+      </div>
 
       <div className="max-w-5xl mx-auto px-6 relative z-10">
         <SectionHeader title="About Me" />
-        <div className="bg-white/80 dark:bg-slate-900/80 p-8 md:p-12 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm hover:border-teal-500/30 transition-all backdrop-blur-md">
+        <div className="bg-white/80 dark:bg-slate-900/80 p-8 md:p-12 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm hover:border-emerald-500/30 transition-all backdrop-blur-md">
           <div className="text-slate-600 dark:text-slate-300 text-lg md:text-xl leading-loose whitespace-pre-line">
             {PERSONAL_INFO.about}
           </div>
@@ -803,12 +846,13 @@ const About = ({ blurPx }) => {
 };
 
 const Projects = ({ blurPx }) => {
+    const bgImage = useBackgroundImage(LOCAL_BACKGROUNDS.projects, REMOTE_BACKGROUNDS.projects);
   return (
     <section id="projects" className="py-20 pt-32 relative transition-colors duration-300 scroll-mt-32 bg-slate-50 dark:bg-slate-950">
-       <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
-            style={{ backgroundImage: `url(${BACKGROUNDS.projects})` }}
+            style={{ backgroundImage: `url(${bgImage})` }}
           />
           <div
             className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300"
@@ -818,7 +862,7 @@ const Projects = ({ blurPx }) => {
             }}
           ></div>
           <BackgroundOverlay />
-       </div>
+      </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <SectionHeader title="Featured Projects" subtitle="A selection of my work in Data Analysis and Automation." />
@@ -839,7 +883,7 @@ const Projects = ({ blurPx }) => {
               
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent flex flex-col justify-end p-8 transition-opacity duration-300 group-hover:opacity-0">
                 <h3 className="text-3xl md:text-5xl font-bold text-white mb-2 shadow-black drop-shadow-md">{project.title}</h3>
-                <div className="w-20 h-2 bg-teal-500 rounded-full"></div>
+                <div className="w-20 h-2 bg-emerald-500 rounded-full"></div>
               </div>
 
               <div
@@ -851,7 +895,7 @@ const Projects = ({ blurPx }) => {
                   WebkitBackdropFilter: `blur(${blurPx}px)`
                 }}
               >
-                <h3 className="text-3xl md:text-5xl font-bold text-teal-400 mb-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                <h3 className="text-3xl md:text-5xl font-bold text-emerald-400 mb-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                   {project.title}
                 </h3>
 
@@ -861,13 +905,13 @@ const Projects = ({ blurPx }) => {
 
                 <div className="flex flex-wrap gap-3 justify-center mb-10 translate-y-4 group-hover:translate-y-0 transition-transform duration-700 delay-100">
                   {project.tech.map((t, i) => (
-                    <span key={i} className="text-sm md:text-base font-medium bg-teal-500/10 text-teal-300 px-5 py-2 rounded-full border border-teal-500/20">
+                    <span key={i} className="text-sm md:text-base font-medium bg-emerald-500/10 text-emerald-300 px-5 py-2 rounded-full border border-emerald-500/20">
                       {t}
                     </span>
                   ))}
                 </div>
 
-                <div className="inline-flex items-center gap-2 text-white bg-teal-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-teal-500 transition-colors shadow-lg">
+                <div className="inline-flex items-center gap-2 text-white bg-emerald-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-emerald-500 transition-colors shadow-lg">
                   View Details <ArrowRight size={22} />
                 </div>
               </div>
@@ -889,13 +933,13 @@ const Experience = ({ blurPx }) => {
     setSelectedTitle(title);
     setModalOpen(true);
   };
-
+  const bgImage = useBackgroundImage(LOCAL_BACKGROUNDS.experience, REMOTE_BACKGROUNDS.experience);
   return (
     <section id="experience" className="py-20 relative transition-colors duration-300 scroll-mt-20 bg-slate-50 dark:bg-slate-900">
-       <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
-            style={{ backgroundImage: `url(${BACKGROUNDS.experience})` }}
+            style={{ backgroundImage: `url(${bgImage})` }}
           />
           <div
             className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300"
@@ -915,11 +959,11 @@ const Experience = ({ blurPx }) => {
               <div className="hidden md:block absolute left-[50%] top-0 bottom-0 w-px bg-slate-200 dark:bg-slate-700 -translate-x-1/2"></div>
               <div className={`md:flex items-center justify-between ${exp.id % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
                 <div className={`hidden md:block w-[45%] ${exp.id % 2 === 0 ? 'text-left' : 'text-right'}`}>
-                  <span className="text-teal-500 font-mono text-sm">{exp.date}</span>
+                  <span className="text-emerald-500 font-mono text-sm">{exp.date}</span>
                 </div>
-                <div className="absolute left-0 md:left-1/2 w-4 h-4 bg-teal-500 rounded-full border-4 border-slate-50 dark:border-slate-900 -translate-x-[5px] md:-translate-x-1/2 mt-1.5 md:mt-0"></div>
+                <div className="absolute left-0 md:left-1/2 w-4 h-4 bg-emerald-500 rounded-full border-4 border-slate-50 dark:border-slate-900 -translate-x-[5px] md:-translate-x-1/2 mt-1.5 md:mt-0"></div>
                 <div className="w-full md:w-[45%]">
-                  <div className="md:hidden text-teal-500 font-mono text-sm mb-1">{exp.date}</div>
+                  <div className="md:hidden text-emerald-500 font-mono text-sm mb-1">{exp.date}</div>
                   <div className="bg-white/80 dark:bg-slate-900/80 p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:shadow-xl transition-shadow group backdrop-blur-sm">
                     <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100">{exp.role}</h3>
                     <div className="flex items-center gap-2 mb-3">
@@ -930,11 +974,11 @@ const Experience = ({ blurPx }) => {
                     {exp.highlight && (
                       <button 
                         onClick={() => openCertificate(exp.certificateImage, exp.highlight)}
-                        className="flex items-start gap-2 bg-teal-500/10 p-3 rounded-lg border border-teal-500/20 hover:bg-teal-500/20 transition-colors w-full text-left group cursor-pointer mt-3"
+                        className="flex items-start gap-2 bg-emerald-500/10 p-3 rounded-lg border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors w-full text-left group cursor-pointer mt-3"
                       >
-                        <Award size={16} className="text-teal-500 mt-0.5 shrink-0" />
+                        <Award size={16} className="text-emerald-500 mt-0.5 shrink-0" />
                         <div>
-                          <p className="text-teal-600 dark:text-teal-200 text-xs font-semibold group-hover:underline">{exp.highlight}</p>
+                          <p className="text-emerald-600 dark:text-emerald-200 text-xs font-semibold group-hover:underline">{exp.highlight}</p>
                           <p className="text-slate-500 text-[10px]">Click to view certificate</p>
                         </div>
                       </button>
@@ -969,13 +1013,13 @@ const Contact = ({ blurPx }) => {
     const body = `${formData.message}%0D%0A%0D%0AFrom: ${formData.name} (${formData.email})`;
     window.location.href = `mailto:${PERSONAL_INFO.email}?subject=${subject}&body=${body}`;
   };
-
+    const bgImage = useBackgroundImage(LOCAL_BACKGROUNDS.contact, REMOTE_BACKGROUNDS.contact);
   return (
     <section id="contact" className="py-20 relative transition-colors duration-300 bg-slate-50 dark:bg-slate-900">
-       <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
-            style={{ backgroundImage: `url(${BACKGROUNDS.contact})` }}
+            style={{ backgroundImage: `url(${bgImage})` }}
           />
           <div
             className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300"
@@ -985,7 +1029,7 @@ const Contact = ({ blurPx }) => {
             }}
           ></div>
           <BackgroundOverlay />
-       </div>
+      </div>
 
       <div className="max-w-4xl mx-auto px-6 relative z-10">
         <SectionHeader title="Get In Touch" />
@@ -998,20 +1042,20 @@ const Contact = ({ blurPx }) => {
             </p>
             
             <div className="space-y-6">
-              <a href={`mailto:${PERSONAL_INFO.email}`} className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-teal-500 transition-colors group">
-                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-teal-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-teal-500 transition-all group-hover:scale-110">
+              <a href={`mailto:${PERSONAL_INFO.email}`} className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-emerald-500 transition-colors group">
+                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-emerald-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-emerald-500 transition-all group-hover:scale-110">
                   <Mail size={20} />
                 </div>
                 <span>{PERSONAL_INFO.email}</span>
               </a>
-              <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-teal-500 transition-colors group">
-                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-teal-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-teal-500 transition-all group-hover:scale-110">
+              <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-emerald-500 transition-colors group">
+                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-emerald-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-emerald-500 transition-all group-hover:scale-110">
                   <LinkedinIcon size={20} />
                 </div>
                 <span>LinkedIn Profile</span>
               </a>
-              <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-teal-500 transition-colors group">
-                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-teal-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-teal-500 transition-all group-hover:scale-110">
+              <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-emerald-500 transition-colors group">
+                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-emerald-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-emerald-500 transition-all group-hover:scale-110">
                   <GithubIcon size={20} />
                 </div>
                 <span>GitHub Profile</span>
@@ -1029,7 +1073,7 @@ const Contact = ({ blurPx }) => {
                 required
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-teal-500 transition-colors"
+                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors"
                 placeholder="Ex: William"
               />
             </div>
@@ -1042,7 +1086,7 @@ const Contact = ({ blurPx }) => {
                 required
                 value={formData.email}
                 onChange={handleChange}
-                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-teal-500 transition-colors"
+                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors"
                 placeholder="Ex: william@gmail.com"
               />
             </div>
@@ -1055,13 +1099,13 @@ const Contact = ({ blurPx }) => {
                 required
                 value={formData.message}
                 onChange={handleChange}
-                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-teal-500 transition-colors resize-none"
+                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors resize-none"
                 placeholder="Write your message here... I'm available for hiring!"
               ></textarea>
             </div>
             <button 
               type="submit" 
-              className="w-full bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 mt-2 shadow-lg shadow-teal-500/20"
+              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 mt-2 shadow-lg shadow-emerald-500/20"
             >
               <Send size={18} />
               Send Message
@@ -1078,8 +1122,8 @@ const Footer = () => (
     <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center text-slate-500 text-sm">
       <p>&copy; {new Date().getFullYear()} {PERSONAL_INFO.name} All rights reserved.</p>
       <div className="flex gap-4 mt-4 md:mt-0">
-        <a href={PERSONAL_INFO.linkedin} className="hover:text-teal-500"><LinkedinIcon size={18} /></a>
-        <a href={PERSONAL_INFO.github} className="hover:text-teal-500"><GithubIcon size={18} /></a>
+        <a href={PERSONAL_INFO.linkedin} className="hover:text-emerald-500"><LinkedinIcon size={18} /></a>
+        <a href={PERSONAL_INFO.github} className="hover:text-emerald-500"><GithubIcon size={18} /></a>
       </div>
     </div>
   </footer>
@@ -1107,6 +1151,9 @@ export default function App() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [blurPx, setBlurPx] = useState(0);
+
+  const skillsBg = useBackgroundImage(LOCAL_BACKGROUNDS.skills, REMOTE_BACKGROUNDS.skills);
+  const certificationsBg = useBackgroundImage(LOCAL_BACKGROUNDS.certifications, REMOTE_BACKGROUNDS.certifications);
 
   const openCertificate = (image, title) => {
     setSelectedImage(image);
@@ -1161,7 +1208,7 @@ export default function App() {
   }
 
   return (
-    <div className={`min-h-screen font-sans selection:bg-teal-500/30 ${isDarkMode ? 'dark' : ''} bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200 transition-colors duration-300`}>
+    <div className={`min-h-screen font-sans selection:bg-emerald-500/30 ${isDarkMode ? 'dark' : ''} bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200 transition-colors duration-300`}>
       <CustomCursor />
       <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
       <SideRibbonNavigation />
@@ -1177,10 +1224,10 @@ export default function App() {
           title="Skills"
           subtitle="Tools and technologies I use to drive insights."
           items={SKILLS}
-          bgImage={BACKGROUNDS.skills}
+          bgImage={skillsBg}
           blurPx={blurPx}
           renderCard={(skill, index) => (
-            <div key={index} className="bg-white/90 dark:bg-slate-900/90 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-teal-500/50 transition-all w-72 shrink-0 flex flex-col items-center text-center justify-center gap-4 group shadow-sm hover:shadow-md backdrop-blur-sm">
+            <div key={index} className="bg-white/30 dark:bg-slate-900/30 p-8 rounded-2xl border border-white/20 dark:border-slate-800 hover:border-emerald-500/50 transition-all w-72 shrink-0 flex flex-col items-center text-center justify-center gap-4 group shadow-lg hover:shadow-xl backdrop-blur-xl">
               <div className="w-16 h-16 flex items-center justify-center rounded-2xl bg-slate-100 dark:bg-white/5 p-2 transition-transform group-hover:scale-110">
                 <img src={skill.image} alt={skill.name} className="w-full h-full object-contain" />
               </div>
@@ -1199,27 +1246,22 @@ export default function App() {
           title="Certifications & Awards"
           subtitle="Recognitions of my expertise and dedication."
           items={CERTIFICATIONS}
-          bgImage={BACKGROUNDS.certifications}
+          bgImage={certificationsBg}
           blurPx={blurPx}
           renderCard={(cert, index) => (
             <a 
-
               key={index} 
-
               href={cert.link || "#"}
-
               target="_blank"
-
               rel="noopener noreferrer"
-
-              className="bg-white/90 dark:bg-slate-900/90 p-8 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between hover:border-teal-500/50 transition-all w-96 shrink-0 h-64 cursor-pointer group shadow-sm hover:shadow-md backdrop-blur-sm block"
+              className="bg-white/30 dark:bg-slate-900/30 p-8 rounded-2xl border border-white/20 dark:border-slate-800 flex flex-col justify-between hover:border-emerald-500/50 transition-all w-96 shrink-0 h-64 cursor-pointer group shadow-lg hover:shadow-xl backdrop-blur-xl block"
             >
               <div>
                 {/* Check if image is a logo (small) or certificate (large) */}
                 <div className="mb-6 h-16 w-16 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center overflow-hidden border border-slate-100 dark:border-slate-700">
                     <img src={cert.image} alt={cert.issuer} className="w-full h-full object-cover" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2 leading-tight group-hover:text-teal-500 transition-colors">{cert.title}</h3>
+                <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2 leading-tight group-hover:text-emerald-500 transition-colors">{cert.title}</h3>
                 <p className="text-slate-500 dark:text-slate-400">{cert.issuer}</p>
               </div>
               <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-sm">
