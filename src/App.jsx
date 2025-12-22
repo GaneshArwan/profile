@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import ReCAPTCHA from "react-google-recaptcha";
 import { 
   Home,
   Mail, 
@@ -168,7 +169,7 @@ const EXPERIENCE = [
       </div>
     ),
     highlight: "Awarded Certificate of Excellence Intern",
-    certificateImage: "https://media.licdn.com/dms/image/v2/D562DAQEjY09fOpIPnw/profile-treasury-image-shrink_800_800/profile-treasury-image-shrink_800_800/0/1743495474953?e=1765983600&v=beta&t=Ser7pAKeBx63KxVfpElDcdLQuAsBg-ktpCR1Yt2Rb9U"
+    link: "https://www.linkedin.com/in/william-oo00/overlay/1743496220514/single-media-viewer/?profileId=ACoAAD2slAoBjkl94d--TrheKOVwxTXqS41kD8E"
   }
 ];
 
@@ -224,7 +225,7 @@ const CERTIFICATIONS = [
 
     image: "https://www.kawanlamagroup.com/favicon.png", // UPDATED IMAGE
 
-    link: "https://www.linkedin.com/in/william-oo00/details/certifications/"
+    link: "https://www.linkedin.com/in/william-oo00/overlay/1743496220514/single-media-viewer/?profileId=ACoAAD2slAoBjkl94d--TrheKOVwxTXqS41kD8E"
 
   },
 
@@ -972,16 +973,18 @@ const Experience = ({ blurPx }) => {
                     </div>
                     {exp.description}
                     {exp.highlight && (
-                      <button 
-                        onClick={() => openCertificate(exp.certificateImage, exp.highlight)}
-                        className="flex items-start gap-2 bg-emerald-500/10 p-3 rounded-lg border border-emerald-500/20 hover:bg-emerald-500/20 transition-colors w-full text-left group cursor-pointer mt-3"
+                      <a 
+                        href={exp.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-start gap-2 bg-teal-500/10 p-3 rounded-lg border border-teal-500/20 hover:bg-teal-500/20 transition-colors w-full text-left group cursor-pointer mt-3"
                       >
-                        <Award size={16} className="text-emerald-500 mt-0.5 shrink-0" />
+                        <Award size={16} className="text-teal-500 mt-0.5 shrink-0" />
                         <div>
-                          <p className="text-emerald-600 dark:text-emerald-200 text-xs font-semibold group-hover:underline">{exp.highlight}</p>
+                          <p className="text-teal-600 dark:text-teal-200 text-xs font-semibold group-hover:underline">{exp.highlight}</p>
                           <p className="text-slate-500 text-[10px]">Click to view certificate</p>
                         </div>
-                      </button>
+                      </a>
                     )}
                   </div>
                 </div>
@@ -1000,18 +1003,40 @@ const Experience = ({ blurPx }) => {
   );
 };
 
-const Contact = ({ blurPx }) => {
+// CHANGED: Added isDarkMode to props
+const Contact = ({ blurPx, isDarkMode }) => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [recaptchaToken, setRecaptchaToken] = useState(null); // ADD THIS: State for token
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  // CHANGED: Updated handleSubmit to verify captcha
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const subject = `Portfolio Contact from ${formData.name}`;
-    const body = `${formData.message}%0D%0A%0D%0AFrom: ${formData.name} (${formData.email})`;
-    window.location.href = `mailto:${PERSONAL_INFO.email}?subject=${subject}&body=${body}`;
+
+    if (!recaptchaToken) {
+      alert("Please complete the reCAPTCHA verification.");
+      return;
+    }
+
+    const response = await fetch("https://formspree.io/f/xbdrzqwr", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...formData,
+        "g-recaptcha-response": recaptchaToken // Add token to body
+      }),
+    });
+    
+    if (response.ok) {
+      setFormData({ name: '', email: '', message: '' });
+      setRecaptchaToken(null);
+      alert("Message sent successfully!");
+    } else {
+      alert("Failed to send message. Please try again.");
+    }
   };
     const bgImage = useBackgroundImage(LOCAL_BACKGROUNDS.contact, REMOTE_BACKGROUNDS.contact);
   return (
@@ -1102,6 +1127,13 @@ const Contact = ({ blurPx }) => {
                 className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors resize-none"
                 placeholder="Write your message here... I'm available for hiring!"
               ></textarea>
+            </div>
+            <div className="my-4 overflow-hidden rounded-lg">
+              <ReCAPTCHA
+                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                onChange={setRecaptchaToken}
+                theme={isDarkMode ? "dark" : "light"}
+              />
             </div>
             <button 
               type="submit" 
@@ -1285,7 +1317,7 @@ export default function App() {
           title={selectedTitle} 
         />
 
-        <Contact blurPx={blurPx} />
+        <Contact blurPx={blurPx} isDarkMode={isDarkMode} />
         <Footer />
       </div>
     </div>
