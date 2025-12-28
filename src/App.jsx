@@ -1420,9 +1420,9 @@ export default function App() {
 
         <div data-scroll-section><Contact blurPx={blurPx} isDarkMode={isDarkMode} /></div>
         <div data-scroll-section><Footer /></div>
+        <Analytics />
+        <SpeedInsights />
       </main>
-      <Analytics />
-      <SpeedInsights />
     </div>
     
   );
