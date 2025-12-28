@@ -181,183 +181,94 @@ const EXPERIENCE = [
 ];
 
 const CERTIFICATIONS = [
-
   {
-
     id: 1,
-
     title: "Belajar Analisis Data dengan Python",
-
     issuer: "Dicoding Indonesia",
-
-    date: "Issued Oct 2023",
-
-    credentialId: "GRX52E7ERX0M",
-
     image: "https://media.licdn.com/dms/image/v2/C560BAQHOIi63tC8k8w/company-logo_100_100/company-logo_100_100/0/1660182933847/dicoding_logo?e=1767830400&v=beta&t=w0cAb4xz5sFk-PsdIa2MQCYjqrp_9feO2fG8_c3jC6c",
-
     link: "https://www.dicoding.com/certificates/GRX52E7ERX0M"
-
   },
-
   {
-
     id: 2,
-
     title: "Belajar Dasar Visualisasi Data",
-
     issuer: "Dicoding Indonesia",
-
-    date: "Issued Dec 2023",
-
-    credentialId: "QLZ941NY7P5D",
-
     image: "https://media.licdn.com/dms/image/v2/C560BAQHOIi63tC8k8w/company-logo_100_100/company-logo_100_100/0/1660182933847/dicoding_logo?e=1767830400&v=beta&t=w0cAb4xz5sFk-PsdIa2MQCYjqrp_9feO2fG8_c3jC6c",
-
     link: "https://www.dicoding.com/certificates/QLZ941NY7P5D"
-
   },
-
   {
-
     id: 3,
-
     title: "Certificate of Excellence",
-
     issuer: "Kawan Lama Group",
-
-    date: "Internship Award",
-
-    credentialId: "MDM Automation",
-
-    image: "https://www.kawanlamagroup.com/favicon.png", // UPDATED IMAGE
-
+    image: "https://www.kawanlamagroup.com/favicon.png",
     link: "https://www.linkedin.com/in/william-oo00/overlay/1743496220514/single-media-viewer/?profileId=ACoAAD2slAoBjkl94d--TrheKOVwxTXqS41kD8E"
-
   },
-
   {
-
     id: 4,
-
     title: "Memulai Pemrograman dengan Python",
-
     issuer: "Dicoding Indonesia",
-
-    date: "Issued Sep 2023",
-
-    credentialId: "Programming Logic",
-
     image: "https://media.licdn.com/dms/image/v2/C560BAQHOIi63tC8k8w/company-logo_100_100/company-logo_100_100/0/1660182933847/dicoding_logo?e=1767830400&v=beta&t=w0cAb4xz5sFk-PsdIa2MQCYjqrp_9feO2fG8_c3jC6c",
-
     link: "https://dicoding.com/certificates/98XWVRM4LPM3"
-
   },
-
   {
-
     id: 5,
-
     title: "Machine Learning Pemula",
-
     issuer: "Dicoding Indonesia",
-
-    date: "Issued 2023",
-
-    credentialId: "ML Foundations",
-
     image: "https://media.licdn.com/dms/image/v2/C560BAQHOIi63tC8k8w/company-logo_100_100/company-logo_100_100/0/1660182933847/dicoding_logo?e=1767830400&v=beta&t=w0cAb4xz5sFk-PsdIa2MQCYjqrp_9feO2fG8_c3jC6c",
-
     link: "https://dicoding.com/certificates/98XWV4O7LPM3"
-
   },
-
   {
-
     id: 6,
-
     title: "Microsoft Excel",
-
     issuer: "MySkill",
-
-    date: "Issued Aug 2023",
-
-    credentialId: "", // EMPTY STRING AS REQUESTED
-
-    image: "https://myskill.id/favicon/favicon-32x32.png", // UPDATED IMAGE
-
+    image: "https://myskill.id/favicon/favicon-32x32.png",
     link: "https://storage.googleapis.com/myskill-v2-certificates/learning-path-kpIIH7ZvWgW3muNNmC1V/1L3U2pxG95SYDqJeWU826bAsGLn2-iJSQ2XkoAtkIt8JfWW9v.pdf"
-
   },
-
   {
-
     id: 7,
-
     title: "SQL for Data Science",
-
     issuer: "Dicoding Indonesia",
-
-    date: "Issued 2023",
-
-    credentialId: "Database Management",
-
     image: "https://media.licdn.com/dms/image/v2/C560BAQHOIi63tC8k8w/company-logo_100_100/company-logo_100_100/0/1660182933847/dicoding_logo?e=1767830400&v=beta&t=w0cAb4xz5sFk-PsdIa2MQCYjqrp_9feO2fG8_c3jC6c",
-
     link: "https://dicoding.com/certificates/81P23MG9YXOY"
-
   },
-
   {
-
     id: 8,
-
     title: "Google Analytics Certification",
-
     issuer: "Google Digital Academy",
-
-    date: "Issued Oct 2023",
-
-    credentialId: "177278382",
-
     image: "https://media.licdn.com/dms/image/v2/C4E0BAQH3BCCd-0PGng/company-logo_100_100/company-logo_100_100/0/1630624368505?e=1767830400&v=beta&t=ndQOZD1t2LBlwWBePjVpk7xRDoxigbM5sKUuZJyRce4",
-
     link: "https://skillshop.exceedlms.com/student/award/a31oSo7NkTXipXtJfDb5eR3E"
-
   }
-
 ];
 
 const PROJECTS = [
   {
     id: 1,
-    title: "Enterprise Process Automation",
-    description: "An end-to-end automation suite utilizing RPA and custom web apps (Catalyst) to streamline master data collection. Features automated Google Sheets integration, PostgreSQL data warehousing, and background job processing to reduce manual workload by ~70%.",
-    tech: ["Python", "RPA", "Google Apps Script", "PostgreSQL", "Catalyst"],
-    link: "https://github.com/GaneshArwan/enterprise-process-automation", // Updated Link
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop" // You can set a local path here later
+    title: "ProcessPilot Automation",
+    description: "Enterprise-grade orchestration system designed to automate high-volume business requests. Features a custom 'Distributed Key-Lock' mechanism for concurrency control, 'Scaled Round Robin' algorithms for intelligent workload distribution, and dynamic SAP GUI script generation to reduce manual effort by ~70%.",
+    tech: ["Google Apps Script", "SAP GUI Scripting", "JavaScript", "REST API", "Distributed Systems"],
+    link: "https://github.com/GaneshArwan/enterprise-process-automation",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop"
   },
   {
     id: 2,
-    title: "KPI Dashboard",
-    description: "Interactive Business Intelligence dashboard built with Looker and Google Sheets. Visualizes key performance indicators for operational efficiency, providing real-time insights into team performance and data trends across multiple business units.",
-    tech: ["Looker Studio", "Google Sheets", "SQL", "Data Visualization"],
-    link: "https://github.com/GaneshArwan/kpi-dashboard", // Updated Link
+    title: "Corporate KPI & SLA Dashboard",
+    description: "Interactive analytics platform built with Streamlit to track operational efficiency. Integrates a robust SLA engine that calculates business-day processing times, automated ETL pipelines for Google Sheets data, and dynamic Plotly visualizations for identifying bottleneck trends.",
+    tech: ["Python", "Streamlit", "Plotly", "Pandas", "Google API"],
+    link: "https://github.com/GaneshArwan/kpi-dashboard",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"
   },
   {
     id: 3,
     title: "Indonesia GHG Cluster Map",
-    description: "A data science project clustering Indonesian provinces based on Greenhouse Gas (GHG) emissions data. Provides visual insights into regional environmental impact.",
-    tech: ["Python", "Clustering", "Geospatial Data", "Data Analysis"],
+    description: "Unsupervised machine learning application categorizing Indonesian provinces by Greenhouse Gas emissions. Utilizes K-Means clustering with Silhouette analysis to determine optimal grouping and presents insights via an interactive geospatial map.",
+    tech: ["Python", "Scikit-Learn", "Streamlit", "K-Means", "Geospatial Analysis"],
     link: "https://github.com/GaneshArwan/indonesia-province-ghg-cluster-map",
     image: "https://images.unsplash.com/photo-1569336415962-a4bd9f69cd83?q=80&w=1000&auto=format&fit=crop"
   },
   {
     id: 4,
     title: "Student Dropout Classification",
-    description: "A predictive model designed to identify students at risk of dropping out. Utilizes various academic and demographic features to classify status, aiming to support early intervention strategies.",
-    tech: ["Python", "Scikit-Learn", "Pandas", "Classification"],
+    description: "A comprehensive predictive modeling pipeline to identify at-risk students. Implements advanced ensemble classifiers (XGBoost, AdaBoost, Random Forest) coupled with ADASYN oversampling and rigorous GridSearchCV hyperparameter tuning for maximum recall.",
+    tech: ["Python", "XGBoost", "Scikit-Learn", "Imbalanced-Learn", "Pandas"],
     link: "https://github.com/GaneshArwan/dropoout_classification",
     image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop"
   }
@@ -1180,150 +1091,151 @@ const Experience = ({ blurPx }) => {
 
 
 const Contact = ({ blurPx, isDarkMode }) => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [recaptchaToken, setRecaptchaToken] = useState(null); // ADD THIS: State for token
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  // CHANGED: Updated handleSubmit to verify captcha
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    if (!recaptchaToken) {
-      alert("Please complete the reCAPTCHA verification.");
-      return;
-    }
+    if (!recaptchaToken) {
+      alert("Please complete the reCAPTCHA verification.");
+      return;
+    }
 
-    const response = await fetch("https://formspree.io/f/xbdrzqwr", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        ...formData,
-        "g-recaptcha-response": recaptchaToken // Add token to body
-      }),
-    });
-    
-    if (response.ok) {
-      setFormData({ name: '', email: '', message: '' });
-      setRecaptchaToken(null);
-      alert("Message sent successfully!");
-    } else {
-      alert("Failed to send message. Please try again.");
-    }
-  };
-    const bgImage = useBackgroundImage(LOCAL_BACKGROUNDS.contact, REMOTE_BACKGROUNDS.contact);
-  return (
-    <section id="contact" className="py-20 relative transition-colors duration-300 bg-slate-50 dark:bg-slate-900">
-      <div className="absolute inset-0 z-0">
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
-            style={{ backgroundImage: `url(${bgImage})` }}
-          />
-          <div
-            className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300"
-            style={{
-              backdropFilter: `blur(${blurPx}px)`,
-              WebkitBackdropFilter: `blur(${blurPx}px)`
-            }}
-          ></div>
-          <BackgroundOverlay />
-      </div>
+    const response = await fetch("https://formspree.io/f/xbdrzqwr", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...formData,
+        "g-recaptcha-response": recaptchaToken
+      }),
+    });
+    
+    if (response.ok) {
+      setFormData({ name: '', email: '', message: '' });
+      setRecaptchaToken(null);
+      alert("Message sent successfully!");
+    } else {
+      alert("Failed to send message. Please try again.");
+    }
+  };
 
-      <div className="max-w-4xl mx-auto px-2 sm:px-6 relative z-10">
-        <SectionHeader title={<GlossyText>Get In Touch</GlossyText>} />
-        
-        <div className="grid md:grid-cols-2 gap-12">
-          <div>
-            <p className="text-slate-600 dark:text-slate-400 mb-8 text-lg leading-relaxed">
-              I am currently open to opportunities in Data Analysis, Data Science, and Machine Learning. 
-              Whether you have a question, a project collaboration idea, or just want to say hi, I'll try my best to get back to you!
-            </p>
-            
-            <div className="space-y-6">
-              <a href={`mailto:${PERSONAL_INFO.email}`} className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-emerald-500 transition-colors group">
-                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-emerald-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-emerald-500 transition-all group-hover:scale-110">
-                  <Mail size={20} />
-                </div>
-                <span>{PERSONAL_INFO.email}</span>
-              </a>
-              <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-emerald-500 transition-colors group">
-                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-emerald-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-emerald-500 transition-all group-hover:scale-110">
-                  <LinkedinIcon size={20} />
-                </div>
-                <span>LinkedIn Profile</span>
-              </a>
-              <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-emerald-500 transition-colors group">
-                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-emerald-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-emerald-500 transition-all group-hover:scale-110">
-                  <GithubIcon size={20} />
-                </div>
-                <span>GitHub Profile</span>
-              </a>
-            </div>
-          </div>
+  const bgImage = useBackgroundImage(LOCAL_BACKGROUNDS.contact, REMOTE_BACKGROUNDS.contact);
 
-          <form onSubmit={handleSubmit} className="space-y-4 bg-white/80 dark:bg-slate-800/80 p-2 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm backdrop-blur-sm">
-            <div>
-              <label htmlFor="name" className="block text-lg font-medium text-slate-500 dark:text-slate-400 mb-1">Name</label>
-              <input 
-                type="text" 
-                name="name" 
-                id="name" 
-                required
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors"
-                placeholder="Ex: William"
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="block text-lg font-medium text-slate-500 dark:text-slate-400 mb-1">Email</label>
-              <input 
-                type="email" 
-                name="email" 
-                id="email" 
-                required
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors"
-                placeholder="Ex: william@gmail.com"
-              />
-            </div>
-            <div>
-              <label htmlFor="message" className="block text-lg font-medium text-slate-500 dark:text-slate-400 mb-1">Message</label>
-              <textarea 
-                name="message" 
-                id="message" 
-                rows="4" 
-                required
-                value={formData.message}
-                onChange={handleChange}
-                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors resize-none"
-                placeholder="Write your message here... I'm available for hiring!"
-              ></textarea>
-            </div>
-            <div className="my-4 w-full flex justify-start">
-                <div className="transform scale-[0.77] origin-top-left sm:scale-100 sm:origin-top-left">
-                    <ReCAPTCHA
-                        sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                        onChange={setRecaptchaToken}
-                        theme={isDarkMode ? "dark" : "light"}
-                    />
-                </div>
-            </div>
-            <button 
-              type="submit" 
-              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 mt-2 shadow-lg shadow-emerald-500/20"
-            >
-              <Send size={18} />
-              Send Message
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
-  );
+  return (
+    <section id="contact" className="py-20 relative transition-colors duration-300 bg-slate-50 dark:bg-slate-900">
+      <div className="absolute inset-0 z-0">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+          style={{ backgroundImage: `url(${bgImage})` }}
+        />
+        <div
+          className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300"
+          style={{
+            backdropFilter: `blur(${blurPx}px)`,
+            WebkitBackdropFilter: `blur(${blurPx}px)`
+          }}
+        ></div>
+        <BackgroundOverlay />
+      </div>
+
+      <div className="max-w-4xl mx-auto px-2 sm:px-6 relative z-10">
+        <SectionHeader title={<GlossyText>Get In Touch</GlossyText>} />
+        
+        <div className="grid md:grid-cols-2 gap-12">
+          <div>
+            <p className="text-slate-600 dark:text-slate-400 mb-8 text-lg leading-relaxed">
+              I am currently open to opportunities in Data Analysis, Data Science, and Machine Learning. 
+              Whether you have a question, a project collaboration idea, or just want to say hi, I'll try my best to get back to you!
+            </p>
+            
+            <div className="space-y-6">
+              <a href={`mailto:${PERSONAL_INFO.email}`} className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-emerald-500 transition-colors group">
+                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-emerald-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-emerald-500 transition-all group-hover:scale-110">
+                  <Mail size={20} />
+                </div>
+                <span>{PERSONAL_INFO.email}</span>
+              </a>
+              <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-emerald-500 transition-colors group">
+                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-emerald-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-emerald-500 transition-all group-hover:scale-110">
+                  <LinkedinIcon size={20} />
+                </div>
+                <span>LinkedIn Profile</span>
+              </a>
+              <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-emerald-500 transition-colors group">
+                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-emerald-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-emerald-500 transition-all group-hover:scale-110">
+                  <GithubIcon size={20} />
+                </div>
+                <span>GitHub Profile</span>
+              </a>
+            </div>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4 bg-white/80 dark:bg-slate-800/80 p-2 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm backdrop-blur-sm">
+            <div>
+              <label htmlFor="name" className="block text-lg font-medium text-slate-500 dark:text-slate-400 mb-1">Name</label>
+              <input 
+                type="text" 
+                name="name" 
+                id="name" 
+                required
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors"
+                placeholder="Ex: William"
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-lg font-medium text-slate-500 dark:text-slate-400 mb-1">Email</label>
+              <input 
+                type="email" 
+                name="email" 
+                id="email" 
+                required
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors"
+                placeholder="Ex: william@gmail.com"
+              />
+            </div>
+            <div>
+              <label htmlFor="message" className="block text-lg font-medium text-slate-500 dark:text-slate-400 mb-1">Message</label>
+              <textarea 
+                name="message" 
+                id="message" 
+                rows="4" 
+                required
+                value={formData.message}
+                onChange={handleChange}
+                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors resize-none"
+                placeholder="Hello, Welcome to my portfolio!"
+              ></textarea>
+            </div>
+            <div className="my-4 w-full flex justify-start">
+              <div className="transform scale-[0.77] origin-top-left sm:scale-100 sm:origin-top-left">
+                <ReCAPTCHA
+                  sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                  onChange={setRecaptchaToken}
+                  theme={isDarkMode ? "dark" : "light"}
+                />
+              </div>
+            </div>
+            <button 
+              type="submit" 
+              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 mt-2 shadow-lg shadow-emerald-500/20"
+            >
+              <Send size={18} />
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 
@@ -1500,7 +1412,6 @@ export default function App() {
                     <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2 leading-tight group-hover:text-emerald-500 transition-colors">{cert.title}</h3>
                     <p className="text-slate-500 dark:text-slate-400">{cert.issuer}</p>
                   </div>
-                  <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-sm"><span className="text-slate-500">{cert.date}</span>{cert.credentialId && (<span className="font-mono text-slate-600 truncate max-w-[120px]">{cert.credentialId}</span>)}</div>
                 </a>
               )} 
             />
