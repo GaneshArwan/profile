@@ -15,6 +15,8 @@ import {
   X as CloseIcon,
   Send
 } from 'lucide-react';
+import LocomotiveScroll from 'locomotive-scroll';
+import 'locomotive-scroll/dist/locomotive-scroll.css'; // Pastikan import CSS jika perlu
 
 // --- Custom Icons ---
 
@@ -701,72 +703,52 @@ const CustomCursor = () => {
 
 // --- Main Components ---
 
-const Navbar = ({ isDarkMode, toggleTheme }) => {
+const Navbar = ({ isDarkMode, toggleTheme, activeSection, scrollTo }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
+  
+  const handleLinkClick = (id) => {
+    scrollTo(id);
+    setIsOpen(false);
+  };
 
-  // Listen for global scroll events to close the menu automatically
-  useEffect(() => {
-    const closeMenu = () => setIsOpen(false);
-    window.addEventListener('close-menu', closeMenu);
-    return () => window.removeEventListener('close-menu', closeMenu);
-  }, []);
-
-  // ScrollSpy Logic (Keep this)
-  useEffect(() => {
-    const handleScrollSpy = () => {
-      const sections = ['about', 'projects', 'skills', 'experience', 'certifications', 'contact'];
-      if (window.scrollY < 300) {
-        setActiveSection("");
-        return;
-      }
-      for (const id of sections) {
-        const element = document.getElementById(id);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          if ((rect.top >= 0 && rect.top <= window.innerHeight / 2) || (rect.top < 0 && rect.bottom > window.innerHeight / 2)) {
-            const title = id.charAt(0).toUpperCase() + id.slice(1);
-            setActiveSection(title === 'Certifications' ? 'Awards' : title);
-            break;
-          }
-        }
-      }
-    };
-    window.addEventListener('scroll', handleScrollSpy);
-    return () => window.removeEventListener('scroll', handleScrollSpy);
-  }, []);
+  const navLinks = [
+    { name: "About", id: "about" },
+    { name: "Projects", id: "projects" },
+    { name: "Skills", id: "skills" },
+    { name: "Experience", id: "experience" },
+    { name: "Awards", id: "certifications" },
+    { name: "Contact", id: "contact" },
+  ];
 
   return (
-    <nav className="fixed left-1/2 -translate-x-1/2 top-12 lg:top-32 z-50 w-[30%] md:w-auto md:min-w-[240px] min-w-[320px] rounded-full bg-white/30 dark:bg-slate-900/30 backdrop-blur-xl border border-white/20 dark:border-slate-700/50 shadow-2xl transition-all duration-300 px-6">
+    <nav className="fixed left-1/2 -translate-x-1/2 top-12 lg:top-20 z-[999] w-[90%] max-w-[360px] md:w-auto md:min-w-[300px] rounded-full bg-white/30 dark:bg-slate-900/30 backdrop-blur-xl border border-white/20 dark:border-slate-700/50 shadow-2xl transition-all duration-300 px-6">
       <div className="flex justify-between items-center gap-4 py-3">
-        {/* Left: Home Icon - Uses data-scroll-to for top */}
-        <a 
-          href="#" 
-          data-scroll-to /* 👈 Attribute Hijack */
-          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          className="text-emerald-500 hover:scale-110 transition-transform"
+        {/* Home Button */}
+        <button 
+          onClick={() => handleLinkClick('top')} 
+          className="text-emerald-500 hover:scale-110 transition-transform shrink-0"
+          aria-label="Back to Top"
         >
           <Home size={24} />
-        </a>
+        </button>
         
-        {/* Center: Active Section Title */}
-        <div className="absolute left-1/2 -translate-x-1/2 text-center">
+        {/* Active Section Display - Fixed Glitch with key prop */}
+        <div className="flex-1 text-center overflow-hidden">
             {activeSection && (
-                <span className="text-lg font-bold text-slate-800 dark:text-slate-100 animate-in fade-in slide-in-from-top-2 whitespace-nowrap">
+                <span 
+                  key={activeSection} // 🔴 CRITICAL FIX: Forces animation restart on change
+                  className="inline-block text-lg font-bold text-slate-800 dark:text-slate-100 animate-in fade-in slide-in-from-top-2 duration-300 whitespace-nowrap"
+                >
                     {activeSection}
                 </span>
             )}
         </div>
 
-        {/* Right: Actions */}
-        <div className="flex items-center gap-4 ml-auto">
-          <button 
-            onClick={toggleTheme}
-            className="hidden lg:[@media(min-height:830px)]:flex p-2 rounded-full bg-slate-100/50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 hover:bg-emerald-100 dark:hover:bg-slate-700 transition-colors shadow-sm ring-1 ring-white/20"
-          >
+        {/* Right Actions */}
+        <div className="flex items-center gap-3 shrink-0 ml-auto">
+          <button onClick={toggleTheme} className="hidden lg:[@media(min-height:830px)]:flex p-2 rounded-full bg-slate-100/50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 hover:bg-emerald-100 dark:hover:bg-slate-700 transition-colors shadow-sm ring-1 ring-white/20">
             {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
           </button>
-
           <div className="lg:[@media(min-height:830px)]:hidden flex items-center">
             <button onClick={() => setIsOpen(!isOpen)} className="text-slate-600 dark:text-slate-300 hover:text-emerald-500">
               {isOpen ? <X size={28} /> : <Menu size={28} />}
@@ -775,14 +757,8 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
-      <div 
-        className={`lg:[@media(min-height:830px)]:hidden bg-white/90 dark:bg-slate-900/90 absolute top-full left-0 w-full mt-4 rounded-2xl border border-white/20 backdrop-blur-xl overflow-hidden shadow-xl transition-all duration-300 ease-in-out origin-top ${
-          isOpen 
-            ? "opacity-100 translate-y-0 scale-100 visible" 
-            : "opacity-0 -translate-y-4 scale-95 invisible"
-        }`}
-      >
+      {/* Mobile Menu */}
+      <div className={`lg:[@media(min-height:830px)]:hidden bg-white/95 dark:bg-slate-900/95 absolute top-full left-0 w-full mt-4 rounded-2xl border border-white/20 backdrop-blur-xl overflow-hidden shadow-xl transition-all duration-300 ease-in-out origin-top ${isOpen ? "opacity-100 translate-y-0 scale-100 visible" : "opacity-0 -translate-y-4 scale-95 invisible"}`}>
         <div className="px-6 py-6 flex flex-col space-y-4">
           <div className="flex justify-between items-center pb-4 border-b border-slate-200 dark:border-slate-800">
               <span className="text-sm font-bold text-slate-500">Theme</span>
@@ -790,16 +766,14 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
                 {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
               </button>
           </div>
-
-          {["About", "Projects", "Skills", "Experience", "Awards", "Contact"].map((link) => (
-            <a 
-              key={link} 
-              href={`#${link.toLowerCase()}`}
-              data-scroll-to /* 👈 Attribute Hijack */
-              className="text-lg font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-500 hover:pl-2 transition-all"
+          {navLinks.map((link) => (
+            <button 
+              key={link.name} 
+              onClick={() => handleLinkClick(link.id)} 
+              className="text-left text-lg font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-500 hover:pl-2 transition-all"
             >
-              {link}
-            </a>
+              {link.name}
+            </button>
           ))}
         </div>
       </div>
@@ -807,7 +781,7 @@ const Navbar = ({ isDarkMode, toggleTheme }) => {
   );
 };
 
-const SideRibbonNavigation = () => {
+const SideRibbonNavigation = ({ scrollTo }) => {
   const sections = [
     { id: 'about', label: 'About' },
     { id: 'projects', label: 'Projects' },
@@ -818,23 +792,19 @@ const SideRibbonNavigation = () => {
   ];
 
   return (
-    <div 
-      className="fixed right-0 top-32 h-[calc(100vh-16rem)] w-16 bg-white/30 dark:bg-slate-900/30 backdrop-blur-xl border-l border-y border-white/20 dark:border-slate-800 z-40 hidden lg:[@media(min-height:830px)]:flex flex-col items-center py-6 shadow-2xl rounded-tl-3xl rounded-bl-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden"
-      style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-    >
+    <div className="fixed right-0 top-32 h-[calc(100vh-16rem)] w-16 bg-white/30 dark:bg-slate-900/30 backdrop-blur-xl border-l border-y border-white/20 dark:border-slate-800 z-40 hidden lg:[@media(min-height:830px)]:flex flex-col items-center py-6 shadow-2xl rounded-tl-3xl rounded-bl-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
       <div className="flex flex-col justify-center gap-6 w-full items-center min-h-full">
       {sections.map((section) => (
-        <a 
+        <button 
           key={section.id} 
-          href={`#${section.id}`}
-          data-scroll-to
+          onClick={() => scrollTo(section.id)} 
           className="group relative flex items-center justify-center w-full shrink-0"
         >
           <span className="vertical-text text-xs font-bold uppercase tracking-[0.25em] text-slate-400 group-hover:text-emerald-500 transition-colors duration-300 whitespace-nowrap cursor-pointer hover:scale-110" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed', transform: 'rotate(180deg)' }}>
             {section.label}
           </span>
           <div className="absolute right-0 w-1 h-0 bg-emerald-500 group-hover:h-full transition-all duration-300 rounded-l-full"></div>
-        </a>
+        </button>
       ))}
       </div>
     </div>
@@ -867,6 +837,10 @@ const styles = `
   }
   .animate-scroll-left { animation: scroll-left 40s linear infinite; }
   .animate-scroll-right { animation: scroll-right 40s linear infinite; }
+
+  html.has-scroll-smooth { overflow: hidden; }
+  html.has-scroll-dragging { user-select: none; }
+  [data-scroll-container] { perspective: 1px; }
 `;
 
 // NEW: Glossy Text Component
@@ -964,7 +938,7 @@ const MarqueeSection = ({ title, subtitle, items, renderCard, bgImage, blurPx })
 
   return (
     <section className="py-20 relative overflow-hidden bg-slate-50 dark:bg-slate-950">
-       <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
             style={{ backgroundImage: `url(${bgImage})` }}
@@ -977,7 +951,7 @@ const MarqueeSection = ({ title, subtitle, items, renderCard, bgImage, blurPx })
             }}
           ></div>
           <BackgroundOverlay />
-       </div>
+      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 mb-12">
         <SectionHeader title={<GlossyText>{title}</GlossyText>} subtitle={subtitle} />
@@ -1000,14 +974,7 @@ const MarqueeSection = ({ title, subtitle, items, renderCard, bgImage, blurPx })
   );
 };
 
-const Hero = ({ blurPx, isDarkMode }) => {
-  const scrollToContact = (e) => {
-    e.preventDefault();
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      contactSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+const Hero = ({ blurPx, isDarkMode, scrollTo }) => {
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden transition-colors duration-300 bg-slate-50 dark:bg-slate-950">
@@ -1055,9 +1022,12 @@ const Hero = ({ blurPx, isDarkMode }) => {
           </h2>
 
           <div className="flex flex-wrap gap-3 pt-4">
-            <a href="#contact" data-scroll-to className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 text-lg rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-emerald-500/20 hover:-translate-y-1">
+            <button 
+              onClick={() => scrollTo('contact')} 
+              className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-6 text-lg rounded-full transition-all flex items-center gap-2 cursor-pointer shadow-lg hover:shadow-emerald-500/20 hover:-translate-y-1"
+            >
               <Mail size={20} /> Contact Me
-            </a>
+            </button>
             <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noreferrer" className="border border-slate-300 dark:border-slate-600 hover:border-emerald-500 text-slate-600 dark:text-slate-300 hover:text-emerald-500 dark:hover:text-emerald-400 py-3 px-6 text-lg rounded-full transition-all flex items-center gap-2 hover:-translate-y-1">
               <LinkedinIcon size={20} /> LinkedIn
             </a>
@@ -1077,11 +1047,11 @@ const About = ({ blurPx }) => {
   return (
     <section id="about" className="py-20 pt-40 relative transition-colors duration-300 scroll-mt-28 bg-slate-50 dark:bg-slate-950">
        {/* ... background code remains same ... */}
-       <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed" style={{ backgroundImage: `url(${bgImage})` }} />
           <div className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300" style={{ backdropFilter: `blur(${blurPx}px)`, WebkitBackdropFilter: `blur(${blurPx}px)` }}></div>
           <BackgroundOverlay />
-       </div>
+      </div>
 
       <div className="max-w-5xl mx-auto px-6 relative z-10">
         {/* CHANGED: Glossy Title */}
@@ -1208,151 +1178,154 @@ const Experience = ({ blurPx }) => {
   );
 };
 
-// CHANGED: Added isDarkMode to props
+
 const Contact = ({ blurPx, isDarkMode }) => {
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [recaptchaToken, setRecaptchaToken] = useState(null); // ADD THIS: State for token
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+  const [recaptchaToken, setRecaptchaToken] = useState(null); // ADD THIS: State for token
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  // CHANGED: Updated handleSubmit to verify captcha
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // CHANGED: Updated handleSubmit to verify captcha
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    if (!recaptchaToken) {
-      alert("Please complete the reCAPTCHA verification.");
-      return;
-    }
+    if (!recaptchaToken) {
+      alert("Please complete the reCAPTCHA verification.");
+      return;
+    }
 
-    const response = await fetch("https://formspree.io/f/xbdrzqwr", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        ...formData,
-        "g-recaptcha-response": recaptchaToken // Add token to body
-      }),
-    });
-    
-    if (response.ok) {
-      setFormData({ name: '', email: '', message: '' });
-      setRecaptchaToken(null);
-      alert("Message sent successfully!");
-    } else {
-      alert("Failed to send message. Please try again.");
-    }
-  };
-    const bgImage = useBackgroundImage(LOCAL_BACKGROUNDS.contact, REMOTE_BACKGROUNDS.contact);
-  return (
-    <section id="contact" className="py-20 relative transition-colors duration-300 bg-slate-50 dark:bg-slate-900">
-      <div className="absolute inset-0 z-0">
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
-            style={{ backgroundImage: `url(${bgImage})` }}
-          />
-          <div
-            className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300"
-            style={{
-              backdropFilter: `blur(${blurPx}px)`,
-              WebkitBackdropFilter: `blur(${blurPx}px)`
-            }}
-          ></div>
-          <BackgroundOverlay />
-      </div>
+    const response = await fetch("https://formspree.io/f/xbdrzqwr", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...formData,
+        "g-recaptcha-response": recaptchaToken // Add token to body
+      }),
+    });
+    
+    if (response.ok) {
+      setFormData({ name: '', email: '', message: '' });
+      setRecaptchaToken(null);
+      alert("Message sent successfully!");
+    } else {
+      alert("Failed to send message. Please try again.");
+    }
+  };
+    const bgImage = useBackgroundImage(LOCAL_BACKGROUNDS.contact, REMOTE_BACKGROUNDS.contact);
+  return (
+    <section id="contact" className="py-20 relative transition-colors duration-300 bg-slate-50 dark:bg-slate-900">
+      <div className="absolute inset-0 z-0">
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+            style={{ backgroundImage: `url(${bgImage})` }}
+          />
+          <div
+            className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300"
+            style={{
+              backdropFilter: `blur(${blurPx}px)`,
+              WebkitBackdropFilter: `blur(${blurPx}px)`
+            }}
+          ></div>
+          <BackgroundOverlay />
+      </div>
 
-      <div className="max-w-4xl mx-auto px-6 relative z-10">
-        <SectionHeader title={<GlossyText>Get In Touch</GlossyText>} />
-        
-        <div className="grid md:grid-cols-2 gap-12">
-          <div>
-            <p className="text-slate-600 dark:text-slate-400 mb-8 text-lg leading-relaxed">
-              I am currently open to opportunities in Data Analysis, Data Science, and Machine Learning. 
-              Whether you have a question, a project collaboration idea, or just want to say hi, I'll try my best to get back to you!
-            </p>
-            
-            <div className="space-y-6">
-              <a href={`mailto:${PERSONAL_INFO.email}`} className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-emerald-500 transition-colors group">
-                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-emerald-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-emerald-500 transition-all group-hover:scale-110">
-                  <Mail size={20} />
-                </div>
-                <span>{PERSONAL_INFO.email}</span>
-              </a>
-              <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-emerald-500 transition-colors group">
-                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-emerald-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-emerald-500 transition-all group-hover:scale-110">
-                  <LinkedinIcon size={20} />
-                </div>
-                <span>LinkedIn Profile</span>
-              </a>
-              <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-emerald-500 transition-colors group">
-                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-emerald-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-emerald-500 transition-all group-hover:scale-110">
-                  <GithubIcon size={20} />
-                </div>
-                <span>GitHub Profile</span>
-              </a>
-            </div>
-          </div>
+      <div className="max-w-4xl mx-auto px-2 sm:px-6 relative z-10">
+        <SectionHeader title={<GlossyText>Get In Touch</GlossyText>} />
+        
+        <div className="grid md:grid-cols-2 gap-12">
+          <div>
+            <p className="text-slate-600 dark:text-slate-400 mb-8 text-lg leading-relaxed">
+              I am currently open to opportunities in Data Analysis, Data Science, and Machine Learning. 
+              Whether you have a question, a project collaboration idea, or just want to say hi, I'll try my best to get back to you!
+            </p>
+            
+            <div className="space-y-6">
+              <a href={`mailto:${PERSONAL_INFO.email}`} className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-emerald-500 transition-colors group">
+                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-emerald-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-emerald-500 transition-all group-hover:scale-110">
+                  <Mail size={20} />
+                </div>
+                <span>{PERSONAL_INFO.email}</span>
+              </a>
+              <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-emerald-500 transition-colors group">
+                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-emerald-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-emerald-500 transition-all group-hover:scale-110">
+                  <LinkedinIcon size={20} />
+                </div>
+                <span>LinkedIn Profile</span>
+              </a>
+              <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="flex items-center gap-4 text-slate-600 dark:text-slate-300 hover:text-emerald-500 transition-colors group">
+                <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center text-emerald-500 shadow-sm border border-slate-200 dark:border-slate-700 group-hover:border-emerald-500 transition-all group-hover:scale-110">
+                  <GithubIcon size={20} />
+                </div>
+                <span>GitHub Profile</span>
+              </a>
+            </div>
+          </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4 bg-white/80 dark:bg-slate-800/80 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm backdrop-blur-sm">
-            <div>
-              <label htmlFor="name" className="block text-lg font-medium text-slate-500 dark:text-slate-400 mb-1">Name</label>
-              <input 
-                type="text" 
-                name="name" 
-                id="name" 
-                required
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors"
-                placeholder="Ex: William"
-              />
-            </div>
-            <div>
-              <label htmlFor="email" className="block text-lg font-medium text-slate-500 dark:text-slate-400 mb-1">Email</label>
-              <input 
-                type="email" 
-                name="email" 
-                id="email" 
-                required
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors"
-                placeholder="Ex: william@gmail.com"
-              />
-            </div>
-            <div>
-              <label htmlFor="message" className="block text-lg font-medium text-slate-500 dark:text-slate-400 mb-1">Message</label>
-              <textarea 
-                name="message" 
-                id="message" 
-                rows="4" 
-                required
-                value={formData.message}
-                onChange={handleChange}
-                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors resize-none"
-                placeholder="Write your message here... I'm available for hiring!"
-              ></textarea>
-            </div>
-            <div className="my-4 overflow-hidden rounded-lg">
-              <ReCAPTCHA
-                sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
-                onChange={setRecaptchaToken}
-                theme={isDarkMode ? "dark" : "light"}
-              />
-            </div>
-            <button 
-              type="submit" 
-              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 mt-2 shadow-lg shadow-emerald-500/20"
-            >
-              <Send size={18} />
-              Send Message
-            </button>
-          </form>
-        </div>
-      </div>
-    </section>
-  );
+          <form onSubmit={handleSubmit} className="space-y-4 bg-white/80 dark:bg-slate-800/80 p-2 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm backdrop-blur-sm">
+            <div>
+              <label htmlFor="name" className="block text-lg font-medium text-slate-500 dark:text-slate-400 mb-1">Name</label>
+              <input 
+                type="text" 
+                name="name" 
+                id="name" 
+                required
+                value={formData.name}
+                onChange={handleChange}
+                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors"
+                placeholder="Ex: William"
+              />
+            </div>
+            <div>
+              <label htmlFor="email" className="block text-lg font-medium text-slate-500 dark:text-slate-400 mb-1">Email</label>
+              <input 
+                type="email" 
+                name="email" 
+                id="email" 
+                required
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors"
+                placeholder="Ex: william@gmail.com"
+              />
+            </div>
+            <div>
+              <label htmlFor="message" className="block text-lg font-medium text-slate-500 dark:text-slate-400 mb-1">Message</label>
+              <textarea 
+                name="message" 
+                id="message" 
+                rows="4" 
+                required
+                value={formData.message}
+                onChange={handleChange}
+                className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors resize-none"
+                placeholder="Write your message here... I'm available for hiring!"
+              ></textarea>
+            </div>
+            <div className="my-4 w-full flex justify-start">
+                <div className="transform scale-[0.77] origin-top-left sm:scale-100 sm:origin-top-left">
+                    <ReCAPTCHA
+                        sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                        onChange={setRecaptchaToken}
+                        theme={isDarkMode ? "dark" : "light"}
+                    />
+                </div>
+            </div>
+            <button 
+              type="submit" 
+              className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 rounded-lg transition-all flex items-center justify-center gap-2 mt-2 shadow-lg shadow-emerald-500/20"
+            >
+              <Send size={18} />
+              Send Message
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  );
 };
+
 
 const Footer = () => (
   <footer className="bg-slate-50 dark:bg-slate-900 py-8 border-t border-slate-200 dark:border-slate-900 transition-colors duration-300 lg:pr-24 relative z-10">
@@ -1370,60 +1343,101 @@ export default function App() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
   const [selectedTitle, setSelectedTitle] = useState('');
-
-  useEffect(() => {
-    const handleScrollTo = (e) => {
-      // Find the closest parent with data-scroll-to
-      const trigger = e.target.closest('[data-scroll-to]');
-      
-      if (trigger) {
-        e.preventDefault();
-        
-        // Get target ID from href (e.g., "#about" -> "about")
-        const targetId = trigger.getAttribute('href')?.replace('#', '');
-        const targetElement = document.getElementById(targetId);
-        
-        if (targetElement) {
-          targetElement.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-          
-          // Dispatch event to close mobile menu if needed
-          window.dispatchEvent(new CustomEvent('close-menu'));
-        }
-      }
-    };
-
-    document.addEventListener('click', handleScrollTo);
-    return () => document.removeEventListener('click', handleScrollTo);
-  }, []);
   
   const [isDarkMode, setIsDarkMode] = useState(() => {
     try {
       if (typeof window !== 'undefined') {
         const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-          return savedTheme === 'dark';
-        }
+        if (savedTheme) return savedTheme === 'dark';
         return window.matchMedia('(prefers-color-scheme: dark)').matches;
       }
-    } catch (e) {
-      console.warn('LocalStorage access denied or error:', e);
-    }
+    } catch (e) {}
     return true; 
   });
 
   const [isLoading, setIsLoading] = useState(true);
   const [blurPx, setBlurPx] = useState(0);
+  const [activeSection, setActiveSection] = useState("");
+  const scrollRef = useRef(null);
 
   const skillsBg = useBackgroundImage(LOCAL_BACKGROUNDS.skills, REMOTE_BACKGROUNDS.skills);
   const certificationsBg = useBackgroundImage(LOCAL_BACKGROUNDS.certifications, REMOTE_BACKGROUNDS.certifications);
+  useEffect(() => {
+    if (isLoading) return;
 
-  const openCertificate = (image, title) => {
-    setSelectedImage(image);
-    setSelectedTitle(title);
-    setModalOpen(true);
+    // 🔴 FIX: Prevent browser from fighting Locomotive on reload
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    const scrollEl = document.querySelector('[data-scroll-container]');
+    if (!scrollEl) return;
+
+    const scroll = new LocomotiveScroll({
+      el: scrollEl,
+      smooth: true,
+      smartphone: { smooth: true },
+      tablet: { smooth: true },
+      multiplier: 1.0, // Standard scroll speed
+    });
+    scrollRef.current = scroll;
+
+    // 🔴 FIX: Auto-update scroll height when content size changes (Fixes "bugged" layout)
+    const resizeObserver = new ResizeObserver(() => {
+      scroll.update();
+    });
+    resizeObserver.observe(scrollEl);
+
+    // Listen to scroll events for Blur & Active Section
+    scroll.on('scroll', (args) => {
+      const currentY = args.scroll.y;
+      
+      // Blur Logic
+      if (currentY < 120) setBlurPx(0);
+      else if (currentY < 360) setBlurPx(1);
+      else setBlurPx(1);
+
+      // ScrollSpy Logic
+      const sections = ['about', 'projects', 'skills', 'experience', 'certifications', 'contact'];
+      let current = "";
+      
+      // Only check if we have scrolled past hero
+      if (currentY > 200) {
+        for (const id of sections) {
+          const el = document.getElementById(id);
+          if (el) {
+            // Get element position relative to scroll
+            const offsetTop = el.getBoundingClientRect().top + currentY;
+            // Buffer zone of 40% viewport height
+            if (currentY >= offsetTop - window.innerHeight * 0.4) {
+              let label = id.charAt(0).toUpperCase() + id.slice(1);
+              if(label === 'Certifications') label = 'Awards';
+              current = label;
+            }
+          }
+        }
+      }
+      setActiveSection(current);
+    });
+
+    return () => {
+      resizeObserver.disconnect();
+      if (scroll) scroll.destroy();
+    };
+  }, [isLoading]);
+
+  // Unified Scroll Helper
+  const scrollTo = (id) => {
+    if(!scrollRef.current) return;
+    
+    if (id === 'top') {
+        scrollRef.current.scrollTo('top');
+    } else {
+        const target = document.getElementById(id);
+        if (target) {
+            scrollRef.current.scrollTo(target);
+        }
+    }
   };
 
   const toggleTheme = () => {
@@ -1431,124 +1445,70 @@ export default function App() {
     setIsDarkMode(next);
     try {
       const root = window.document.documentElement;
-      if (next) {
-        root.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
-      } else {
-        root.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
-      }
+      if (next) { root.classList.add('dark'); localStorage.setItem('theme', 'dark'); } 
+      else { root.classList.remove('dark'); localStorage.setItem('theme', 'light'); }
     } catch (e) {}
   };
 
   useEffect(() => {
     const root = window.document.documentElement;
-    if (isDarkMode) {
-      root.classList.add('dark');
-      try { localStorage.setItem('theme', 'dark'); } catch(e) {}
-    } else {
-      root.classList.remove('dark');
-      try { localStorage.setItem('theme', 'light'); } catch(e) {}
-    }
+    if (isDarkMode) root.classList.add('dark');
+    else root.classList.remove('dark');
   }, [isDarkMode]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const y = window.scrollY;
-      if (y < 120) {
-        setBlurPx(0);
-      } else if (y < 360) {
-        setBlurPx(1);
-      } else {
-        setBlurPx(1);
-      }
-    };
-      window.addEventListener('scroll', handleScroll, { passive: true });
-      handleScroll(); 
-      return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  
-
-  if (isLoading) {
-    return <FuturisticLoader onComplete={() => setIsLoading(false)} />;
-  }
+  if (isLoading) return <FuturisticLoader onComplete={() => setIsLoading(false)} />;
 
   return (
     <div className={`min-h-screen font-sans selection:bg-emerald-500/30 ${isDarkMode ? 'dark' : ''} bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200 transition-colors duration-300`}>
       <style>{styles}</style>
       <CustomCursor />
-      <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} />
-      <SideRibbonNavigation />
-      <Hero blurPx={blurPx} isDarkMode={isDarkMode} />
-      <About blurPx={blurPx} />
-      <Projects blurPx={blurPx} />
-      
-      {/* SKILLS */}
-      <section id="skills">
-          <MarqueeSection 
-            title="Skills"
-            subtitle="Tools and technologies I use to drive insights."
-            items={SKILLS}
-            bgImage={skillsBg}
-            blurPx={blurPx}
-            renderCard={(skill, key) => (
-              <div key={key} className="bg-white/30 dark:bg-slate-900/30 p-8 rounded-2xl border border-white/20 dark:border-slate-800 hover:border-emerald-500/50 transition-all w-72 shrink-0 flex flex-col items-center text-center justify-center gap-4 group shadow-lg hover:shadow-xl backdrop-blur-xl">
-                <div className="w-16 h-16 flex items-center justify-center rounded-2xl bg-slate-100 dark:bg-white/5 p-2 transition-transform group-hover:scale-110">
-                  <img src={skill.image} alt={skill.name} className="w-full h-full object-contain" />
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-slate-200">{skill.name}</h3>
-                  <p className="text-sm text-slate-500 mt-1">{skill.category}</p>
-                </div>
-              </div>
-            )}
-          />
-      </section>
+      <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} activeSection={activeSection} scrollTo={scrollTo} />
+      <SideRibbonNavigation scrollTo={scrollTo} />
+      <CertificateModal isOpen={modalOpen} onClose={() => setModalOpen(false)} imageSrc={selectedImage} title={selectedTitle} />
 
-      <Experience blurPx={blurPx} />
-      <section id="certifications">
-          <MarqueeSection 
-            title="Certifications & Awards"
-            subtitle="Recognitions of my expertise and dedication."
-            items={CERTIFICATIONS}
-            bgImage={certificationsBg}
-            blurPx={blurPx}
-            renderCard={(cert, key) => (
-              <a 
-                key={key} 
-                href={cert.link || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-white/30 dark:bg-slate-900/30 p-8 rounded-2xl border border-white/20 dark:border-slate-800 flex flex-col justify-between hover:border-emerald-500/50 transition-all w-96 shrink-0 h-64 cursor-pointer group shadow-lg hover:shadow-xl backdrop-blur-xl block"
-              >
-                <div>
-                  <div className="mb-6 h-16 w-16 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center overflow-hidden border border-slate-100 dark:border-slate-700">
-                      <img src={cert.image} alt={cert.issuer} className="w-full h-full object-cover" />
+      <main data-scroll-container>
+        <div data-scroll-section>
+            <Hero blurPx={blurPx} isDarkMode={isDarkMode} scrollTo={scrollTo} />
+        </div>
+        
+        <div data-scroll-section><About blurPx={blurPx} /></div>
+        <div data-scroll-section><Projects blurPx={blurPx} /></div>
+        
+        <div data-scroll-section id="skills">
+            <MarqueeSection 
+              title="Skills" subtitle="Tools and technologies I use to drive insights." 
+              items={SKILLS} bgImage={skillsBg} blurPx={blurPx} 
+              renderCard={(skill, key) => (
+                <div key={key} className="bg-white/30 dark:bg-slate-900/30 p-8 rounded-2xl border border-white/20 dark:border-slate-800 hover:border-emerald-500/50 transition-all w-72 shrink-0 flex flex-col items-center text-center justify-center gap-4 group shadow-lg hover:shadow-xl backdrop-blur-xl">
+                  <div className="w-16 h-16 flex items-center justify-center rounded-2xl bg-slate-100 dark:bg-white/5 p-2 transition-transform group-hover:scale-110"><img src={skill.image} alt={skill.name} className="w-full h-full object-contain" /></div>
+                  <div><h3 className="text-xl font-bold text-slate-900 dark:text-slate-200">{skill.name}</h3><p className="text-sm text-slate-500 mt-1">{skill.category}</p></div>
+                </div>
+              )} 
+            />
+        </div>
+
+        <div data-scroll-section><Experience blurPx={blurPx} /></div>
+        
+        <div data-scroll-section id="certifications">
+            <MarqueeSection 
+              title="Certifications & Awards" subtitle="Recognitions of my expertise and dedication." 
+              items={CERTIFICATIONS} bgImage={certificationsBg} blurPx={blurPx} 
+              renderCard={(cert, key) => (
+                <a key={key} href={cert.link || "#"} target="_blank" rel="noopener noreferrer" className="bg-white/30 dark:bg-slate-900/30 p-8 rounded-2xl border border-white/20 dark:border-slate-800 flex flex-col justify-between hover:border-emerald-500/50 transition-all w-96 shrink-0 h-64 cursor-pointer group shadow-lg hover:shadow-xl backdrop-blur-xl block">
+                  <div>
+                    <div className="mb-6 h-16 w-16 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center overflow-hidden border border-slate-100 dark:border-slate-700"><img src={cert.image} alt={cert.issuer} className="w-full h-full object-cover" /></div>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2 leading-tight group-hover:text-emerald-500 transition-colors">{cert.title}</h3>
+                    <p className="text-slate-500 dark:text-slate-400">{cert.issuer}</p>
                   </div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2 leading-tight group-hover:text-emerald-500 transition-colors">{cert.title}</h3>
-                  <p className="text-slate-500 dark:text-slate-400">{cert.issuer}</p>
-                </div>
-                <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-sm">
-                  <span className="text-slate-500">{cert.date}</span>
-                  {cert.credentialId && (
-                    <span className="font-mono text-slate-600 truncate max-w-[120px]">{cert.credentialId}</span>
-                  )}
-                </div>
-              </a>
-            )}
-          />
-      </section>
+                  <div className="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-sm"><span className="text-slate-500">{cert.date}</span>{cert.credentialId && (<span className="font-mono text-slate-600 truncate max-w-[120px]">{cert.credentialId}</span>)}</div>
+                </a>
+              )} 
+            />
+        </div>
 
-      <CertificateModal 
-          isOpen={modalOpen} 
-          onClose={() => setModalOpen(false)} 
-          imageSrc={selectedImage} 
-          title={selectedTitle} 
-      />
-
-      <Contact blurPx={blurPx} isDarkMode={isDarkMode} />
-      <Footer />
+        <div data-scroll-section><Contact blurPx={blurPx} isDarkMode={isDarkMode} /></div>
+        <div data-scroll-section><Footer /></div>
+      </main>
     </div>
   );
 }
