@@ -35,7 +35,7 @@ export const Navbar = ({ isDarkMode, toggleTheme, activeSection, scrollTo }) => 
             {activeSection && (
                 <span 
                   key={activeSection} // CRITICAL FIX: Forces animation restart on change
-                  className="inline-block text-2xl md:text-5xl leading-none font-black tracking-widest text-slate-800 dark:text-slate-100 animate-in fade-in slide-in-from-top-2 duration-300 whitespace-nowrap py-2"
+                  className="inline-block text-2xl md:text-[200px] leading-none font-black tracking-widest text-slate-800 dark:text-slate-100 animate-in fade-in slide-in-from-top-2 duration-300 whitespace-nowrap py-2"
                 >
                     {activeSection}
                 </span>
