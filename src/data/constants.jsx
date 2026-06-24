@@ -57,8 +57,8 @@ export const EXPERIENCE = [
     id: 1,
     role: "Master Data Management Data Analyst Officer",
     company: "Kawan Lama Group",
-    type: "Contract",
-    date: "Jan 2025 - Present",
+    type: "Full-time",
+    date: "Jan 2025 - Mar 2026",
     description: (
       <div className="space-y-4 text-sm leading-relaxed text-slate-700 dark:text-slate-300 font-medium">
         <ul className="list-disc pl-5 space-y-3">
@@ -194,7 +194,7 @@ export const PROJECTS = [
     description: "A high-performance, real-time voice-interactive application engineered for fluid, natural conversation using advanced Speech-to-Text and Generative AI models.",
     tech: ["TypeScript", "WebRTC", "AI Audio Models", "Node.js"],
     link: "https://github.com/GaneshArwan/VoiceAIAssistant",
-    image: "https://images.unsplash.com/photo-1590845947698-8924d7409b56?q=80&w=2070&auto=format&fit=crop"
+    image: "https://images.unsplash.com/photo-1593696140826-c58b021acf8b?q=80&w=2070&auto=format&fit=crop"
   },
   {
     id: 3,
@@ -202,7 +202,7 @@ export const PROJECTS = [
     description: "An autonomous code review platform that analyzes GitHub pull requests using LangGraph.js and large language models to ensure best practices and catch vulnerabilities early.",
     tech: ["TypeScript", "LangGraph.js", "GitHub API", "LLMs"],
     link: "https://github.com/GaneshArwan/AICodeReviewAgent",
-    image: "https://images.unsplash.com/photo-1618401471353-b98a5233c591?q=80&w=2070&auto=format&fit=crop"
+    image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop"
   },
   {
     id: 4,

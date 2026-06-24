@@ -19,15 +19,15 @@ export const Navbar = ({ isDarkMode, toggleTheme, activeSection, scrollTo }) => 
   ];
 
   return (
-    <nav className="fixed left-1/2 -translate-x-1/2 top-12 lg:top-20 z-[999] w-[90%] max-w-[360px] md:w-auto md:min-w-[300px] rounded-full bg-white/30 dark:bg-slate-900/30 backdrop-blur-xl border border-white/20 dark:border-slate-700/50 shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-300 px-6">
-      <div className="flex justify-between items-center gap-4 py-3">
+    <nav className="fixed left-1/2 -translate-x-1/2 top-12 lg:top-20 z-[999] w-[90%] max-w-[380px] md:w-max md:min-w-[380px] rounded-full bg-white/30 dark:bg-slate-900/30 backdrop-blur-xl border border-white/20 dark:border-slate-700/50 shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-300 px-6 md:px-8">
+      <div className="flex justify-between items-center gap-6 py-4">
         {/* Home Button */}
         <button 
           onClick={() => handleLinkClick('top')} 
           className="text-emerald-500 hover:scale-110 transition-transform shrink-0"
           aria-label="Back to Top"
         >
-          <Home size={24} />
+          <Home size={28} />
         </button>
         
         {/* Active Section Display - Fixed Glitch with key prop */}
@@ -35,7 +35,7 @@ export const Navbar = ({ isDarkMode, toggleTheme, activeSection, scrollTo }) => 
             {activeSection && (
                 <span 
                   key={activeSection} // CRITICAL FIX: Forces animation restart on change
-                  className="inline-block text-lg font-bold text-slate-800 dark:text-slate-100 animate-in fade-in slide-in-from-top-2 duration-300 whitespace-nowrap"
+                  className="inline-block text-xl md:text-2xl font-black tracking-wide text-slate-800 dark:text-slate-100 animate-in fade-in slide-in-from-top-2 duration-300 whitespace-nowrap"
                 >
                     {activeSection}
                 </span>
@@ -45,11 +45,11 @@ export const Navbar = ({ isDarkMode, toggleTheme, activeSection, scrollTo }) => 
         {/* Right Actions */}
         <div className="flex items-center gap-3 shrink-0 ml-auto">
           <button onClick={toggleTheme} className="hidden lg:[@media(min-height:830px)]:flex p-2 rounded-full bg-slate-100/50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 hover:bg-emerald-100 dark:hover:bg-slate-700 transition-colors shadow-sm ring-1 ring-white/20">
-            {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+            {isDarkMode ? <Sun size={24} /> : <Moon size={24} />}
           </button>
           <div className="lg:[@media(min-height:830px)]:hidden flex items-center">
             <button onClick={() => setIsOpen(!isOpen)} className="text-slate-600 dark:text-slate-300 hover:text-emerald-500">
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+              {isOpen ? <X size={32} /> : <Menu size={32} />}
             </button>
           </div>
         </div>
@@ -68,7 +68,7 @@ export const Navbar = ({ isDarkMode, toggleTheme, activeSection, scrollTo }) => 
             <button 
               key={link.name} 
               onClick={() => handleLinkClick(link.id)} 
-              className="text-left text-lg font-medium text-slate-600 dark:text-slate-300 hover:text-emerald-500 hover:pl-2 transition-all"
+              className="text-left text-xl md:text-2xl py-2 font-bold text-slate-600 dark:text-slate-300 hover:text-emerald-500 hover:pl-3 transition-all"
             >
               {link.name}
             </button>

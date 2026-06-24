@@ -33,4 +33,9 @@ body {
 html.has-scroll-smooth { overflow: hidden; }
 html.has-scroll-dragging { user-select: none; }
 [data-scroll-container] { perspective: 1px; }
-[data-scroll-section] { margin-top: -1px; }
+[data-scroll-section] { 
+  margin-top: -2px; 
+  padding-top: 2px;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
