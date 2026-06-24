@@ -33,13 +33,10 @@ body {
 
 html.has-scroll-smooth { overflow: hidden; }
 html.has-scroll-dragging { user-select: none; }
-[data-scroll-container] { perspective: 1px; background-color: var(--color-slate-50); }
-@media (prefers-color-scheme: dark) {
-  html.dark [data-scroll-container] { background-color: var(--color-slate-950); }
-}
+[data-scroll-container] { perspective: 1px; }
 [data-scroll-section] { 
-  margin-top: -3px; 
-  padding-top: 3px;
+  @apply bg-slate-50 dark:bg-slate-950;
   transform: translateZ(0);
-  backface-visibility: hidden;
+  will-change: transform;
+  margin-top: -1px;
 }
