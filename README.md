@@ -24,25 +24,20 @@ This portfolio highlights my top projects, including:
 3. **ProcessPilot Automation**: Enterprise-grade orchestration system for SAP workflows.
 4. **Corporate KPI & SLA Dashboard**: Full-stack data engineering and analytics dashboard.
 
-## 🚀 Getting Started
 
-To run this project locally:
 
-```bash
-# Clone the repository
-git clone https://github.com/GaneshArwan/profile.git
+## 📫 Let's Connect
 
-# Navigate into the directory
-cd profile
-
-# Install dependencies
-npm install
-
-# Run the development server
-npm run dev
-```
-
-## 📫 Contact
 Feel free to reach out to me!
-- **LinkedIn**: [william-oo00](https://www.linkedin.com/in/william-oo00)
-- **Email**: wiliamzwili135@gmail.com
+
+<div align="left">
+  <a href="https://www.linkedin.com/in/william-oo00">
+    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+  </a>
+  <a href="mailto:wiliamzwili135@gmail.com">
+    <img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
+  </a>
+  <a href="https://github.com/GaneshArwan">
+    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+  </a>
+</div>
