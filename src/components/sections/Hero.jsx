@@ -17,7 +17,7 @@ export const Hero = ({ isDarkMode, scrollTo }) => {
             muted
             playsInline
             key={isDarkMode ? 'dark' : 'light'}
-            className="absolute inset-0 w-full h-full object-cover object-[80%_center] md:object-center"
+            className="absolute inset-0 w-full h-full object-cover object-[85%_center] md:object-center"
           >
             <source src={isDarkMode ? HERO_VIDEOS.dark : HERO_VIDEOS.light} type="video/mp4" />
           </video>
