@@ -2,7 +2,7 @@
 
 Welcome to my personal portfolio! This is a modern, blazing-fast, mobile-first web application built to showcase my expertise in Data Analysis, AI/ML Engineering, and Generative AI.
 
-![Portfolio Preview](./public/assets/hero.jpg)
+![Portfolio Preview](./public/assets/hero.png)
 
 ## ✨ Features
 - **Premium Glassmorphism UI**: High-end modern aesthetics featuring dynamic glow effects and backdrop blurs.
