@@ -1,2 +1,35 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
+
+html { scroll-behavior: smooth; }
+body {
+  @apply bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200;
+  margin: 0;
+}
+@keyframes gloss-shine {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes scroll-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes scroll-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+.glossy-matcha {
+  background: linear-gradient(90deg, #34d399, #10b981, #d1fae5, #059669);
+  background-size: 300% 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gloss-shine 4s ease-in-out infinite;
+}
+.animate-scroll-left { animation: scroll-left 40s linear infinite; }
+.animate-scroll-right { animation: scroll-right 40s linear infinite; }
+
+html.has-scroll-smooth { overflow: hidden; }
+html.has-scroll-dragging { user-select: none; }
+[data-scroll-container] { perspective: 1px; }

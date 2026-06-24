@@ -1,16 +1,48 @@
-# React + Vite
+# 🚀 William's Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to my personal portfolio! This is a modern, blazing-fast, mobile-first web application built to showcase my expertise in Data Analysis, AI/ML Engineering, and Generative AI.
 
-Currently, two official plugins are available:
+![Portfolio Preview](./public/assets/hero.jpg)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
+- **Premium Glassmorphism UI**: High-end modern aesthetics featuring dynamic glow effects and backdrop blurs.
+- **Mobile-First Responsive Design**: Flawlessly adapts to any screen size (resolving 100svh mobile browser issues).
+- **Smooth Scroll Integration**: Uses `LocomotiveScroll` for a buttery-smooth navigation experience.
+- **Dark/Light Mode Ready**: Fully supports system preference theming and manual toggling.
+- **Component-Driven Architecture**: Modular, maintainable React codebase utilizing Vite and Tailwind CSS 4.
 
-## React Compiler
+## 🛠 Tech Stack
+- **Framework**: React 19 + Vite (Rolldown)
+- **Styling**: Tailwind CSS 4 (with advanced glassmorphic tokens)
+- **Icons**: Lucide React & Devicon
+- **Animations**: Custom CSS Keyframes & LocomotiveScroll
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🌟 Showcased Projects
+This portfolio highlights my top projects, including:
+1. **AI Content Pipeline**: Multi-model Generative AI platform (Gemini, OpenAI, Anthropic).
+2. **Voice AI Assistant**: Real-time voice interactive application.
+3. **ProcessPilot Automation**: Enterprise-grade orchestration system for SAP workflows.
+4. **Corporate KPI & SLA Dashboard**: Full-stack data engineering and analytics dashboard.
 
-## Expanding the ESLint configuration
+## 🚀 Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+To run this project locally:
+
+```bash
+# Clone the repository
+git clone https://github.com/GaneshArwan/profile.git
+
+# Navigate into the directory
+cd profile
+
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
+```
+
+## 📫 Contact
+Feel free to reach out to me!
+- **LinkedIn**: [william-oo00](https://www.linkedin.com/in/william-oo00)
+- **Email**: wiliamzwili135@gmail.com
