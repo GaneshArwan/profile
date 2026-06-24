@@ -42,7 +42,7 @@ export const StickyScrollSection = ({ id, title, subtitle, items, renderCard, bg
     <section id={id} ref={sectionRef} className="relative h-[400vh] transition-colors duration-300 scroll-mt-24">
       <div className="absolute inset-0 z-0">
           <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${bgImage})` }}
           />
           <div

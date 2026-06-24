@@ -12,7 +12,7 @@ export const MarqueeSection = ({ title, subtitle, items, renderCard, bgImage, bl
     <section className="py-20 relative overflow-hidden bg-slate-50 dark:bg-slate-950">
       <div className="absolute inset-0 z-0">
           <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${bgImage})` }}
           />
           <div
