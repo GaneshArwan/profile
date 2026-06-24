@@ -35,8 +35,8 @@ export const FuturisticLoader = ({ onComplete }) => {
       {/* Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(rgba(16,185,129,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(16,185,129,0.05)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
       
-      {/* HUD Container - Scaled Up */}
-      <div className="relative flex flex-col items-center justify-center w-full h-full max-w-3xl scale-125">
+      {/* HUD Container */}
+      <div className="relative flex flex-col items-center justify-center w-full h-full max-w-3xl">
         
         {/* Spinning Rings */}
         <div className="absolute w-[500px] h-[500px] rounded-full border border-emerald-500/20 border-t-emerald-500/80 animate-[spin_4s_linear_infinite]"></div>
