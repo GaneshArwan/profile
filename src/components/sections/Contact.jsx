@@ -8,7 +8,7 @@ import { GithubIcon, LinkedinIcon } from '../icons';
 import { useBackgroundImage } from '../../hooks/useBackgroundImage';
 import { PERSONAL_INFO, LOCAL_BACKGROUNDS, REMOTE_BACKGROUNDS } from '../../data/constants';
 
-export const Contact = ({ blurPx, isDarkMode }) => {
+export const Contact = ({ isDarkMode }) => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [recaptchaToken, setRecaptchaToken] = useState(null);
 
@@ -51,13 +51,7 @@ export const Contact = ({ blurPx, isDarkMode }) => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${bgImage})` }}
         />
-        <div
-          className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300"
-          style={{
-            backdropFilter: `blur(${blurPx}px)`,
-            WebkitBackdropFilter: `blur(${blurPx}px)`
-          }}
-        ></div>
+        <div className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90" />
         <BackgroundOverlay />
       </div>
 

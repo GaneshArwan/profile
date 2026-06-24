@@ -7,7 +7,7 @@ import { Award } from 'lucide-react';
 import { useBackgroundImage } from '../../hooks/useBackgroundImage';
 import { EXPERIENCE, LOCAL_BACKGROUNDS, REMOTE_BACKGROUNDS } from '../../data/constants';
 
-export const Experience = ({ blurPx }) => {
+export const Experience = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedImage] = useState('');
   const [selectedTitle] = useState('');
@@ -21,13 +21,7 @@ export const Experience = ({ blurPx }) => {
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${bgImage})` }}
           />
-          <div
-            className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300"
-            style={{
-              backdropFilter: `blur(${blurPx}px)`,
-              WebkitBackdropFilter: `blur(${blurPx}px)`
-            }}
-          ></div>
+          <div className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90" />
           <BackgroundOverlay />
         </div>
 

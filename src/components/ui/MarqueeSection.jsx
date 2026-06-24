@@ -3,7 +3,7 @@ import { SectionHeader } from './SectionHeader';
 import { BackgroundOverlay } from './BackgroundOverlay';
 import { GlossyText } from './GlossyText';
 
-export const MarqueeSection = ({ title, subtitle, items, renderCard, bgImage, blurPx }) => {
+export const MarqueeSection = ({ title, subtitle, items, renderCard, bgImage }) => {
   // Split items into two rows for the visual effect
   const row1 = [...items, ...items, ...items]; // Triple for smooth loop
   const row2 = [...items.reverse(), ...items, ...items]; 
@@ -15,13 +15,7 @@ export const MarqueeSection = ({ title, subtitle, items, renderCard, bgImage, bl
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${bgImage})` }}
           />
-          <div
-            className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300"
-            style={{
-              backdropFilter: `blur(${blurPx}px)`,
-              WebkitBackdropFilter: `blur(${blurPx}px)`
-            }}
-          ></div>
+          <div className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90" />
           <BackgroundOverlay />
       </div>
 

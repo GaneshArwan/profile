@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { SectionHeader } from './SectionHeader';
 import { BackgroundOverlay } from './BackgroundOverlay';
 
-export const StickyScrollSection = ({ id, title, subtitle, items, renderCard, bgImage, blurPx }) => {
+export const StickyScrollSection = ({ id, title, subtitle, items, renderCard, bgImage }) => {
   const sectionRef = useRef(null);
   const containerRef = useRef(null);
   const [translateX, setTranslateX] = useState(0);
@@ -45,13 +45,7 @@ export const StickyScrollSection = ({ id, title, subtitle, items, renderCard, bg
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${bgImage})` }}
           />
-          <div
-            className="absolute inset-0 bg-slate-50/85 dark:bg-slate-950/85 transition-[backdrop-filter] duration-300"
-            style={{
-              backdropFilter: `blur(${blurPx}px)`,
-              WebkitBackdropFilter: `blur(${blurPx}px)`
-            }}
-          ></div>
+          <div className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90" />
           <BackgroundOverlay />
       </div>
 

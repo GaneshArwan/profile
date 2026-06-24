@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useBackgroundImage } from '../../hooks/useBackgroundImage';
 
-export const ProjectCard = ({ project, blurPx }) => {
+export const ProjectCard = ({ project }) => {
   const bgImage = project.image;
 
   return (
@@ -23,14 +23,11 @@ export const ProjectCard = ({ project, blurPx }) => {
       </div>
 
       <div
-        className="absolute inset-0 bg-slate-900/95 transition-[backdrop-filter] duration-300
+        className="absolute inset-0 bg-slate-900/95 transition-opacity duration-300
                   opacity-0 group-hover:opacity-100
                   flex flex-col justify-center items-center p-8 md:p-16 text-center"
-        style={{
-          backdropFilter: `blur(${blurPx}px)`,
-          WebkitBackdropFilter: `blur(${blurPx}px)`
-        }}
       >
+        <div className="absolute inset-0 bg-white/10 dark:bg-slate-900/10 pointer-events-none" />
         <h3 className="text-3xl md:text-5xl font-bold text-emerald-400 mb-6 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
           {project.title}
         </h3>

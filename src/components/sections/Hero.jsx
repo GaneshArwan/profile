@@ -7,7 +7,7 @@ import { BackgroundOverlay } from '../ui/BackgroundOverlay';
 import { GithubIcon, LinkedinIcon } from '../icons';
 import { PERSONAL_INFO, HERO_VIDEOS } from '../../data/constants';
 
-export const Hero = ({ blurPx, isDarkMode, scrollTo }) => {
+export const Hero = ({ isDarkMode, scrollTo }) => {
   return (
     <section className="min-h-[100svh] flex items-center justify-center relative overflow-hidden transition-colors duration-300 bg-slate-50 dark:bg-slate-950">
       <div className="absolute inset-0 z-0">
@@ -22,13 +22,7 @@ export const Hero = ({ blurPx, isDarkMode, scrollTo }) => {
             <source src={isDarkMode ? HERO_VIDEOS.dark : HERO_VIDEOS.light} type="video/mp4" />
           </video>
 
-          <div
-            className="absolute inset-0 bg-slate-50/50 dark:bg-slate-950/50 transition-[backdrop-filter] duration-300"
-            style={{
-              backdropFilter: `blur(${blurPx}px)`,
-              WebkitBackdropFilter: `blur(${blurPx}px)`
-            }}
-          ></div>
+          <div className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90" />
           <BackgroundOverlay />
       </div>
 

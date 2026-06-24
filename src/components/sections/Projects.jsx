@@ -6,7 +6,7 @@ import { ProjectCard } from '../ui/ProjectCard';
 import { useBackgroundImage } from '../../hooks/useBackgroundImage';
 import { PROJECTS, LOCAL_BACKGROUNDS, REMOTE_BACKGROUNDS } from '../../data/constants';
 
-export const Projects = ({ blurPx }) => {
+export const Projects = () => {
   const bgImage = useBackgroundImage(LOCAL_BACKGROUNDS.projects, REMOTE_BACKGROUNDS.projects);
 
   return (
@@ -16,13 +16,7 @@ export const Projects = ({ blurPx }) => {
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${bgImage})` }}
           />
-          <div
-            className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90 transition-[backdrop-filter] duration-300"
-            style={{
-              backdropFilter: `blur(${blurPx}px)`,
-              WebkitBackdropFilter: `blur(${blurPx}px)`
-            }}
-          ></div>
+          <div className="absolute inset-0 bg-slate-50/90 dark:bg-slate-950/90" />
           <BackgroundOverlay />
       </div>
 
@@ -30,7 +24,7 @@ export const Projects = ({ blurPx }) => {
         <SectionHeader title={<GlossyText>Projects</GlossyText>} subtitle="A selection of my work in Data Analysis and Automation." />
         <div className="space-y-16 mb-12">
           {PROJECTS.map((project) => (
-            <ProjectCard key={project.id} project={project} blurPx={blurPx} />
+            <ProjectCard key={project.id} project={project} />
           ))}
         </div>
       </div>

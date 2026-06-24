@@ -44,7 +44,6 @@ export default function App() {
   });
 
   const [isLoading, setIsLoading] = useState(true);
-  const [blurPx, setBlurPx] = useState(0);
   const [activeSection, setActiveSection] = useState("");
   const scrollRef = useRef(null);
 
@@ -81,10 +80,6 @@ export default function App() {
     scroll.on('scroll', (args) => {
       const currentY = args.scroll.y;
       
-      if (currentY < 120) setBlurPx(0);
-      else if (currentY < 360) setBlurPx(1);
-      else setBlurPx(1);
-
       const sections = ['about', 'projects', 'skills', 'experience', 'certifications', 'contact'];
       let current = "";
       
@@ -153,14 +148,14 @@ export default function App() {
 
       <main data-scroll-container className="bg-slate-50 dark:bg-slate-950">
         <div data-scroll-section>
-          <Hero blurPx={blurPx} isDarkMode={isDarkMode} scrollTo={scrollTo} />
-          <About blurPx={blurPx} />
-          <Projects blurPx={blurPx} />
+          <Hero isDarkMode={isDarkMode} scrollTo={scrollTo} />
+          <About />
+          <Projects />
           
           <div id="skills">
               <MarqueeSection 
                 title="Skills" subtitle="Tools and technologies I use to drive insights." 
-                items={SKILLS} bgImage={skillsBg} blurPx={blurPx} 
+                items={SKILLS} bgImage={skillsBg} 
                 renderCard={(skill, key) => (
                   <div key={key} className="bg-white/30 dark:bg-slate-900/30 p-8 rounded-2xl border border-white/20 dark:border-slate-800 hover:border-emerald-500/50 transition-all w-72 shrink-0 flex flex-col items-center text-center justify-center gap-4 group shadow-lg hover:shadow-xl backdrop-blur-xl">
                     <div className="w-16 h-16 flex items-center justify-center rounded-2xl bg-slate-100 dark:bg-white/5 p-2 transition-transform group-hover:scale-110"><img src={skill.image} alt={skill.name} className="w-full h-full object-contain" /></div>
@@ -170,12 +165,12 @@ export default function App() {
               />
           </div>
 
-          <Experience blurPx={blurPx} />
+          <Experience />
           
           <div id="certifications">
               <MarqueeSection 
                 title="Certifications & Awards" subtitle="Recognitions of my expertise and dedication." 
-                items={CERTIFICATIONS} bgImage={certificationsBg} blurPx={blurPx} 
+                items={CERTIFICATIONS} bgImage={certificationsBg} 
                 renderCard={(cert, key) => (
                   <a key={key} href={cert.link || "#"} target="_blank" rel="noopener noreferrer" className="bg-white/30 dark:bg-slate-900/30 p-8 rounded-2xl border border-white/20 dark:border-slate-800 flex flex-col justify-between hover:border-emerald-500/50 transition-all w-96 shrink-0 h-64 cursor-pointer group shadow-lg hover:shadow-xl backdrop-blur-xl block">
                     <div>
@@ -188,7 +183,7 @@ export default function App() {
               />
           </div>
 
-          <Contact blurPx={blurPx} isDarkMode={isDarkMode} />
+          <Contact isDarkMode={isDarkMode} />
           <Footer />
         </div>
         <Analytics />
