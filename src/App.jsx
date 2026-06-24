@@ -153,45 +153,44 @@ export default function App() {
 
       <main data-scroll-container className="bg-slate-50 dark:bg-slate-950">
         <div data-scroll-section>
-            <Hero blurPx={blurPx} isDarkMode={isDarkMode} scrollTo={scrollTo} />
-        </div>
-        
-        <div data-scroll-section><About blurPx={blurPx} /></div>
-        <div data-scroll-section><Projects blurPx={blurPx} /></div>
-        
-        <div data-scroll-section id="skills">
-            <MarqueeSection 
-              title="Skills" subtitle="Tools and technologies I use to drive insights." 
-              items={SKILLS} bgImage={skillsBg} blurPx={blurPx} 
-              renderCard={(skill, key) => (
-                <div key={key} className="bg-white/30 dark:bg-slate-900/30 p-8 rounded-2xl border border-white/20 dark:border-slate-800 hover:border-emerald-500/50 transition-all w-72 shrink-0 flex flex-col items-center text-center justify-center gap-4 group shadow-lg hover:shadow-xl backdrop-blur-xl">
-                  <div className="w-16 h-16 flex items-center justify-center rounded-2xl bg-slate-100 dark:bg-white/5 p-2 transition-transform group-hover:scale-110"><img src={skill.image} alt={skill.name} className="w-full h-full object-contain" /></div>
-                  <div><h3 className="text-xl font-bold text-slate-900 dark:text-slate-200">{skill.name}</h3><p className="text-sm text-slate-500 mt-1">{skill.category}</p></div>
-                </div>
-              )} 
-            />
-        </div>
-
-        <div data-scroll-section><Experience blurPx={blurPx} /></div>
-        
-        <div data-scroll-section id="certifications">
-            <MarqueeSection 
-              title="Certifications & Awards" subtitle="Recognitions of my expertise and dedication." 
-              items={CERTIFICATIONS} bgImage={certificationsBg} blurPx={blurPx} 
-              renderCard={(cert, key) => (
-                <a key={key} href={cert.link || "#"} target="_blank" rel="noopener noreferrer" className="bg-white/30 dark:bg-slate-900/30 p-8 rounded-2xl border border-white/20 dark:border-slate-800 flex flex-col justify-between hover:border-emerald-500/50 transition-all w-96 shrink-0 h-64 cursor-pointer group shadow-lg hover:shadow-xl backdrop-blur-xl block">
-                  <div>
-                    <div className="mb-6 h-16 w-16 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center overflow-hidden border border-slate-100 dark:border-slate-700"><img src={cert.image} alt={cert.issuer} className="w-full h-full object-cover" /></div>
-                    <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2 leading-tight group-hover:text-emerald-500 transition-colors">{cert.title}</h3>
-                    <p className="text-slate-500 dark:text-slate-400">{cert.issuer}</p>
+          <Hero blurPx={blurPx} isDarkMode={isDarkMode} scrollTo={scrollTo} />
+          <About blurPx={blurPx} />
+          <Projects blurPx={blurPx} />
+          
+          <div id="skills">
+              <MarqueeSection 
+                title="Skills" subtitle="Tools and technologies I use to drive insights." 
+                items={SKILLS} bgImage={skillsBg} blurPx={blurPx} 
+                renderCard={(skill, key) => (
+                  <div key={key} className="bg-white/30 dark:bg-slate-900/30 p-8 rounded-2xl border border-white/20 dark:border-slate-800 hover:border-emerald-500/50 transition-all w-72 shrink-0 flex flex-col items-center text-center justify-center gap-4 group shadow-lg hover:shadow-xl backdrop-blur-xl">
+                    <div className="w-16 h-16 flex items-center justify-center rounded-2xl bg-slate-100 dark:bg-white/5 p-2 transition-transform group-hover:scale-110"><img src={skill.image} alt={skill.name} className="w-full h-full object-contain" /></div>
+                    <div><h3 className="text-xl font-bold text-slate-900 dark:text-slate-200">{skill.name}</h3><p className="text-sm text-slate-500 mt-1">{skill.category}</p></div>
                   </div>
-                </a>
-              )} 
-            />
-        </div>
+                )} 
+              />
+          </div>
 
-        <div data-scroll-section><Contact blurPx={blurPx} isDarkMode={isDarkMode} /></div>
-        <div data-scroll-section><Footer /></div>
+          <Experience blurPx={blurPx} />
+          
+          <div id="certifications">
+              <MarqueeSection 
+                title="Certifications & Awards" subtitle="Recognitions of my expertise and dedication." 
+                items={CERTIFICATIONS} bgImage={certificationsBg} blurPx={blurPx} 
+                renderCard={(cert, key) => (
+                  <a key={key} href={cert.link || "#"} target="_blank" rel="noopener noreferrer" className="bg-white/30 dark:bg-slate-900/30 p-8 rounded-2xl border border-white/20 dark:border-slate-800 flex flex-col justify-between hover:border-emerald-500/50 transition-all w-96 shrink-0 h-64 cursor-pointer group shadow-lg hover:shadow-xl backdrop-blur-xl block">
+                    <div>
+                      <div className="mb-6 h-16 w-16 rounded-full bg-slate-50 dark:bg-slate-800 flex items-center justify-center overflow-hidden border border-slate-100 dark:border-slate-700"><img src={cert.image} alt={cert.issuer} className="w-full h-full object-cover" /></div>
+                      <h3 className="text-xl font-bold text-slate-900 dark:text-slate-100 mb-2 leading-tight group-hover:text-emerald-500 transition-colors">{cert.title}</h3>
+                      <p className="text-slate-500 dark:text-slate-400">{cert.issuer}</p>
+                    </div>
+                  </a>
+                )} 
+              />
+          </div>
+
+          <Contact blurPx={blurPx} isDarkMode={isDarkMode} />
+          <Footer />
+        </div>
         <Analytics />
         <SpeedInsights />
       </main>

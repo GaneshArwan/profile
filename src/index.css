@@ -35,8 +35,6 @@ html.has-scroll-smooth { overflow: hidden; }
 html.has-scroll-dragging { user-select: none; }
 [data-scroll-container] { perspective: 1px; }
 [data-scroll-section] { 
-  @apply bg-slate-50 dark:bg-slate-950;
   transform: translateZ(0);
   will-change: transform;
-  margin-top: -1px;
 }
