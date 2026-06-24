@@ -31,11 +31,11 @@ export const Navbar = ({ isDarkMode, toggleTheme, activeSection, scrollTo }) => 
         </button>
         
         {/* Active Section Display - Fixed Glitch with key prop */}
-        <div className="flex-1 text-center">
+        <div className="flex-1 text-center overflow-hidden">
             {activeSection && (
                 <span 
                   key={activeSection} // CRITICAL FIX: Forces animation restart on change
-                  className="inline-block text-2xl md:text-[200px] leading-none font-black tracking-widest text-slate-800 dark:text-slate-100 animate-in fade-in slide-in-from-top-2 duration-300 whitespace-nowrap py-2"
+                  className="inline-block text-2xl md:text-3xl font-black tracking-wide text-slate-800 dark:text-slate-100 animate-in fade-in slide-in-from-top-2 duration-300 whitespace-nowrap"
                 >
                     {activeSection}
                 </span>

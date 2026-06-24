@@ -19,7 +19,7 @@ export const SideRibbonNavigation = ({ scrollTo }) => {
           onClick={() => scrollTo(section.id)} 
           className="group relative flex items-center justify-center w-full shrink-0"
         >
-          <span className="vertical-text text-xs font-bold uppercase tracking-[0.25em] text-slate-400 group-hover:text-emerald-500 transition-colors duration-300 whitespace-nowrap cursor-pointer hover:scale-110" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed', transform: 'rotate(180deg)' }}>
+          <span className="vertical-text text-xl font-bold uppercase tracking-[0.25em] text-slate-400 group-hover:text-emerald-500 transition-colors duration-300 whitespace-nowrap cursor-pointer hover:scale-110" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed', transform: 'rotate(180deg)' }}>
             {section.label}
           </span>
           <div className="absolute right-0 w-1 h-0 bg-emerald-500 group-hover:h-full transition-all duration-300 rounded-l-full"></div>
