@@ -75,6 +75,9 @@ export default function App() {
     });
     resizeObserver.observe(scrollEl);
 
+    const handleLoad = () => scroll.update();
+    window.addEventListener('load', handleLoad);
+
     scroll.on('scroll', (args) => {
       const currentY = args.scroll.y;
       
@@ -102,6 +105,7 @@ export default function App() {
     });
 
     return () => {
+      window.removeEventListener('load', handleLoad);
       resizeObserver.disconnect();
       if (scroll) scroll.destroy();
     };
@@ -147,7 +151,7 @@ export default function App() {
       <SideRibbonNavigation scrollTo={scrollTo} />
       <CertificateModal isOpen={modalOpen} onClose={() => setModalOpen(false)} imageSrc={selectedImage} title={selectedTitle} />
 
-      <main data-scroll-container>
+      <main data-scroll-container className="bg-slate-50 dark:bg-slate-950">
         <div data-scroll-section>
             <Hero blurPx={blurPx} isDarkMode={isDarkMode} scrollTo={scrollTo} />
         </div>
