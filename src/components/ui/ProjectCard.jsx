@@ -1,6 +1,5 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
-import { useBackgroundImage } from '../../hooks/useBackgroundImage';
 
 export const ProjectCard = ({ project }) => {
   const bgImage = project.image;
