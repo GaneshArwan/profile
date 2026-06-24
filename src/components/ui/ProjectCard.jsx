@@ -3,8 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import { useBackgroundImage } from '../../hooks/useBackgroundImage';
 
 export const ProjectCard = ({ project, blurPx }) => {
-  const localPath = `/assets/projects/${project.id}.jpg`;
-  const bgImage = useBackgroundImage(localPath, project.image);
+  const bgImage = project.image;
 
   return (
     <a 

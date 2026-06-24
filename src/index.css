@@ -5,6 +5,7 @@ html { scroll-behavior: smooth; }
 body {
   @apply bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200;
   margin: 0;
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }
 @keyframes gloss-shine {
   0% { background-position: 0% 50%; }
@@ -32,10 +33,13 @@ body {
 
 html.has-scroll-smooth { overflow: hidden; }
 html.has-scroll-dragging { user-select: none; }
-[data-scroll-container] { perspective: 1px; }
+[data-scroll-container] { perspective: 1px; background-color: var(--color-slate-50); }
+@media (prefers-color-scheme: dark) {
+  html.dark [data-scroll-container] { background-color: var(--color-slate-950); }
+}
 [data-scroll-section] { 
-  margin-top: -2px; 
-  padding-top: 2px;
+  margin-top: -3px; 
+  padding-top: 3px;
   transform: translateZ(0);
   backface-visibility: hidden;
 }
