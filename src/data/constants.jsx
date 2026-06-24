@@ -42,12 +42,12 @@ export const SKILLS = [
   { name: "TypeScript", image: getIconUrl("typescript"), category: "Language" },
   { name: "SQL", image: getIconUrl("mysql"), category: "Language" },
   { name: "Machine Learning", image: getIconUrl("tensorflow"), category: "AI" },
-  { name: "Generative AI", image: "https://upload.wikimedia.org/wikipedia/commons/2/22/Google_Gemini_logo.svg", category: "AI" },
-  { name: "LangChain", image: "https://raw.githubusercontent.com/langchain-ai/langchain/master/docs/static/img/langchain_logo.png", category: "AI" },
+  { name: "Generative AI", image: "https://www.gstatic.com/lamda/images/gemini_sparkle_v002_d4735304ff6292a690345.svg", category: "AI" },
+  { name: "LangChain", image: "https://avatars.githubusercontent.com/u/126733545?s=200&v=4", category: "AI" },
   { name: "Next.js", image: getIconUrl("nextjs"), category: "Framework" },
   { name: "Pandas", image: getIconUrl("pandas"), category: "Analytics" },
-  { name: "Power BI", image: "https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg", category: "Analytics" },
-  { name: "Google Apps Script", image: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_Apps_Script.svg", category: "Automation" },
+  { name: "Power BI", image: "https://img.icons8.com/color/48/000000/power-bi.png", category: "Analytics" },
+  { name: "Google Apps Script", image: "https://img.icons8.com/color/48/000000/google-logo.png", category: "Automation" },
   { name: "Git", image: getIconUrl("git"), category: "Version Control" },
   { name: "Scikit-Learn", image: getIconUrl("scikitlearn"), category: "AI" },
 ];
@@ -174,7 +174,7 @@ export const CERTIFICATIONS = [
     id: 8,
     title: "Google Analytics Certification",
     issuer: "Google Digital Academy",
-    image: "https://upload.wikimedia.org/wikipedia/commons/8/89/Google_Analytics_icon.svg",
+    image: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/google/google-original.svg",
     link: "https://skillshop.exceedlms.com/student/award/a31oSo7NkTXipXtJfDb5eR3E"
   }
 ];
@@ -194,7 +194,7 @@ export const PROJECTS = [
     description: "A high-performance, real-time voice-interactive application engineered for fluid, natural conversation using advanced Speech-to-Text and Generative AI models.",
     tech: ["TypeScript", "WebRTC", "AI Audio Models", "Node.js"],
     link: "https://github.com/GaneshArwan/VoiceAIAssistant",
-    image: "https://images.unsplash.com/photo-1589254065878-42c9da997008?q=80&w=2070&auto=format&fit=crop"
+    image: "https://images.unsplash.com/photo-1590845947698-8924d7409b56?q=80&w=2070&auto=format&fit=crop"
   },
   {
     id: 3,
@@ -202,7 +202,7 @@ export const PROJECTS = [
     description: "An autonomous code review platform that analyzes GitHub pull requests using LangGraph.js and large language models to ensure best practices and catch vulnerabilities early.",
     tech: ["TypeScript", "LangGraph.js", "GitHub API", "LLMs"],
     link: "https://github.com/GaneshArwan/AICodeReviewAgent",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop"
+    image: "https://images.unsplash.com/photo-1618401471353-b98a5233c591?q=80&w=2070&auto=format&fit=crop"
   },
   {
     id: 4,
