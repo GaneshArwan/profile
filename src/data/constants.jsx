@@ -115,7 +115,7 @@ export const EXPERIENCE = [
         </div>
       </div>
     ),
-    highlight: "Awarded Certificate of Excellence Intern",
+    highlight: "Awarded Best Intern",
     link: "https://www.linkedin.com/in/william-oo00/overlay/1743496220514/single-media-viewer/?profileId=ACoAAD2slAoBjkl94d--TrheKOVwxTXqS41kD8E"
   }
 ];
