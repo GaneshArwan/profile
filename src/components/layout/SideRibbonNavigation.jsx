@@ -11,7 +11,7 @@ export const SideRibbonNavigation = ({ scrollTo }) => {
   ];
 
   return (
-    <div className="fixed right-0 top-32 h-[calc(100vh-16rem)] w-12 bg-white/30 dark:bg-slate-900/30 backdrop-blur-xl border-l border-y border-white/20 dark:border-slate-800 z-40 hidden lg:[@media(min-height:830px)]:flex flex-col items-center py-6 shadow-2xl rounded-tl-3xl rounded-bl-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+    <div className="fixed right-0 top-32 h-[calc(100vh-16rem)] w-8 bg-white/30 dark:bg-slate-900/30 backdrop-blur-xl border-l border-y border-white/20 dark:border-slate-800 z-40 hidden lg:[@media(min-height:830px)]:flex flex-col items-center py-6 shadow-2xl rounded-tl-3xl rounded-bl-3xl overflow-y-auto [&::-webkit-scrollbar]:hidden" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
       <div className="flex flex-col justify-center gap-6 w-full items-center min-h-full">
       {sections.map((section) => (
         <button 
