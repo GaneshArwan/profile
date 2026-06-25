@@ -52,10 +52,10 @@ export const Hero = ({ isDarkMode, scrollTo }) => {
             >
               <Mail size={20} /> Contact Me
             </button>
-            <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noreferrer" className="bg-white/50 hover:bg-white/80 dark:bg-slate-900/30 dark:hover:bg-slate-900/50 backdrop-blur-md border border-slate-200/50 dark:border-slate-700/50 hover:border-emerald-500/50 text-slate-700 dark:text-slate-300 hover:text-emerald-500 dark:hover:text-emerald-400 py-3 px-6 text-lg rounded-full transition-all flex items-center gap-2 hover:-translate-y-1 shadow-sm">
+            <a href={PERSONAL_INFO.linkedin} target="_blank" rel="noopener noreferrer" className="bg-white/50 hover:bg-white/80 dark:bg-slate-900/30 dark:hover:bg-slate-900/50 backdrop-blur-md border border-slate-200/50 dark:border-slate-700/50 hover:border-emerald-500/50 text-slate-700 dark:text-slate-300 hover:text-emerald-500 dark:hover:text-emerald-400 py-3 px-6 text-lg rounded-full transition-all flex items-center gap-2 hover:-translate-y-1 shadow-sm">
               <LinkedinIcon size={20} /> LinkedIn
             </a>
-            <a href={PERSONAL_INFO.github} target="_blank" rel="noreferrer" className="bg-white/50 hover:bg-white/80 dark:bg-slate-900/30 dark:hover:bg-slate-900/50 backdrop-blur-md border border-slate-200/50 dark:border-slate-700/50 hover:border-emerald-500/50 text-slate-700 dark:text-slate-300 hover:text-emerald-500 dark:hover:text-emerald-400 py-3 px-6 text-lg rounded-full transition-all flex items-center gap-2 hover:-translate-y-1 shadow-sm">
+            <a href={PERSONAL_INFO.github} target="_blank" rel="noopener noreferrer" className="bg-white/50 hover:bg-white/80 dark:bg-slate-900/30 dark:hover:bg-slate-900/50 backdrop-blur-md border border-slate-200/50 dark:border-slate-700/50 hover:border-emerald-500/50 text-slate-700 dark:text-slate-300 hover:text-emerald-500 dark:hover:text-emerald-400 py-3 px-6 text-lg rounded-full transition-all flex items-center gap-2 hover:-translate-y-1 shadow-sm">
               <GithubIcon size={20} /> GitHub
             </a>
           </div>
