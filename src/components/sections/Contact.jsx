@@ -55,8 +55,11 @@ export const Contact = ({ isDarkMode }) => {
         <BackgroundOverlay />
       </div>
 
-      <div className="max-w-4xl mx-auto px-2 sm:px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <SectionHeader title={<GlossyText>Get In Touch</GlossyText>} />
+      </div>
+
+      <div className="max-w-4xl mx-auto px-2 sm:px-6 relative z-10">
         
         <div className="grid md:grid-cols-2 gap-12">
           <div>

@@ -25,8 +25,11 @@ export const Experience = () => {
           <BackgroundOverlay />
         </div>
 
-      <div className="max-w-5xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <SectionHeader title={<GlossyText>Experience</GlossyText>} />
+      </div>
+
+      <div className="max-w-5xl mx-auto px-6 relative z-10">
         <div className="space-y-12">
           {EXPERIENCE.map((exp) => (
             <div key={exp.id} className="relative pl-8 md:pl-0">
