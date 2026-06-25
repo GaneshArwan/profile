@@ -127,7 +127,7 @@ export const Contact = ({ isDarkMode }) => {
                 value={formData.message}
                 onChange={handleChange}
                 className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg px-4 py-3 text-slate-900 dark:text-slate-200 focus:outline-none focus:border-emerald-500 transition-colors resize-none"
-                placeholder="Hello, Welcome to my portfolio!"
+                placeholder="Hi!"
               ></textarea>
             </div>
             <div className="my-4 w-full flex justify-start">
