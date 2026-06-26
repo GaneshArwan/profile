@@ -186,6 +186,7 @@ export const PROJECTS = [
     description: "A content management platform built with Next.js and LangChain. It supports multiple LLMs (Gemini, OpenAI, Anthropic, Local) and uses a Client-Side BYOK architecture for secure API key handling.",
     tech: ["TypeScript", "Next.js", "LangChain", "LLMs", "React"],
     link: "https://github.com/GaneshArwan/AIContentPipeline",
+    liveLink: "https://ai-content-pipeline-one.vercel.app/",
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop"
   },
   {
@@ -194,6 +195,7 @@ export const PROJECTS = [
     description: "A real-time voice application integrating Speech-to-Text and Generative AI to enable direct conversational interactions through the browser.",
     tech: ["TypeScript", "WebRTC", "AI Audio Models", "Node.js"],
     link: "https://github.com/GaneshArwan/VoiceAIAssistant",
+    liveLink: "https://voice-ai-assistant-theta.vercel.app/",
     image: "https://images.unsplash.com/photo-1593696140826-c58b021acf8b?q=80&w=2070&auto=format&fit=crop"
   },
   {
@@ -202,6 +204,7 @@ export const PROJECTS = [
     description: "An automated code review tool that connects to the GitHub API. It uses LangGraph.js and LLMs to analyze pull requests, identify potential bugs, and check for standard practices.",
     tech: ["TypeScript", "LangGraph.js", "GitHub API", "LLMs"],
     link: "https://github.com/GaneshArwan/AICodeReviewAgent",
+    liveLink: "https://ai-code-review-agent-sigma.vercel.app/",
     image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop"
   },
   {
@@ -210,6 +213,7 @@ export const PROJECTS = [
     description: "A Resume and CV analysis tool supporting Gemini, OpenAI, and Anthropic. It processes resume text against job descriptions to identify missing keywords and format gaps, using a local BYOK setup.",
     tech: ["TypeScript", "Next.js", "Generative AI", "NLP"],
     link: "https://github.com/GaneshArwan/AIResumeCVAnalyzer",
+    liveLink: "https://ai-resume-cv-analyzer.vercel.app",
     image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=2070&auto=format&fit=crop"
   },
   {
@@ -218,6 +222,7 @@ export const PROJECTS = [
     description: "An internal automation tool developed to handle business requests at scale. It implements a Distributed Key-Lock for concurrency and Scaled Round Robin for workload distribution, integrated with SAP GUI scripts to reduce manual processing.",
     tech: ["Google Apps Script", "SAP GUI Scripting", "JavaScript", "REST API", "Distributed Systems"],
     link: "https://github.com/GaneshArwan/enterprise-process-automation",
+    liveLink: null,
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop"
   },
   {
@@ -226,6 +231,7 @@ export const PROJECTS = [
     description: "A Python and Streamlit dashboard for tracking operational Service Level Agreements (SLA). It includes data pipelines from Google Sheets and renders visual reports using Plotly to monitor processing times.",
     tech: ["Python", "Streamlit", "Plotly", "Pandas", "Google API"],
     link: "https://github.com/GaneshArwan/kpi-dashboard",
+    liveLink: "https://kpi-dashboard-ganesh.streamlit.app/",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"
   }
 ];

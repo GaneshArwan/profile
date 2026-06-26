@@ -82,14 +82,16 @@ export const Projects = () => {
                     >
                       View Repo
                     </a>
-                    <a 
-                      href={project.liveLink || "#"} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="inline-flex items-center gap-3 text-white bg-emerald-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-emerald-500 transition-all shadow-lg hover:shadow-emerald-500/30 hover:-translate-y-1"
-                    >
-                      View Live <ArrowRight size={22} />
-                    </a>
+                    {project.liveLink && (
+                      <a 
+                        href={project.liveLink} 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        className="inline-flex items-center gap-3 text-white bg-emerald-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-emerald-500 transition-all shadow-lg hover:shadow-emerald-500/30 hover:-translate-y-1"
+                      >
+                        View Live <ArrowRight size={22} />
+                      </a>
+                    )}
                   </div>
 
                 </div>
