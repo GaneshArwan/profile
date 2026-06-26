@@ -183,7 +183,7 @@ export const PROJECTS = [
   {
     id: 1,
     title: "AI Content Pipeline",
-    description: "A Next.js and LangChain content orchestration platform. Features a state-aware, multi-model (Gemini, OpenAI, Anthropic, Local) pipeline using a secure Client-Side BYOK architecture.",
+    description: "A content management platform built with Next.js and LangChain. It supports multiple LLMs (Gemini, OpenAI, Anthropic, Local) and uses a Client-Side BYOK architecture for secure API key handling.",
     tech: ["TypeScript", "Next.js", "LangChain", "LLMs", "React"],
     link: "https://github.com/GaneshArwan/AIContentPipeline",
     image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2070&auto=format&fit=crop"
@@ -191,7 +191,7 @@ export const PROJECTS = [
   {
     id: 2,
     title: "Voice AI Assistant",
-    description: "A high-performance, real-time voice-interactive application engineered for fluid, natural conversation using advanced Speech-to-Text and Generative AI models.",
+    description: "A real-time voice application integrating Speech-to-Text and Generative AI to enable direct conversational interactions through the browser.",
     tech: ["TypeScript", "WebRTC", "AI Audio Models", "Node.js"],
     link: "https://github.com/GaneshArwan/VoiceAIAssistant",
     image: "https://images.unsplash.com/photo-1593696140826-c58b021acf8b?q=80&w=2070&auto=format&fit=crop"
@@ -199,7 +199,7 @@ export const PROJECTS = [
   {
     id: 3,
     title: "AI Code Review Agent",
-    description: "An autonomous code review platform that analyzes GitHub pull requests using LangGraph.js and large language models to ensure best practices and catch vulnerabilities early.",
+    description: "An automated code review tool that connects to the GitHub API. It uses LangGraph.js and LLMs to analyze pull requests, identify potential bugs, and check for standard practices.",
     tech: ["TypeScript", "LangGraph.js", "GitHub API", "LLMs"],
     link: "https://github.com/GaneshArwan/AICodeReviewAgent",
     image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop"
@@ -207,7 +207,7 @@ export const PROJECTS = [
   {
     id: 4,
     title: "AI Resume & CV Analyzer",
-    description: "🚀 Pro-level AI Resume & CV Analyzer with multi-provider support (Gemini, OpenAI, Anthropic). Secure BYOK architecture, high-performance comparative analysis, and deep keyword gap insights.",
+    description: "A Resume and CV analysis tool supporting Gemini, OpenAI, and Anthropic. It processes resume text against job descriptions to identify missing keywords and format gaps, using a local BYOK setup.",
     tech: ["TypeScript", "Next.js", "Generative AI", "NLP"],
     link: "https://github.com/GaneshArwan/AIResumeCVAnalyzer",
     image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?q=80&w=2070&auto=format&fit=crop"
@@ -215,7 +215,7 @@ export const PROJECTS = [
   {
     id: 5,
     title: "ProcessPilot Automation",
-    description: "Enterprise-grade orchestration system designed to automate high-volume business requests. Features a custom 'Distributed Key-Lock' mechanism for concurrency control, 'Scaled Round Robin' algorithms for intelligent workload distribution, and dynamic SAP GUI script generation to reduce manual effort by ~70%.",
+    description: "An internal automation tool developed to handle business requests at scale. It implements a Distributed Key-Lock for concurrency and Scaled Round Robin for workload distribution, integrated with SAP GUI scripts to reduce manual processing.",
     tech: ["Google Apps Script", "SAP GUI Scripting", "JavaScript", "REST API", "Distributed Systems"],
     link: "https://github.com/GaneshArwan/enterprise-process-automation",
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop"
@@ -223,7 +223,7 @@ export const PROJECTS = [
   {
     id: 6,
     title: "Corporate KPI & SLA Dashboard",
-    description: "Interactive analytics platform built with Streamlit to track operational efficiency. Integrates a robust SLA engine that calculates business-day processing times, automated ETL pipelines for Google Sheets data, and dynamic Plotly visualizations for identifying bottleneck trends.",
+    description: "A Python and Streamlit dashboard for tracking operational Service Level Agreements (SLA). It includes data pipelines from Google Sheets and renders visual reports using Plotly to monitor processing times.",
     tech: ["Python", "Streamlit", "Plotly", "Pandas", "Google API"],
     link: "https://github.com/GaneshArwan/kpi-dashboard",
     image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"
