@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Home, Sun, Moon, Menu, X } from 'lucide-react';
 
-export const Navbar = ({ isDarkMode, toggleTheme, activeSection, scrollTo }) => {
+export const Navbar = ({ isDarkMode, toggleTheme, activeSection, scrollTo, scrollDirection }) => {
   const [isOpen, setIsOpen] = useState(false);
   
   const handleLinkClick = (id) => {
@@ -18,8 +18,10 @@ export const Navbar = ({ isDarkMode, toggleTheme, activeSection, scrollTo }) => 
     { name: "Contact", id: "contact" },
   ];
 
+  const isHidden = scrollDirection === 'down' && !isOpen;
+
   return (
-    <nav className="fixed left-1/2 -translate-x-1/2 top-12 lg:top-20 z-[999] w-[90%] max-w-[380px] md:w-max md:min-w-[380px] rounded-full bg-white/30 dark:bg-slate-900/30 backdrop-blur-xl border border-white/20 dark:border-slate-700/50 shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-300 px-6 md:px-8">
+    <nav className={`fixed left-1/2 -translate-x-1/2 top-12 lg:top-20 z-[999] w-[90%] max-w-[380px] md:w-max md:min-w-[380px] rounded-full bg-white/30 dark:bg-slate-900/30 backdrop-blur-xl border border-white/20 dark:border-slate-700/50 shadow-[0_8px_32px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-500 ease-in-out px-6 md:px-8 ${isHidden ? '-translate-y-32 opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'}`}>
       <div className="flex justify-between items-center gap-6 py-4">
         {/* Home Button */}
         <button 

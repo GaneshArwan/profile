@@ -45,6 +45,8 @@ export default function App() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [activeSection, setActiveSection] = useState("");
+  const [scrollDirection, setScrollDirection] = useState('up');
+  const lastScrollY = useRef(0);
   const scrollRef = useRef(null);
 
   const skillsBg = useBackgroundImage(LOCAL_BACKGROUNDS.skills, REMOTE_BACKGROUNDS.skills);
@@ -79,6 +81,13 @@ export default function App() {
 
     scroll.on('scroll', (args) => {
       const currentY = args.scroll.y;
+
+      if (currentY > lastScrollY.current && currentY > 100) {
+        setScrollDirection('down');
+      } else if (currentY < lastScrollY.current) {
+        setScrollDirection('up');
+      }
+      lastScrollY.current = currentY;
       
       const sections = ['about', 'projects', 'skills', 'experience', 'certifications', 'contact'];
       let current = "";
@@ -142,7 +151,7 @@ export default function App() {
   return (
     <div className={`min-h-[100svh] font-sans selection:bg-emerald-500/30 ${isDarkMode ? 'dark' : ''} bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200 transition-colors duration-300`}>
       <CustomCursor />
-      <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} activeSection={activeSection} scrollTo={scrollTo} />
+      <Navbar isDarkMode={isDarkMode} toggleTheme={toggleTheme} activeSection={activeSection} scrollTo={scrollTo} scrollDirection={scrollDirection} />
       <SideRibbonNavigation scrollTo={scrollTo} />
       <CertificateModal isOpen={modalOpen} onClose={() => setModalOpen(false)} imageSrc={selectedImage} title={selectedTitle} />
 
