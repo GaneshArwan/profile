@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
 export const Typewriter = ({ text, delay = 100, startDelay = 0 }) => {
-  const [currentText, setCurrentText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [hasStarted, setHasStarted] = useState(false);
+  const [currentText, setCurrentText] = useState(() => (startDelay === 0 && text ? text : ''));
+  const [currentIndex, setCurrentIndex] = useState(() => (startDelay === 0 && text ? text.length : 0));
+  const [hasStarted, setHasStarted] = useState(() => startDelay === 0);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setHasStarted(true), startDelay);
-    return () => clearTimeout(timeout);
+    if (startDelay > 0) {
+      const timeout = setTimeout(() => setHasStarted(true), startDelay);
+      return () => clearTimeout(timeout);
+    }
   }, [startDelay]);
 
   useEffect(() => {

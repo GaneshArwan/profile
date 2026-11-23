@@ -1,40 +1,230 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
-html { scroll-behavior: smooth; }
+@theme {
+  --color-slate-50: #f4f7f5;
+  --color-slate-100: #ebf1ed;
+  --color-slate-200: #d6e2db;
+  --color-slate-300: #b5c7bd;
+  --color-slate-400: #86a092;
+  --color-slate-500: #526b5d;
+  --color-slate-600: #364c40;
+  --color-slate-700: #22352b;
+  --color-slate-800: #13241b;
+  --color-slate-900: #0b1a11;
+  --color-slate-950: #050e09;
+}
+
+/* High-Contrast Design Tokens (WCAG AA >= 4.5:1 compliant) */
+:root {
+  /* Telemetry & Automation Core (Emerald) — Invariant Compatibility */
+  --color-telemetry-primary: #047857; /* emerald-700: light mode primary accent (5.24:1 on slate-50) */
+  --color-telemetry-hover: #065f46;   /* emerald-800: light mode hover/high-contrast (7.34:1 on slate-50) */
+  --color-telemetry-dark: #34d399;    /* emerald-400: dark mode primary accent (10.49:1 on slate-950) */
+
+  /* Enterprise Data Governance Core (Teal Analogous) */
+  --color-governance-light: #0f766e;      /* teal-700: light mode (5.47:1 on white, 5.24:1 on sage) */
+  --color-governance-primary: #0f766e;    /* alias */
+  --color-governance-hover: #115e59;      /* teal-800: light mode hover (7.58:1 on white) */
+  --color-governance-dark: #2dd4bf;       /* teal-400: dark mode (10.20:1 on forest, 10.49:1 on obsidian) */
+  --color-governance-dark-hover: #5eead4; /* teal-300: dark mode hover (12.84:1 on forest) */
+
+  /* Applied AI & System Intelligence Core (Mint Analogous) */
+  --color-ai-light: #15803d;              /* mint-700 / emerald-700: light mode (5.02:1 on white) */
+  --color-ai-primary: #15803d;            /* alias */
+  --color-ai-hover: #166534;              /* mint-800 / emerald-800: light mode hover (7.13:1 on white) */
+  --color-ai-dark: #4ade80;               /* mint-400 / emerald-400: dark mode (10.90:1 on forest) */
+  --color-ai-dark-hover: #86efac;         /* mint-300: dark mode hover (13.53:1 on forest) */
+
+  /* Distinction & Honors Core (Warm Gold / Bronze) */
+  --color-status-amber-light: #92400e;    /* amber-800: light mode (7.09:1 on white, 6.78:1 on slate-50) */
+  --color-status-amber-primary: #92400e;  /* alias */
+  --color-status-amber-hover: #78350f;    /* amber-900: light mode hover (8.67:1 on white) */
+  --color-status-amber-dark: #fbbf24;     /* amber-400: dark mode (11.38:1 on forest, 12.08:1 on obsidian) */
+  --color-status-amber-dark-hover: #fcd34d; /* amber-300: dark mode hover (13.17:1 on forest) */
+
+  /* Dev-Tool Theme Surfaces & Hairline Borders */
+  --color-surface-obsidian: #050e09;      /* rich dark root background (17.34:1 vs text) */
+  --color-surface-forest: #0b1a11;        /* elevated dark cards & panels (16.35:1 vs text) */
+  --color-surface-sage: #f4f6f4;          /* crisp sage-stone light background (16.44:1 vs text) */
+  --color-surface-alabaster: #ffffff;     /* elevated light cards & panels (17.65:1 vs text) */
+  --color-hairline-light: rgba(4, 120, 87, 0.12); /* 1px technical light border */
+  --color-hairline-dark: rgba(52, 211, 153, 0.12); /* 1px technical dark border */
+
+  /* Custom Emerald & Sage-Obsidian Scrollbar Tokens (Light Mode) */
+  --scrollbar-track: #ebf1ed;             /* slate-100 crisp sage surface */
+  --scrollbar-thumb: #86a092;             /* slate-400 calm sage-slate resting thumb */
+  --scrollbar-thumb-hover: #047857;       /* emerald-700 primary interactive hover (5.24:1) */
+  --scrollbar-thumb-active: #065f46;      /* emerald-800 high-contrast active state (7.34:1) */
+}
+
+.dark {
+  /* Custom Emerald & Sage-Obsidian Scrollbar Tokens (Dark Mode) */
+  --scrollbar-track: #050e09;             /* surface-obsidian */
+  --scrollbar-thumb: #22352b;             /* slate-700 deep forest resting thumb */
+  --scrollbar-thumb-hover: #10b981;       /* emerald-500 interactive hover */
+  --scrollbar-thumb-active: #34d399;      /* emerald-400 high-contrast active state (10.49:1) */
+}
+
+/* Dev-Tool Surface & Hairline Utilities */
+.bg-surface-obsidian {
+  background-color: var(--color-surface-obsidian);
+}
+
+.bg-surface-forest {
+  background-color: var(--color-surface-forest);
+}
+
+.bg-surface-sage {
+  background-color: var(--color-surface-sage);
+}
+
+.bg-surface-alabaster {
+  background-color: var(--color-surface-alabaster);
+}
+
+.border-hairline {
+  border-color: var(--color-hairline-light);
+}
+
+.dark .border-hairline {
+  border-color: var(--color-hairline-dark);
+}
+
+html { 
+  scroll-behavior: smooth; 
+}
+
 body {
   @apply bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-200;
   margin: 0;
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
-@keyframes gloss-shine {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-@keyframes scroll-left {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-@keyframes scroll-right {
-  from { transform: translateX(-50%); }
-  to { transform: translateX(0); }
-}
-.glossy-matcha {
-  background: linear-gradient(90deg, #34d399, #10b981, #d1fae5, #059669);
-  background-size: 300% 300%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gloss-shine 4s ease-in-out infinite;
-}
-.animate-scroll-left { animation: scroll-left 40s linear infinite; }
-.animate-scroll-right { animation: scroll-right 40s linear infinite; }
 
-html.has-scroll-smooth { overflow: hidden; }
-html.has-scroll-dragging { user-select: none; }
-[data-scroll-container] { perspective: 1px; }
-[data-scroll-section] { 
-  transform: translateZ(0);
+/* Custom Cross-Browser Scrollbar System (Chromium/WebKit geometry + Firefox fallback) */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 9999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  transition: background-color 150ms ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: var(--scrollbar-thumb-active);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--scrollbar-track);
+}
+
+/* Slim 6px utilities for internal scroll containers */
+.custom-scrollbar::-webkit-scrollbar,
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track,
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb,
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background-clip: padding-box;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover,
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:active,
+.scrollbar-thin::-webkit-scrollbar-thumb:active {
+  background-color: var(--scrollbar-thumb-active);
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  html,
+  .custom-scrollbar,
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
+}
+
+button:not(:disabled), a[href] {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-telemetry-primary, #047857) !important;
+  outline-offset: 2px !important;
+}
+
+.dark :focus-visible {
+  outline: 2px solid var(--color-telemetry-dark, #34d399) !important;
+  outline-offset: 2px !important;
+}
+
+@keyframes scroll-left {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes scroll-right {
+  from { transform: translate3d(-50%, 0, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+
+.animate-scroll-left { 
+  animation: scroll-left 40s linear infinite; 
   will-change: transform;
+}
+.animate-scroll-right { 
+  animation: scroll-right 40s linear infinite; 
+  will-change: transform;
+}
+
+.animate-scroll-left:hover,
+.animate-scroll-right:hover,
+.animate-scroll-left:focus-within,
+.animate-scroll-right:focus-within,
+.animate-paused,
+.animate-scroll-left.animate-paused,
+.animate-scroll-right.animate-paused {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-scroll-left,
+  .animate-scroll-right {
+    animation: none;
+  }
 }
