@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import {
-  Github,
   ExternalLink,
   Activity,
   CheckCircle2,
@@ -14,6 +13,7 @@ import {
   GitBranch,
   Film,
 } from 'lucide-react';
+import { GithubIcon } from '../icons';
 import { useI18n } from '../../lib/i18n';
 import { useOptimizedVideo } from '../../hooks/useOptimizedVideo';
 import { MermaidViewer } from './MermaidViewer';
@@ -402,7 +402,7 @@ export const ProjectCard = ({ project }) => {
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center gap-2 text-sm font-semibold text-slate-700 dark:text-slate-200 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 px-5 py-2.5 min-h-[44px] rounded-xl border border-slate-300 dark:border-slate-700 transition-colors shadow-sm cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 dark:focus-visible:outline-emerald-400"
           >
-            <Github size={16} aria-hidden="true" />
+            <GithubIcon size={16} aria-hidden="true" />
             <span>{isIndonesian ? (t('projects.viewRepo') || 'Kode Sumber') : 'View Repo'}</span>
           </a>
         )}
