@@ -2,6 +2,20 @@
 
 Personal portfolio for William, a Data & Automation Analyst based in Jakarta. The site documents production work from Kawan Lama Group (Master Data Management across Site, Vendor, Customer, Article, and Finance domains), academic background at Tarumanagara University (S1 Informatics, GPA 3.89), eight technical projects, and a searchable directory of 87 verified credentials.
 
+## Live Demo
+
+Live Deployment: [myportofolio-prod.vercel.app](https://myportofolio-prod.vercel.app/)
+
+![Live Demo](docs/media/demo.gif)
+
+[Watch full MP4 walkthrough](docs/media/demo.mp4)
+
+## Screenshots
+
+| Hero & Telemetry | Experience & MDM Domains |
+| :---: | :---: |
+| ![Hero & Telemetry](docs/media/screenshot-desktop.png) | ![Experience & MDM Domains](docs/media/screenshot-interactive.png) |
+
 ## What's Inside
 
 The portfolio is organized around verifiable work rather than static summary cards:
